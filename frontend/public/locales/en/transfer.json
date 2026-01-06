@@ -1,0 +1,142 @@
+{
+  "title": "Transfer Files",
+  "destination": {
+    "title": "Select Destination",
+    "location": "Storage Location",
+    "selectLocation": "Select storage location",
+    "selectLocationPlaceholder": "Select location...",
+    "locationFormat": "{{name}} ({{type}}){{unavailable}}",
+    "unavailable": " (unavailable)",
+    "root": "Root",
+    "directoryList": "Directory list",
+    "createFolder": "Create Folder",
+    "create": "Create",
+    "selectDestination": "Select Destination",
+    "newFolder": {
+      "title": "Create a new folder",
+      "label": "Folder name",
+      "placeholder": "Enter at least 1 character",
+      "rulesTitle": "Folder naming rules:"
+    },
+    "loadError": "Failed to load directories",
+    "notifications": {
+      "folderCreated": {
+        "title": "Folder created",
+        "message": "Folder \"{{name}}\" created successfully"
+      },
+      "folderCreateError": "Failed to create folder"
+    }
+  },
+  "conflicts": {
+    "title": "Resolve File Conflicts",
+    "nonConflicting": {
+      "title": "Non-conflicting files",
+      "message": "{{count}} file(s) will be copied automatically (no conflicts)."
+    },
+    "conflicting": {
+      "title": "Conflicting files",
+      "message": "{{count}} file(s) already exist in the destination. How should these be handled?"
+    },
+    "resolution": {
+      "label": "Resolution strategy",
+      "skip": "Skip",
+      "skipDescription": "Skip conflicting files, keep existing destination files",
+      "overwrite": "Overwrite",
+      "overwriteDescription": "Replace existing files with source files",
+      "rename": "Rename",
+      "renameDescription": "Copy source files with new names (e.g., file.txt -> file (1).txt)"
+    },
+    "fileList": {
+      "title": "Conflicting files:",
+      "showingFirst": "Showing first 25 of {{count}} conflicts"
+    },
+    "summary": {
+      "title": "Summary",
+      "autoCopy": "{{count}} file(s) will be copied automatically",
+      "willBe": "{{count}} conflict(s) will be {{action}}",
+      "total": "Total: {{count}} files will be copied"
+    },
+    "checkError": "Failed to check for conflicts"
+  },
+  "progress": {
+    "title": "File Transfer Progress",
+    "titleWithSummary": "File Transfer Progress: {{summary}}",
+    "fileCount": "{{completed}} / {{total}} files",
+    "failedCount": "{{count}} failed",
+    "status": {
+      "error": "Error",
+      "complete": "Complete",
+      "queued": "Queued",
+      "transferring": "Transferring"
+    },
+    "errorAlert": "Transfer error",
+    "noTransfers": {
+      "title": "No transfers",
+      "message": "No active transfers"
+    },
+    "notifications": {
+      "completed": {
+        "title": "Transfer completed",
+        "message": "Successfully transferred {{count}} file(s)"
+      },
+      "failed": {
+        "title": "Transfer failed",
+        "message": "Failed to transfer {{count}} file(s)"
+      },
+      "connectionError": {
+        "title": "Transfer connection error",
+        "message": "Lost connection to transfer progress updates"
+      },
+      "cancelled": {
+        "title": "Transfer cancelled",
+        "message": "The file transfer has been cancelled"
+      },
+      "cancelError": "Failed to cancel transfer"
+    }
+  },
+  "actions": {
+    "cancel": "Cancel",
+    "close": "Close",
+    "apply": "Apply",
+    "proceed": "Proceed",
+    "cancelTransfer": "Cancel Transfer",
+    "continueTransfer": "Continue Transfer"
+  },
+  "confirmCancel": {
+    "title": "Cancel transfer?",
+    "message": "Are you sure you want to cancel this transfer? Files already transferred will remain."
+  },
+  "largeTransfer": {
+    "title": "Large Folder Transfer",
+    "alertTitle": "Large transfer operation",
+    "filesToTransfer": "Files to transfer",
+    "filesSuffix": "files",
+    "totalSize": "Total size",
+    "instructions": "This operation may take significant time to complete. You can monitor progress in the transfer queue."
+  },
+  "notifications": {
+    "started": {
+      "title": "Transfer started",
+      "message": "Transferring {{count}} file(s)"
+    },
+    "startError": "Failed to start transfer"
+  },
+  "summary": {
+    "title": "Transfer Summary",
+    "filesTransferred": "Files transferred: {{count}}",
+    "filesSkipped": "Files skipped: {{count}}",
+    "filesFailed": "Files failed: {{count}}",
+    "totalSize": "Total size: {{size}}"
+  },
+  "errors": {
+    "noDestination": "Please select a destination",
+    "sameLocation": "Source and destination cannot be the same",
+    "transferFailed": "Transfer failed",
+    "networkError": "Network error during transfer"
+  },
+  "huggingface": {
+    "importing": "Importing from HuggingFace",
+    "modelFiles": "Model files",
+    "downloadProgress": "Download Progress"
+  }
+}

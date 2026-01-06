@@ -1,0 +1,13 @@
+# Dependencies
+**/node_modules/
+
+# Build outputs
+**/dist/
+**/build/
+
+# Test coverage
+**/coverage/
+
+# Lock files (already formatted by npm)
+package-lock.json
+**/package-lock.json
