@@ -1,0 +1,26 @@
+<!doctype html>
+<% if (typeof nbPrefix !== 'undefined' && nbPrefix) { %>
+<html lang="en-US" data-nb-prefix="<%= nbPrefix %>">
+  <% } else { %>
+  <html lang="en-US">
+    <% } %>
+
+    <head>
+      <meta charset="utf-8" />
+      <title>S4</title>
+      <meta id="appName" name="application-name" content="S4" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+      <% if (typeof nbPrefix !== 'undefined' && nbPrefix) { %>
+      <base href="<%= nbPrefix %>/" />
+      <% } else { %>
+      <base href="/" />
+      <% } %>
+    </head>
+
+    <body>
+      <noscript>Enabling JavaScript is required to run this app.</noscript>
+      <div id="root"></div>
+    </body>
+  </html>
+</html>

@@ -1,0 +1,60 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  // tell the TypeScript parser that we want to use JSX syntax
+  "parserOptions": {
+    "tsx": true,
+    "jsx": true,
+    "js": true,
+    "useJSXTextNode": true,
+    "project": "./tsconfig.json"
+  },
+  // includes the typescript specific rules found here: https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin#supported-rules
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "globals": {
+    "window": "readonly",
+    "describe": "readonly",
+    "test": "readonly",
+    "expect": "readonly",
+    "it": "readonly",
+    "process": "readonly",
+    "document": "readonly"
+  },
+  "settings": {},
+  "rules": {
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ],
+    "eqeqeq": ["error", "always", { "null": "ignore" }],
+    "no-restricted-syntax": [
+      "error",
+      {
+        "selector": "CallExpression[callee.property.name='toString']:not([arguments.0.value='base64'])",
+        "message": "Avoid using .toString(). Use fastify.log.error(e, 'your string') for errors, or craft specific string representations instead."
+      }
+    ],
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-empty-function": "warn",
+    "@typescript-eslint/no-inferrable-types": "error",
+    "@typescript-eslint/no-explicit-any": "off",
+    "import/extensions": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "error",
+    "import/no-unresolved": "off",
+    "prettier/prettier": "error"
+  }
+}

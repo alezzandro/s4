@@ -1,0 +1,266 @@
+{
+  "title": "Storage Browser",
+  "locationSelector": {
+    "label": "Storage Location:",
+    "placeholder": "Select storage location",
+    "loading": "Loading locations...",
+    "noLocations": "No storage locations available"
+  },
+  "breadcrumb": {
+    "root": "Root"
+  },
+  "table": {
+    "columns": {
+      "key": "Key",
+      "lastModified": "Last Modified",
+      "size": "Size"
+    },
+    "emptyState": {
+      "title": "No files found",
+      "description": "This location is empty or no files match your search."
+    }
+  },
+  "search": {
+    "placeholder": "Search files and folders",
+    "mode": {
+      "contains": "Contains",
+      "startsWith": "Starts with"
+    },
+    "results": {
+      "truncated": "Search results may be incomplete"
+    }
+  },
+  "actions": {
+    "upload": "Upload",
+    "uploadSingle": "Upload File",
+    "uploadMultiple": "Upload Files",
+    "createFolder": "Create Folder",
+    "importModel": "Import from HuggingFace",
+    "copyPath": "Copy Path",
+    "viewFile": "View",
+    "downloadFile": "Download",
+    "deleteFile": "Delete",
+    "selectAll": "Select All",
+    "deselectAll": "Deselect All",
+    "copySelected": "Copy Selected",
+    "deleteSelected": "Delete Selected",
+    "viewDetails": "View Details",
+    "loadMore": "Load more"
+  },
+  "fileDetails": {
+    "title": "File Details: {{fileName}}",
+    "tabs": {
+      "metadata": "Metadata",
+      "tags": "Tags"
+    },
+    "metadata": {
+      "key": "Key",
+      "size": "Size",
+      "lastModified": "Last Modified",
+      "contentType": "Content Type",
+      "etag": "ETag",
+      "storageClass": "Storage Class",
+      "customMetadata": "Custom Metadata"
+    },
+    "tags": {
+      "noTags": "This object has no tags. Add tags below.",
+      "addTag": "Add new tag",
+      "keyPlaceholder": "Key",
+      "valuePlaceholder": "Value",
+      "tagCount": "{{count}} of {{max}} tags used",
+      "saveTags": "Save Tags",
+      "saving": "Saving...",
+      "saved": "Tags saved",
+      "savedMessage": "Object tags have been updated successfully."
+    },
+    "notAvailable": "Object metadata and tags are only available for S3 storage locations."
+  },
+  "upload": {
+    "single": {
+      "title": "Upload file",
+      "dragDropText": "Drag and drop a file here or click to browse",
+      "browseFiles": "Browse files",
+      "uploading": "Uploading...",
+      "progress": {
+        "toBackend": "Uploading to server",
+        "toS3": "Uploading to storage"
+      }
+    },
+    "multiple": {
+      "title": "Upload multiple files",
+      "dragDropText": "Drag and drop files here or click to browse",
+      "filesSelected": "{{count}} files selected",
+      "startUpload": "Start Upload"
+    },
+    "success": "File uploaded",
+    "successMessage": "File \"{{fileName}}\" has been successfully uploaded.",
+    "failed": "File Upload Failed",
+    "abortError": "Error Aborting Upload",
+    "abortErrorMessage": "Failed to abort the upload process."
+  },
+  "createFolder": {
+    "title": "Create a new folder",
+    "nameLabel": "Folder name",
+    "namePlaceholder": "Enter folder name",
+    "create": "Create Folder",
+    "success": "Folder created",
+    "successMessage": "Folder \"{{folderName}}\" has been successfully created.",
+    "failed": "Folder Creation Failed"
+  },
+  "delete": {
+    "file": {
+      "title": "Delete file?",
+      "message": "This action cannot be undone.",
+      "confirmMessage": "Type {{fileName}} to confirm deletion.",
+      "confirm": "Delete file",
+      "success": "File deleted",
+      "successMessage": "File \"{{fileName}}\" has been successfully deleted.",
+      "failed": "File Deletion Failed"
+    },
+    "folder": {
+      "title": "Delete folder?",
+      "message": "This will delete the folder and all its contents. This action cannot be undone.",
+      "confirmMessage": "Type {{folderName}} to confirm deletion.",
+      "confirm": "Delete folder",
+      "success": "Folder deleted",
+      "successMessage": "Folder \"{{folderName}}\" and all its contents have been successfully deleted.",
+      "failed": "Folder Deletion Failed"
+    },
+    "selected": {
+      "title": "Delete selected items?",
+      "message": "You are about to delete {{count}} items. This action cannot be undone.",
+      "confirmCheckbox": "I understand this action cannot be undone",
+      "confirm": "Delete {{count}} items",
+      "success": "Delete Successful",
+      "successMessage": "Successfully deleted {{count}} items."
+    }
+  },
+  "import": {
+    "huggingface": {
+      "title": "Import a model from Hugging Face",
+      "modelId": "Model ID",
+      "modelIdPlaceholder": "e.g., meta-llama/Meta-Llama-3-8B",
+      "token": "HuggingFace Token (optional)",
+      "tokenPlaceholder": "hf_...",
+      "destination": "Destination",
+      "s3": "S3 Storage",
+      "local": "Local Storage",
+      "prefix": "Prefix (optional)",
+      "prefixPlaceholder": "models/",
+      "import": "Import Model",
+      "importing": "Importing...",
+      "started": "Model import started"
+    }
+  },
+  "selection": {
+    "count": "{{count}} items selected",
+    "filesAndFolders": "{{files}} files, {{folders}} folders selected"
+  },
+  "alerts": {
+    "locationUnavailable": {
+      "title": "Location Unavailable",
+      "message": "The storage location \"{{name}}\" is currently unavailable.",
+      "localMessage": "The directory may be inaccessible or the path may be incorrect.",
+      "disabledMessage": "File operations are disabled until the location becomes available."
+    },
+    "noLocations": {
+      "title": "No storage locations available",
+      "message": "All storage sources failed to load. Check S3 and local storage configuration."
+    }
+  },
+  "fileViewer": {
+    "title": "File Preview",
+    "error": "Error Viewing File",
+    "errorMessage": "Failed to retrieve the file content.",
+    "errorObjectMessage": "Failed to retrieve the object content."
+  },
+  "notifications": {
+    "defaultSettings": {
+      "title": "Using Default Settings",
+      "maxConcurrentTransfers": "Failed to fetch max concurrent transfers setting. Using default value (2).",
+      "maxFilesPerPage": "Failed to fetch max files per page setting. Using default value (100)."
+    },
+    "locationNotFound": {
+      "title": "Location Not Found",
+      "message": "Storage location \"{{locationId}}\" does not exist."
+    },
+    "locationUnavailable": {
+      "title": "Location Unavailable",
+      "message": "Storage location \"{{name}}\" is currently unavailable. It may be disconnected or inaccessible.",
+      "cannotSelect": "Cannot select \"{{name}}\" as it is currently unavailable."
+    },
+    "invalidLocation": {
+      "title": "Invalid Location",
+      "message": "Location \"{{locationId}}\" does not exist."
+    },
+    "pathCopied": {
+      "title": "Path copied",
+      "message": "The path has been successfully copied to the clipboard."
+    },
+    "errorLoadingFiles": {
+      "title": "Error Loading Files",
+      "message": "Failed to load files from storage."
+    },
+    "noLocations": {
+      "title": "No storage locations available",
+      "message": "All storage sources failed to load. Check S3 and local storage configuration. See browser console for details."
+    },
+    "errorLoadingLocations": {
+      "title": "Error Loading Locations",
+      "message": "Failed to load storage locations. Please check your connection settings."
+    },
+    "deleteFailed": {
+      "title": "Delete Failed",
+      "message": "Failed to delete some items. Please try again."
+    },
+    "noItemsSelected": {
+      "title": "No items selected",
+      "message": "Please select items to copy."
+    },
+    "downloadFailed": {
+      "title": "Download Failed",
+      "message": "Failed to download the file. Please try again."
+    },
+    "uploadComplete": {
+      "title": "Upload Complete",
+      "message": "Successfully uploaded {{count}} file(s)."
+    },
+    "uploadPartialFailed": {
+      "title": "Upload Completed with Errors",
+      "message": "{{failed}} of {{total}} files failed to upload."
+    },
+    "modelImport": {
+      "error": "Model import error",
+      "fileError": "Error importing \"{{fileName}}\": {{error}}",
+      "success": "Model imported",
+      "successMessage": "Model \"{{modelName}}\" has been successfully imported.",
+      "failed": "Model import failed",
+      "failedMessage": "Import of model \"{{modelName}}\" failed.",
+      "cancelled": "Model import cancelled",
+      "cancelledMessage": "Import of model \"{{modelName}}\" was cancelled.",
+      "started": "Model import started",
+      "startedMessage": "Model \"{{modelName}}\" import has successfully started.",
+      "startFailed": "Failed to start model import.",
+      "cancelFailed": "Cancel failed",
+      "cancelFailedMessage": "Failed to cancel import.",
+      "noLocations": "Cannot import model - no storage destinations available."
+    },
+    "connectionError": {
+      "title": "Connection error",
+      "message": "Failed to establish import progress connection",
+      "lost": "Lost connection to import progress stream. Please check the transfer queue for status."
+    },
+    "filesDeleted": {
+      "title": "Files deleted",
+      "message": "All downloaded files have been deleted."
+    },
+    "cleanupFailed": {
+      "title": "Cleanup failed",
+      "message": "Failed to delete downloaded files."
+    },
+    "validationError": {
+      "title": "Validation Error",
+      "message": "Please fill in all required fields."
+    }
+  }
+}

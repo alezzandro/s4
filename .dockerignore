@@ -1,0 +1,39 @@
+# Version control
+.git
+.gitignore
+.github
+
+# IDE/Editor
+.vscode
+.idea
+*.swp
+*.swo
+.DS_Store
+
+# Development tools
+.claude
+logs
+*.log
+npm-debug.log*
+
+# Dependencies (rebuilt fresh in Docker)
+node_modules
+**/node_modules
+
+# Build artifacts (rebuilt in Docker)
+dist
+**/dist
+build
+**/build
+coverage
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Not needed in container
+kubernetes
+assets
+*.md
+Makefile
