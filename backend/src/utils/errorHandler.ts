@@ -59,7 +59,7 @@ export async function handleS3Error(
 export async function handleError(
   error: unknown,
   reply: FastifyReply,
-  statusCode = HttpStatus.INTERNAL_SERVER_ERROR,
+  statusCode: number = HttpStatus.INTERNAL_SERVER_ERROR,
   logger?: { error: (msg: unknown) => void },
 ): Promise<void> {
   const sanitized = sanitizeErrorForLogging(error);

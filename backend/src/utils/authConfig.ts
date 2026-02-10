@@ -162,7 +162,7 @@ export const PUBLIC_ROUTES = ['/api/auth/info', '/api/auth/login'];
  * Routes that require exact match only to be public.
  * These are for health check endpoints that should not make their subpaths public.
  */
-export const PUBLIC_ROUTES_EXACT = ['/api'];
+export const PUBLIC_ROUTES_EXACT = ['/api', '/api/github/repo-info'];
 
 /**
  * Check if a URL path is a public route

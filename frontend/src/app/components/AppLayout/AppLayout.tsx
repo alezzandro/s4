@@ -133,13 +133,13 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
   const currentLanguage = i18n.resolvedLanguage || 'en';
   const currentLngDisplay = supportedLngs[currentLanguage] || supportedLngs['en'];
 
-  // Fetch GitHub stars and forks
+  // Fetch GitHub stars and forks via backend proxy
   React.useEffect(() => {
-    fetch('https://api.github.com/repos/rh-aiservices-bu/s4')
-      .then((response) => response.json())
-      .then((data) => {
-        setRepoStars(data.stargazers_count);
-        setRepoForks(data.forks_count);
+    apiClient
+      .get('/github/repo-info')
+      .then((response) => {
+        setRepoStars(response.data.stargazers_count);
+        setRepoForks(response.data.forks_count);
       })
       .catch((error) => {
         // eslint-disable-next-line no-console

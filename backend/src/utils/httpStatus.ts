@@ -36,6 +36,7 @@ export const HttpStatus = {
   CLIENT_CLOSED_REQUEST: 499, // Nginx extension for aborted requests
 
   // 5xx Server Errors
+  BAD_GATEWAY: 502,
   INTERNAL_SERVER_ERROR: 500,
   INSUFFICIENT_STORAGE: 507,
 } as const;
