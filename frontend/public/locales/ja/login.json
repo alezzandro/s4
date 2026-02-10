@@ -1,0 +1,21 @@
+{
+  "title": "S4 にログイン",
+  "subtitle": "Super Simple Storage Service",
+  "form": {
+    "username": "ユーザー名",
+    "password": "パスワード",
+    "showPassword": "パスワードを表示",
+    "hidePassword": "パスワードを隠す",
+    "logIn": "ログイン",
+    "loggingIn": "ログイン中..."
+  },
+  "validation": {
+    "usernameRequired": "ユーザー名は必須です",
+    "passwordRequired": "パスワードは必須です"
+  },
+  "errors": {
+    "invalidCredentials": "ユーザー名またはパスワードが正しくありません",
+    "sessionExpired": "セッションが期限切れです。もう一度ログインしてください。"
+  },
+  "brandAlt": "S4 - Super Simple Storage Service"
+}

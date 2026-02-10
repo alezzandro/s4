@@ -4,7 +4,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
 // Add polyfills for jsdom environment
-import { TextEncoder, TextDecoder } from 'util';
+import { TextDecoder, TextEncoder } from 'util';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const transferTranslations = require('../../public/locales/en/transfer.json');
@@ -21,7 +21,9 @@ const errorsTranslations = require('../../public/locales/en/errors.json');
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const translationTranslations = require('../../public/locales/en/translation.json');
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 global.TextEncoder = TextEncoder as any;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 global.TextDecoder = TextDecoder as any;
 
 // Initialize i18n for tests with all namespaces
@@ -70,6 +72,7 @@ global.IntersectionObserver = class IntersectionObserver {
     return [];
   }
   unobserve() {}
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 } as any;
 
 // Mock ResizeObserver
@@ -78,6 +81,7 @@ global.ResizeObserver = class ResizeObserver {
   disconnect() {}
   observe() {}
   unobserve() {}
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 } as any;
 
 // Add any global test configuration here

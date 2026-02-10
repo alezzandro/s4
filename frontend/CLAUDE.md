@@ -16,6 +16,17 @@
 
 ⚠️ **MANDATORY**: Follow the [PatternFly 6 Development Guide](../docs/development/pf6-guide/README.md) as the **AUTHORITATIVE SOURCE** for all UI development.
 
+### Context7 Warning
+
+**DO NOT use Context7 for PatternFly components.** Context7 may contain outdated PatternFly versions (v5 or earlier) that conflict with this project's PatternFly 6 requirements.
+
+**Instead use:**
+
+- **Local guide**: [`docs/development/pf6-guide/`](../docs/development/pf6-guide/README.md) (authoritative, project-specific)
+- **Official docs**: [PatternFly.org](https://www.patternfly.org/) (always up-to-date)
+
+Context7 is fine for non-PatternFly libraries: React, Axios, React Router, Jest, i18next, and other dependencies.
+
 ### Essential Rules
 
 1. **Class Prefix**: ALL PatternFly classes MUST use `pf-v6-` prefix
@@ -786,6 +797,7 @@ frontend/
 - ❌ Create EventSource manually (use `createAuthenticatedEventSource()` instead)
 - ❌ Skip accessibility features
 - ❌ Use `alert()` or `console.error()` for user-facing errors (use notification utilities)
+- ❌ Use Context7 for PatternFly documentation (use local `docs/development/pf6-guide/` and PatternFly.org instead)
 
 ### PatternFly 6 Guide
 
@@ -800,7 +812,7 @@ For comprehensive PatternFly 6 development guidance:
 ## 🔧 Known Limitations
 
 - Simple authentication only (single admin user, no multi-user or role-based access)
-- Limited i18n (English only currently implemented)
+- i18n translations may be incomplete or imperfect for non-English languages
 - Ephemeral settings (not persisted unless from env vars)
 - No global error boundary (component-level only)
 - Minimal test coverage

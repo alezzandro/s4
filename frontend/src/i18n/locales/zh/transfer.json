@@ -1,0 +1,142 @@
+{
+  "title": "传输文件",
+  "destination": {
+    "title": "选择目标位置",
+    "location": "存储位置",
+    "selectLocation": "选择存储位置",
+    "selectLocationPlaceholder": "选择位置...",
+    "locationFormat": "{{name}} ({{type}}){{unavailable}}",
+    "unavailable": "（不可用）",
+    "root": "根目录",
+    "directoryList": "目录列表",
+    "createFolder": "创建文件夹",
+    "create": "创建",
+    "selectDestination": "选择目标位置",
+    "newFolder": {
+      "title": "创建新文件夹",
+      "label": "文件夹名称",
+      "placeholder": "至少输入 1 个字符",
+      "rulesTitle": "文件夹命名规则："
+    },
+    "loadError": "无法加载目录",
+    "notifications": {
+      "folderCreated": {
+        "title": "文件夹已创建",
+        "message": "文件夹 \"{{name}}\" 创建成功"
+      },
+      "folderCreateError": "无法创建文件夹"
+    }
+  },
+  "conflicts": {
+    "title": "解决文件冲突",
+    "nonConflicting": {
+      "title": "无冲突文件",
+      "message": "{{count}} 个文件将被自动复制（无冲突）。"
+    },
+    "conflicting": {
+      "title": "冲突文件",
+      "message": "{{count}} 个文件在目标位置已存在。应如何处理？"
+    },
+    "resolution": {
+      "label": "解决策略",
+      "skip": "跳过",
+      "skipDescription": "跳过冲突文件，保留目标位置的现有文件",
+      "overwrite": "覆盖",
+      "overwriteDescription": "用源文件替换现有文件",
+      "rename": "重命名",
+      "renameDescription": "使用新名称复制源文件（例如 file.txt -> file (1).txt）"
+    },
+    "fileList": {
+      "title": "冲突文件：",
+      "showingFirst": "显示 {{count}} 个冲突中的前 25 个"
+    },
+    "summary": {
+      "title": "摘要",
+      "autoCopy": "{{count}} 个文件将被自动复制",
+      "willBe": "{{count}} 个冲突将被{{action}}",
+      "total": "总计：将复制 {{count}} 个文件"
+    },
+    "checkError": "无法检查冲突"
+  },
+  "progress": {
+    "title": "文件传输进度",
+    "titleWithSummary": "文件传输进度：{{summary}}",
+    "fileCount": "{{completed}} / {{total}} 个文件",
+    "failedCount": "{{count}} 个失败",
+    "status": {
+      "error": "错误",
+      "complete": "已完成",
+      "queued": "排队中",
+      "transferring": "传输中"
+    },
+    "errorAlert": "传输错误",
+    "noTransfers": {
+      "title": "无传输",
+      "message": "没有正在进行的传输"
+    },
+    "notifications": {
+      "completed": {
+        "title": "传输完成",
+        "message": "已成功传输 {{count}} 个文件"
+      },
+      "failed": {
+        "title": "传输失败",
+        "message": "{{count}} 个文件传输失败"
+      },
+      "connectionError": {
+        "title": "传输连接错误",
+        "message": "与传输进度更新的连接已断开"
+      },
+      "cancelled": {
+        "title": "传输已取消",
+        "message": "文件传输已被取消"
+      },
+      "cancelError": "无法取消传输"
+    }
+  },
+  "actions": {
+    "cancel": "取消",
+    "close": "关闭",
+    "apply": "应用",
+    "proceed": "继续",
+    "cancelTransfer": "取消传输",
+    "continueTransfer": "继续传输"
+  },
+  "confirmCancel": {
+    "title": "取消传输？",
+    "message": "确定要取消此传输吗？已传输的文件将被保留。"
+  },
+  "largeTransfer": {
+    "title": "大型文件夹传输",
+    "alertTitle": "大型传输操作",
+    "filesToTransfer": "待传输文件",
+    "filesSuffix": "个文件",
+    "totalSize": "总大小",
+    "instructions": "此操作可能需要较长时间才能完成。您可以在传输队列中监控进度。"
+  },
+  "notifications": {
+    "started": {
+      "title": "传输已开始",
+      "message": "正在传输 {{count}} 个文件"
+    },
+    "startError": "无法启动传输"
+  },
+  "summary": {
+    "title": "传输摘要",
+    "filesTransferred": "已传输文件：{{count}}",
+    "filesSkipped": "已跳过文件：{{count}}",
+    "filesFailed": "失败文件：{{count}}",
+    "totalSize": "总大小：{{size}}"
+  },
+  "errors": {
+    "noDestination": "请选择目标位置",
+    "sameLocation": "源位置和目标位置不能相同",
+    "transferFailed": "传输失败",
+    "networkError": "传输过程中发生网络错误"
+  },
+  "huggingface": {
+    "importing": "正在从 HuggingFace 导入",
+    "modelFiles": "模型文件",
+    "downloadProgress": "下载进度"
+  }
+}

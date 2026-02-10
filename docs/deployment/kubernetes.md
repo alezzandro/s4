@@ -17,10 +17,10 @@ S4 can be deployed to Kubernetes using **Helm charts** (recommended) or raw mani
 
 ## Deployment Methods
 
-| Method | Best For | Advantages |
-|--------|----------|------------|
+| Method                 | Best For           | Advantages                              |
+| ---------------------- | ------------------ | --------------------------------------- |
 | **Helm** (Recommended) | Production, GitOps | Easy configuration, upgrades, rollbacks |
-| Raw Manifests | Simple deployments | No Helm required, direct kubectl apply |
+| Raw Manifests          | Simple deployments | No Helm required, direct kubectl apply  |
 
 ## Deployment Architecture
 
@@ -201,16 +201,16 @@ See the [Helm chart README](../../charts/s4/README.md) for complete values docum
 
 Key configuration groups:
 
-| Group | Description |
-|-------|-------------|
-| `image.*` | Container image settings |
-| `s3.*` | S3 backend configuration |
-| `auth.*` | Authentication settings |
-| `storage.*` | PVC sizes and storage classes |
-| `resources.*` | CPU and memory limits |
-| `service.*` | Service type and ports |
-| `ingress.*` | Ingress configuration |
-| `route.*` | OpenShift Route configuration |
+| Group         | Description                   |
+| ------------- | ----------------------------- |
+| `image.*`     | Container image settings      |
+| `s3.*`        | S3 backend configuration      |
+| `auth.*`      | Authentication settings       |
+| `storage.*`   | PVC sizes and storage classes |
+| `resources.*` | CPU and memory limits         |
+| `service.*`   | Service type and ports        |
+| `ingress.*`   | Ingress configuration         |
+| `route.*`     | OpenShift Route configuration |
 
 ### Upgrading with Helm
 

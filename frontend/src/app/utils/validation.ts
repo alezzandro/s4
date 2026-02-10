@@ -100,8 +100,8 @@ export const validateS3ObjectName = (name: string, storageType?: 's3' | 'local')
   if (storageType) {
     const validCharacters =
       storageType === 's3'
-        ? /^[a-zA-Z0-9!.\-_*'()\/]+$/ // S3: letters, numbers, and safe special chars including /
-        : /^[a-zA-Z0-9._\/-]+$/; // Local/PVC: only letters, numbers, dots, underscores, hyphens, /
+        ? /^[a-zA-Z0-9!.\-_*'()/]+$/ // S3: letters, numbers, and safe special chars including /
+        : /^[a-zA-Z0-9._/-]+$/; // Local/PVC: only letters, numbers, dots, underscores, hyphens, /
 
     if (!validCharacters.test(name)) {
       return false;
@@ -127,12 +127,12 @@ export const validateS3ObjectName = (name: string, storageType?: 's3' | 'local')
  * ```
  */
 export const getBucketNameRules = (): string[] => [
-  'Bucket names must be between 3 and 63 characters long',
-  'Bucket names can consist only of lowercase letters, numbers, dots (.), and hyphens (-)',
-  'Bucket names must begin and end with a letter or number',
-  'Bucket names must not contain consecutive periods',
-  'Bucket names must not be formatted as an IP address',
-  'Bucket names must be unique',
+  'buckets:createModal.rules.length',
+  'buckets:createModal.rules.characters',
+  'buckets:createModal.rules.startEnd',
+  'buckets:createModal.rules.noPeriods',
+  'buckets:createModal.rules.noIp',
+  'buckets:createModal.rules.unique',
 ];
 
 /**

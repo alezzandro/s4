@@ -72,9 +72,11 @@ import { FileEntry, StorageLocation, storageService } from '@app/services/storag
 import { TransferAction } from '@app/components/Transfer';
 import { formatBytes } from '@app/utils/format';
 import { MobileCardItem, MobileCardView, ResponsiveTableWrapper } from '@app/components/ResponsiveTable';
+import { DEFAULT_PAGE_SIZE, getAvailablePageSizes, snapToNearestPreset } from '@app/utils/paginationPresets';
 
 const StorageBrowser: React.FC = () => {
   const { t } = useTranslation('storage-browser');
+  const { t: tCommon } = useTranslation('translation');
 
   /*
       Common variables
@@ -116,7 +118,8 @@ const StorageBrowser: React.FC = () => {
 
   // Limit the number of concurrent file uploads or transfers
   const [maxConcurrentTransfers, setMaxConcurrentTransfers] = React.useState(2);
-  const [maxFilesPerPage, setMaxFilesPerPage] = React.useState(100);
+  const [maxFilesPerPage, setMaxFilesPerPage] = React.useState(DEFAULT_PAGE_SIZE);
+  const [configuredMax, setConfiguredMax] = React.useState(DEFAULT_PAGE_SIZE);
 
   React.useEffect(() => {
     apiClient
@@ -145,17 +148,27 @@ const StorageBrowser: React.FC = () => {
       .then((response) => {
         const { maxFilesPerPage } = response.data;
         if (maxFilesPerPage !== undefined) {
-          setMaxFilesPerPage(maxFilesPerPage);
+          const snapped = snapToNearestPreset(maxFilesPerPage);
+          setConfiguredMax(snapped);
+          setMaxFilesPerPage(snapped);
         }
       })
       .catch((error) => {
         console.error(error);
         // Fall back to default value
-        setMaxFilesPerPage(100);
+        setMaxFilesPerPage(DEFAULT_PAGE_SIZE);
+        setConfiguredMax(DEFAULT_PAGE_SIZE);
         notifyWarning(t('notifications.defaultSettings.title'), t('notifications.defaultSettings.maxFilesPerPage'));
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Run only on mount; t is stable
+
+  // Clamp maxFilesPerPage if it exceeds configuredMax (edge case safety)
+  React.useEffect(() => {
+    if (maxFilesPerPage > configuredMax) {
+      setMaxFilesPerPage(configuredMax);
+    }
+  }, [configuredMax, maxFilesPerPage]);
 
   // URL parameters from /browse/:locationId/:path?
   //
@@ -347,7 +360,8 @@ const StorageBrowser: React.FC = () => {
   const [files, setFiles] = React.useState<FileEntry[]>([]);
   const [directories, setDirectories] = React.useState<FileEntry[]>([]);
   const [paginationToken, setPaginationToken] = React.useState<string | null>(null);
-  const [paginationOffset, setPaginationOffset] = React.useState(0);
+  const [_paginationOffset, setPaginationOffset] = React.useState(0);
+  const paginationOffsetRef = React.useRef(0);
   const [isTruncated, setIsTruncated] = React.useState<boolean>(false);
   const [isLoadingMore, setIsLoadingMore] = React.useState<boolean>(false);
   const [isInitialLoading, setIsInitialLoading] = React.useState<boolean>(true);
@@ -388,7 +402,7 @@ const StorageBrowser: React.FC = () => {
           setIsTruncated(response.isTruncated || false);
         } else {
           // Local storage: Use offset pagination
-          const offset = appendResults ? paginationOffset : 0;
+          const offset = appendResults ? paginationOffsetRef.current : 0;
 
           response = await storageService.listFiles(location.id, path, {
             limit: maxFilesPerPage,
@@ -401,12 +415,10 @@ const StorageBrowser: React.FC = () => {
           const hasMore = response.totalCount! > offset + response.files.length;
           setIsTruncated(hasMore);
 
-          // Update offset for next page
-          if (appendResults) {
-            setPaginationOffset(offset + response.files.length);
-          } else {
-            setPaginationOffset(response.files.length);
-          }
+          // Update offset for next page (ref + state)
+          const newOffset = appendResults ? offset + response.files.length : response.files.length;
+          paginationOffsetRef.current = newOffset;
+          setPaginationOffset(newOffset);
         }
 
         // Separate files and directories from FileEntry array
@@ -445,8 +457,8 @@ const StorageBrowser: React.FC = () => {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [paginationOffset, maxFilesPerPage],
-  ); // Dependencies: paginationOffset and maxFilesPerPage; t is stable
+    [maxFilesPerPage],
+  ); // Dependencies: maxFilesPerPage only; paginationOffset tracked via ref to avoid infinite loop; t is stable
 
   // Load files when location or path changes
   React.useEffect(() => {
@@ -475,6 +487,7 @@ const StorageBrowser: React.FC = () => {
 
     // Reset pagination
     setPaginationToken(null);
+    paginationOffsetRef.current = 0;
     setPaginationOffset(0);
     setIsTruncated(false);
 
@@ -513,6 +526,8 @@ const StorageBrowser: React.FC = () => {
       if (cancelled) return;
       // Reset pagination & existing results, then fetch filtered first page
       setPaginationToken(null);
+      paginationOffsetRef.current = 0;
+      setPaginationOffset(0);
       setIsTruncated(false);
       setFiles([]);
       setDirectories([]);
@@ -535,9 +550,9 @@ const StorageBrowser: React.FC = () => {
   }, [searchObjectText, searchMode, selectedLocation, path, refreshFiles, filterMeta, locationId, serverSearchActive]);
 
   const columnNames = {
-    key: 'Key',
-    lastModified: 'Last Modified',
-    size: 'Size',
+    key: t('table.columns.key'),
+    lastModified: t('table.columns.lastModified'),
+    size: t('table.columns.size'),
   };
 
   // Filter files by name and path
@@ -663,6 +678,7 @@ const StorageBrowser: React.FC = () => {
 
     // Reset pagination
     setPaginationToken(null);
+    paginationOffsetRef.current = 0;
     setPaginationOffset(0);
     setIsTruncated(false);
 
@@ -2221,7 +2237,7 @@ const StorageBrowser: React.FC = () => {
       },
       fields: [
         {
-          label: 'Modified',
+          label: t('table.columns.lastModified'),
           value: dir.modified ? new Date(dir.modified).toLocaleString() : '-',
         },
       ],
@@ -2247,11 +2263,11 @@ const StorageBrowser: React.FC = () => {
       icon: <FileIcon className="file-icon" />,
       fields: [
         {
-          label: 'Size',
+          label: t('table.columns.size'),
           value: file.size ? formatBytes(file.size) : '-',
         },
         {
-          label: 'Modified',
+          label: t('table.columns.lastModified'),
           value: file.modified ? new Date(file.modified).toLocaleString() : '-',
         },
       ],
@@ -2321,18 +2337,16 @@ const StorageBrowser: React.FC = () => {
   return (
     <div>
       <PageSection hasBodyWrapper={false}>
-        <Content component={ContentVariants.h1}>Storage Browser</Content>
+        <Content component={ContentVariants.h1}>{t('title')}</Content>
       </PageSection>
       {selectedLocation && !selectedLocation.available && (
         <PageSection hasBodyWrapper={false}>
-          <Alert variant="warning" title="Location Unavailable" isInline>
+          <Alert variant="warning" title={t('alerts.locationUnavailable.title')} isInline>
             <p>
-              The storage location &quot;{selectedLocation.name}&quot; is currently unavailable.
-              {selectedLocation.type === 'local' && (
-                <span> The directory may be inaccessible or the path may be incorrect.</span>
-              )}
+              {t('alerts.locationUnavailable.message', { name: selectedLocation.name })}
+              {selectedLocation.type === 'local' && <span> {t('alerts.locationUnavailable.localMessage')}</span>}
             </p>
-            <p>File operations are disabled until the location becomes available.</p>
+            <p>{t('alerts.locationUnavailable.disabledMessage')}</p>
           </Alert>
         </PageSection>
       )}
@@ -2341,29 +2355,29 @@ const StorageBrowser: React.FC = () => {
           <FlexItem>
             <Flex>
               <FlexItem>
-                <Content component={ContentVariants.p}>Storage Location:</Content>
+                <Content component={ContentVariants.p}>{t('locationSelector.label')}</Content>
               </FlexItem>
               <FlexItem>
                 <div className="pf-u-flex-align-center pf-u-flex-gap-sm">
                   <FormSelect
                     className="bucket-select"
                     value={formSelectLocation}
-                    aria-label="Select storage location"
+                    aria-label={t('locationSelector.placeholder')}
                     ouiaId="BasicFormSelect"
                     onChange={handleLocationSelectorChange}
                     isDisabled={locationsLoading}
                   >
                     {locationsLoading ? (
-                      <FormSelectOption key="loading" value="" label="Loading locations..." isDisabled />
+                      <FormSelectOption key="loading" value="" label={t('locationSelector.loading')} isDisabled />
                     ) : locations.length === 0 ? (
-                      <FormSelectOption key="empty" value="" label="No storage locations available" isDisabled />
+                      <FormSelectOption key="empty" value="" label={t('locationSelector.noLocations')} isDisabled />
                     ) : null}
 
                     {locations.map((loc) => {
                       const label =
                         loc.type === 's3'
-                          ? `${loc.name} (S3)`
-                          : `${loc.name} (PVC${!loc.available ? ' - Unavailable' : ''})`;
+                          ? `${loc.name} ${t('locationSelector.typeS3')}`
+                          : `${loc.name} ${t('locationSelector.typePVC')}${!loc.available ? t('locationSelector.unavailableSuffix') : ''}`;
 
                       return <FormSelectOption key={loc.id} value={loc.id} label={label} isDisabled={!loc.available} />;
                     })}
@@ -2377,7 +2391,7 @@ const StorageBrowser: React.FC = () => {
             <FlexItem>
               <Flex>
                 <FlexItem>
-                  <Content component={ContentVariants.p}>Location override:</Content>
+                  <Content component={ContentVariants.p}>{t('locationSelector.overrideLabel')}</Content>
                 </FlexItem>
                 <FlexItem>
                   <TextInput
@@ -2389,14 +2403,14 @@ const StorageBrowser: React.FC = () => {
                       }
                     }}
                     type="search"
-                    aria-label="search text input"
-                    placeholder="Enter S3 bucket name..."
+                    aria-label={t('locationSelector.overridePlaceholder')}
+                    placeholder={t('locationSelector.overridePlaceholder')}
                     className="buckets-list-filter-search"
                   />
                 </FlexItem>
                 <FlexItem>
                   <Button variant="secondary" onClick={handleLocationTextInputSend} ouiaId="RefreshBucket">
-                    Set location
+                    {t('locationSelector.setLocation')}
                   </Button>
                 </FlexItem>
               </Flex>
@@ -2438,7 +2452,7 @@ const StorageBrowser: React.FC = () => {
           </FlexItem>
           <FlexItem>
             <Button variant="secondary" onClick={copyPrefixToClipboard} className="copy-path-button" ouiaId="CopyPath">
-              Copy Path
+              {t('actions.copyPath')}
             </Button>
           </FlexItem>
         </Flex>
@@ -2453,7 +2467,7 @@ const StorageBrowser: React.FC = () => {
                   type="search"
                   onChange={(_event, searchText) => setSearchObjectText(searchText)}
                   aria-label="search text input"
-                  placeholder="Filter files (min 3 chars to server search)…"
+                  placeholder={t('search.filterPlaceholder')}
                   customIcon={<SearchIcon />}
                   className="buckets-list-filter-search"
                 />
@@ -2466,8 +2480,8 @@ const StorageBrowser: React.FC = () => {
                   isDisabled={!serverSearchActive}
                   ouiaId="SearchModeSelect"
                 >
-                  <FormSelectOption value="contains" label="Contains" />
-                  <FormSelectOption value="startsWith" label="Starts with" />
+                  <FormSelectOption value="contains" label={t('search.mode.contains')} />
+                  <FormSelectOption value="startsWith" label={t('search.mode.startsWith')} />
                 </FormSelect>
               </FlexItem>
               <FlexItem>
@@ -2479,6 +2493,7 @@ const StorageBrowser: React.FC = () => {
                     setMaxFilesPerPage(newValue);
                     // Reset pagination and refresh files
                     setPaginationToken(null);
+                    paginationOffsetRef.current = 0;
                     setPaginationOffset(0);
                     if (selectedLocation && selectedLocation.available) {
                       refreshFiles(
@@ -2494,10 +2509,13 @@ const StorageBrowser: React.FC = () => {
                   ouiaId="PageSizeSelect"
                   className="page-size-select"
                 >
-                  {[25, 50, 100, 250, 500, 1000].map((size) => (
-                    <FormSelectOption key={size} value={size.toString()} label={`${size} per page`} />
+                  {getAvailablePageSizes(configuredMax).map((size) => (
+                    <FormSelectOption key={size} value={size.toString()} label={size.toString()} />
                   ))}
                 </FormSelect>
+              </FlexItem>
+              <FlexItem alignSelf={{ default: 'alignSelfCenter' }}>
+                {tCommon('common.pagination.perPageLabel')}
               </FlexItem>
               {serverSearchActive && (
                 <FlexItem>
@@ -2508,7 +2526,7 @@ const StorageBrowser: React.FC = () => {
                     }}
                     ouiaId="ClearSearch"
                   >
-                    Clear Search
+                    {t('search.clear')}
                   </Button>
                 </FlexItem>
               )}
@@ -2517,7 +2535,7 @@ const StorageBrowser: React.FC = () => {
                 <Flex>
                   <FlexItem className="file-folder-buttons">
                     <Button variant="primary" onClick={handleCreateFolderModalToggle} ouiaId="ShowCreateFolderModal">
-                      Create Folder
+                      {t('actions.createFolder')}
                     </Button>
                   </FlexItem>
                   <FlexItem className="file-folder-buttons">
@@ -2526,7 +2544,7 @@ const StorageBrowser: React.FC = () => {
                       onClick={handleUploadSingleFileModalToggle}
                       ouiaId="ShowUploadSingleFileModal"
                     >
-                      Upload Single File
+                      {t('actions.uploadSingle')}
                     </Button>
                   </FlexItem>
                   <FlexItem className="file-folder-buttons">
@@ -2535,7 +2553,7 @@ const StorageBrowser: React.FC = () => {
                       onClick={handleUploadFilesModalToggle}
                       ouiaId="ShowUploadMultipleFileModal"
                     >
-                      Upload Multiple Files
+                      {t('actions.uploadMultiple')}
                     </Button>
                   </FlexItem>
                   <FlexItem className="file-folder-buttons">
@@ -2546,7 +2564,7 @@ const StorageBrowser: React.FC = () => {
                       isDisabled={!selectedLocation || !locationId}
                       ouiaId="ShowImportHFModal"
                     >
-                      Import HF Model
+                      {t('actions.importModel')}
                     </Button>
                   </FlexItem>
                 </Flex>
@@ -2559,23 +2577,12 @@ const StorageBrowser: React.FC = () => {
                 <ToolbarContent>
                   <ToolbarItem>
                     <Content component={ContentVariants.p}>
-                      {selectedFileCount > 0 && (
-                        <>
-                          {selectedFileCount} file{selectedFileCount !== 1 ? 's' : ''}
-                        </>
-                      )}
-                      {selectedFileCount > 0 && selectedFolderCount > 0 && ', '}
-                      {selectedFolderCount > 0 && (
-                        <>
-                          {selectedFolderCount} folder{selectedFolderCount !== 1 ? 's' : ''}
-                        </>
-                      )}
-                      {' selected'}
+                      {t('selection.filesAndFolders', { files: selectedFileCount, folders: selectedFolderCount })}
                     </Content>
                   </ToolbarItem>
                   <ToolbarItem>
                     <Button variant="primary" icon={<CopyIcon />} onClick={handleCopySelected}>
-                      Copy to...
+                      {t('actions.copyTo')}
                     </Button>
                   </ToolbarItem>
                   <ToolbarItem>
@@ -2586,12 +2593,12 @@ const StorageBrowser: React.FC = () => {
                       isLoading={isDeletingSelected}
                       isDisabled={isDeletingSelected}
                     >
-                      Delete
+                      {tCommon('common.actions.delete')}
                     </Button>
                   </ToolbarItem>
                   <ToolbarItem>
                     <Button variant="link" onClick={() => setSelectedItems(new Set())}>
-                      Clear selection
+                      {t('actions.clearSelection')}
                     </Button>
                   </ToolbarItem>
                 </ToolbarContent>
@@ -2647,23 +2654,25 @@ const StorageBrowser: React.FC = () => {
               </Card>
             ) : filteredDirectories.length === 0 && filteredFiles.length === 0 && !searchObjectText ? (
               <Card component="div">
-                <EmptyState icon={FolderOpenIcon} titleText="This folder is empty">
-                  <EmptyStateBody>Upload files or create folders to get started.</EmptyStateBody>
+                <EmptyState icon={FolderOpenIcon} titleText={t('emptyState.folderEmpty')}>
+                  <EmptyStateBody>{t('emptyState.folderEmptyDescription')}</EmptyStateBody>
                   <EmptyStateFooter>
-                    <Button onClick={handleCreateFolderModalToggle}>Create Folder</Button>
+                    <Button onClick={handleCreateFolderModalToggle}>{t('actions.createFolder')}</Button>
                     <Button variant="secondary" onClick={handleUploadFilesModalToggle}>
-                      Upload Files
+                      {t('actions.uploadFiles')}
                     </Button>
                   </EmptyStateFooter>
                 </EmptyState>
               </Card>
             ) : filteredDirectories.length === 0 && filteredFiles.length === 0 && searchObjectText ? (
               <Card component="div">
-                <EmptyState icon={SearchIcon} titleText="No files match your search">
-                  <EmptyStateBody>No files or folders found matching &quot;{searchObjectText}&quot;.</EmptyStateBody>
+                <EmptyState icon={SearchIcon} titleText={t('emptyState.noSearchResults')}>
+                  <EmptyStateBody>
+                    {t('emptyState.noSearchResultsDescription', { searchText: searchObjectText })}
+                  </EmptyStateBody>
                   <EmptyStateFooter>
                     <Button variant="secondary" onClick={() => setSearchObjectText('')}>
-                      Clear Search
+                      {t('search.clear')}
                     </Button>
                   </EmptyStateFooter>
                 </EmptyState>
@@ -2798,7 +2807,7 @@ const StorageBrowser: React.FC = () => {
                                     gap={{ default: 'gapMd', md: 'gapMd' }}
                                   >
                                     <ToolbarItem gap={{ default: 'gapLg' }}>
-                                      <Tooltip content={<div>View this file.</div>}>
+                                      <Tooltip content={<div>{t('tooltips.viewFile')}</div>}>
                                         <Button
                                           variant="primary"
                                           className="button-file-control"
@@ -2818,7 +2827,7 @@ const StorageBrowser: React.FC = () => {
                                       </Tooltip>
                                     </ToolbarItem>
                                     <ToolbarItem gap={{ default: 'gapLg' }}>
-                                      <Tooltip content={<div>Download this file.</div>}>
+                                      <Tooltip content={<div>{t('tooltips.downloadFile')}</div>}>
                                         <Button
                                           variant="primary"
                                           className="button-file-control"
@@ -2833,7 +2842,7 @@ const StorageBrowser: React.FC = () => {
                                     </ToolbarItem>
                                     {selectedLocation?.type === 's3' && (
                                       <ToolbarItem gap={{ default: 'gapLg' }}>
-                                        <Tooltip content={<div>View file details and tags.</div>}>
+                                        <Tooltip content={<div>{t('tooltips.viewDetails')}</div>}>
                                           <Button
                                             variant="secondary"
                                             className="button-file-control"
@@ -2847,7 +2856,7 @@ const StorageBrowser: React.FC = () => {
                                     )}
                                     <ToolbarItem variant="separator" />
                                     <ToolbarItem>
-                                      <Tooltip content={<div>Delete this file.</div>}>
+                                      <Tooltip content={<div>{t('tooltips.deleteFile')}</div>}>
                                         <Button
                                           variant="danger"
                                           className="button-file-control"
@@ -2884,7 +2893,9 @@ const StorageBrowser: React.FC = () => {
                     isDisabled={isLoadingMore || deepSearchActive}
                     ouiaId="LoadMore"
                   >
-                    {isLoadingMore ? 'Loading…' : `Load more (${paginationToken ? 'more available' : 'last page'})`}
+                    {isLoadingMore
+                      ? t('pagination.loading')
+                      : `${t('pagination.loadMore')} (${paginationToken ? t('pagination.moreAvailable') : t('pagination.lastPage')})`}
                   </Button>
                 </FlexItem>
               </Flex>
@@ -2894,12 +2905,12 @@ const StorageBrowser: React.FC = () => {
               <Flex direction={{ default: 'row' }} className="pf-u-margin-top-md">
                 <FlexItem>
                   <Content component={ContentVariants.p}>
-                    Deep search active... scanned {deepSearchPagesScanned} additional page(s)...
+                    {t('search.deepSearchActive', { count: deepSearchPagesScanned })}
                   </Content>
                 </FlexItem>
                 <FlexItem>
                   <Button variant="secondary" onClick={cancelDeepSearch} ouiaId="CancelDeepSearch">
-                    Cancel
+                    {t('search.cancel')}
                   </Button>
                 </FlexItem>
               </Flex>
@@ -2909,7 +2920,7 @@ const StorageBrowser: React.FC = () => {
               <Flex direction={{ default: 'column' }} className="pf-u-margin-top-md">
                 <FlexItem>
                   <Content component={ContentVariants.p}>
-                    Showing partial results. {filterMeta.truncated ? 'More results may be available.' : ''}
+                    {t('search.partialResults')} {filterMeta.truncated ? t('search.moreResultsAvailable') : ''}
                   </Content>
                 </FlexItem>
               </Flex>
@@ -2917,26 +2928,19 @@ const StorageBrowser: React.FC = () => {
             {!serverSearchActive && searchObjectText.length >= 3 && isTruncated && (
               <Flex direction={{ default: 'column' }} className="pf-u-margin-top-md">
                 <FlexItem>
-                  <Content component={ContentVariants.p}>
-                    Client-side filtering active. Results may be incomplete. Deep search will auto-trigger if no matches
-                    found.
-                  </Content>
+                  <Content component={ContentVariants.p}>{t('search.clientFiltering')}</Content>
                 </FlexItem>
               </Flex>
             )}
             <Flex direction={{ default: 'column' }}>
               <FlexItem className="file-list-notes" align={{ default: 'alignRight' }}>
-                <Content component={ContentVariants.small}>
-                  File viewer is only enabled for files smaller than 1MB and supported types.
-                </Content>
+                <Content component={ContentVariants.small}>{t('notes.fileViewerLimit')}</Content>
               </FlexItem>
               <FlexItem className="file-list-notes" align={{ default: 'alignRight' }}>
-                <Content component={ContentVariants.small}>
-                  Deleting the last item in a folder will delete the folder.
-                </Content>
+                <Content component={ContentVariants.small}>{t('notes.lastItemDeletesFolder')}</Content>
               </FlexItem>
               <FlexItem className="file-list-notes" align={{ default: 'alignRight' }}>
-                <Content component={ContentVariants.small}>Download of large files may fail.</Content>
+                <Content component={ContentVariants.small}>{t('notes.largeDownloadWarning')}</Content>
               </FlexItem>
             </Flex>
           </FlexItem>
@@ -2949,7 +2953,7 @@ const StorageBrowser: React.FC = () => {
         className="file-viewer-modal"
         aria-labelledby="file-viewer-modal-title"
       >
-        <ModalHeader labelId="file-viewer-modal-title" title="File Preview" />
+        <ModalHeader labelId="file-viewer-modal-title" title={t('fileViewer.title')} />
         <ModalBody>
           <div className="file-viewer-wrapper">
             <DocumentRenderer fileData={fileData} fileName={fileName} />
@@ -2957,7 +2961,7 @@ const StorageBrowser: React.FC = () => {
         </ModalBody>
         <ModalFooter>
           <Button key="close" variant="primary" onClick={handleFileViewerToggle}>
-            Close
+            {tCommon('common.actions.close')}
           </Button>
         </ModalFooter>
       </Modal>
@@ -2967,12 +2971,13 @@ const StorageBrowser: React.FC = () => {
         onClose={handleDeleteFileModalToggle}
         aria-labelledby="delete-file-modal-title"
       >
-        <ModalHeader labelId="delete-file-modal-title" title="Delete file?" titleIconVariant="warning" />
+        <ModalHeader labelId="delete-file-modal-title" title={t('delete.file.title')} titleIconVariant="warning" />
         <ModalBody>
           <Content>
-            <Content component={ContentVariants.p}>This action cannot be undone.</Content>
+            <Content component={ContentVariants.p}>{t('delete.file.message')}</Content>
             <Content component={ContentVariants.p}>
-              Type <strong>{selectedFile.split('/').pop()}</strong> to confirm deletion.
+              {t('delete.file.confirmMessage_prefix')} <strong>{selectedFile.split('/').pop()}</strong>{' '}
+              {t('delete.file.confirmMessage_suffix')}
             </Content>
           </Content>
           <TextInput
@@ -2999,10 +3004,10 @@ const StorageBrowser: React.FC = () => {
             isDisabled={!validateFileToDelete() || isDeletingFile}
             isLoading={isDeletingFile}
           >
-            Delete file
+            {t('delete.file.confirm')}
           </Button>
           <Button key="cancel" variant="secondary" onClick={handleDeleteFileCancel}>
-            Cancel
+            {tCommon('common.actions.cancel')}
           </Button>
         </ModalFooter>
       </Modal>
@@ -3012,16 +3017,14 @@ const StorageBrowser: React.FC = () => {
         onClose={handleDeleteFolderModalToggle}
         aria-labelledby="delete-folder-modal-title"
       >
-        <ModalHeader
-          labelId="delete-folder-modal-title"
-          title="Delete folder and all its content?"
-          titleIconVariant="warning"
-        />
+        <ModalHeader labelId="delete-folder-modal-title" title={t('delete.folder.title')} titleIconVariant="warning" />
         <ModalBody>
           <Content>
-            <Content component={ContentVariants.p}>This action cannot be undone.</Content>
+            <Content component={ContentVariants.p}>{t('delete.folder.message')}</Content>
             <Content component={ContentVariants.p}>
-              Type <strong>{selectedFolder.replace(/\/$/, '').split('/').pop()}</strong> to confirm deletion.
+              {t('delete.folder.confirmMessage_prefix')}{' '}
+              <strong>{selectedFolder.replace(/\/$/, '').split('/').pop()}</strong>{' '}
+              {t('delete.folder.confirmMessage_suffix')}
             </Content>
           </Content>
           <TextInput
@@ -3048,10 +3051,10 @@ const StorageBrowser: React.FC = () => {
             isDisabled={!validateFolderToDelete() || isDeletingFolder}
             isLoading={isDeletingFolder}
           >
-            Delete folder
+            {t('delete.folder.confirm')}
           </Button>
           <Button key="cancel" variant="secondary" onClick={handleDeleteFolderCancel}>
-            Cancel
+            {tCommon('common.actions.cancel')}
           </Button>
         </ModalFooter>
       </Modal>
@@ -3061,15 +3064,16 @@ const StorageBrowser: React.FC = () => {
         onClose={() => setIsDeleteSelectedModalOpen(false)}
         aria-labelledby="delete-selected-modal-title"
       >
-        <ModalHeader labelId="delete-selected-modal-title" title="Delete selected items?" titleIconVariant="warning" />
+        <ModalHeader
+          labelId="delete-selected-modal-title"
+          title={t('delete.selected.title')}
+          titleIconVariant="warning"
+        />
         <ModalBody>
-          <p>
-            Are you sure you want to delete {selectedItems.size} item{selectedItems.size !== 1 ? 's' : ''}? This action
-            cannot be undone.
-          </p>
+          <p>{t('delete.selected.message', { count: selectedItems.size })}</p>
           <Checkbox
             id="bulk-delete-confirm"
-            label="I understand this action cannot be undone"
+            label={t('delete.selected.confirmCheckbox')}
             isChecked={bulkDeleteConfirmed}
             onChange={(_event, checked) => setBulkDeleteConfirmed(checked)}
           />
@@ -3082,10 +3086,10 @@ const StorageBrowser: React.FC = () => {
             isLoading={isDeletingSelected}
             isDisabled={!bulkDeleteConfirmed || isDeletingSelected}
           >
-            Delete {selectedItems.size} item{selectedItems.size !== 1 ? 's' : ''}
+            {t('delete.selected.confirm', { count: selectedItems.size })}
           </Button>
           <Button key="cancel" variant="secondary" onClick={() => setIsDeleteSelectedModalOpen(false)}>
-            Cancel
+            {tCommon('common.actions.cancel')}
           </Button>
         </ModalFooter>
       </Modal>
@@ -3096,7 +3100,7 @@ const StorageBrowser: React.FC = () => {
         ouiaId="CreateFolderModal"
         aria-labelledby="create-folder-modal-title"
       >
-        <ModalHeader labelId="create-folder-modal-title" title="Create a new folder" />
+        <ModalHeader labelId="create-folder-modal-title" title={t('createFolder.title')} />
         <ModalBody>
           <Form
             onSubmit={(event) => {
@@ -3106,14 +3110,14 @@ const StorageBrowser: React.FC = () => {
               }
             }}
           >
-            <FormGroup label="Folder name" isRequired fieldId="folder-name">
+            <FormGroup label={t('createFolder.nameLabel')} isRequired fieldId="folder-name">
               <TextInput
                 isRequired
                 type="text"
                 id="folder-name"
                 name="folder-name"
                 aria-describedby="folder-name-helper"
-                placeholder="Enter at least 1 character"
+                placeholder={t('createFolder.namePlaceholder')}
                 value={newFolderName}
                 onChange={(_event, newFolderName) => setNewFolderName(newFolderName)}
                 onKeyDown={(event) => {
@@ -3130,22 +3134,14 @@ const StorageBrowser: React.FC = () => {
           </Form>
           <Content hidden={!newFolderNameRulesVisibility}>
             <Content component={ContentVariants.small} className="bucket-name-rules">
-              Folder names must:
+              {t('createFolder.rules.header')}
               <ul>
-                <li>be unique</li>
-                {selectedLocation?.type === 's3' ? (
-                  <li>
-                    only contain letters (a-z, A-Z), numbers (0-9), and these special characters: ! . - _ * &apos; ( )
-                    <br />
-                    Spaces are not allowed
-                  </li>
-                ) : (
-                  <li>
-                    only contain letters (a-z, A-Z), numbers (0-9), dots (.), underscores (_), and hyphens (-)
-                    <br />
-                    Spaces and special characters are not allowed
-                  </li>
-                )}
+                <li>{t('createFolder.rules.unique')}</li>
+                <li>
+                  {selectedLocation?.type === 's3'
+                    ? t('createFolder.rules.s3Chars')
+                    : t('createFolder.rules.localChars')}
+                </li>
               </ul>
             </Content>
           </Content>
@@ -3157,10 +3153,10 @@ const StorageBrowser: React.FC = () => {
             onClick={handleNewFolderCreate}
             isDisabled={newFolderName.length < 1 || newFolderNameRulesVisibility}
           >
-            Create
+            {tCommon('common.actions.create')}
           </Button>
           <Button key="cancel" variant="link" onClick={handleNewFolderCancel}>
-            Cancel
+            {tCommon('common.actions.cancel')}
           </Button>
         </ModalFooter>
       </Modal>
@@ -3171,7 +3167,7 @@ const StorageBrowser: React.FC = () => {
         ouiaId="ImportModelModal"
         aria-labelledby="import-model-modal-title"
       >
-        <ModalHeader labelId="import-model-modal-title" title="Import a model from Hugging Face" />
+        <ModalHeader labelId="import-model-modal-title" title={t('import.huggingface.title')} />
         <ModalBody>
           <Form
             onSubmit={(event) => {
@@ -3181,14 +3177,14 @@ const StorageBrowser: React.FC = () => {
               }
             }}
           >
-            <FormGroup label="Model ID" isRequired fieldId="model-name">
+            <FormGroup label={t('import.huggingface.modelId')} isRequired fieldId="model-name">
               <TextInput
                 isRequired
                 type="text"
                 id="model-name"
                 name="model-name"
                 aria-describedby="model-name-helper"
-                placeholder="e.g., meta-llama/Llama-2-7b-hf"
+                placeholder={t('import.huggingface.modelIdPlaceholder')}
                 value={modelName}
                 onChange={(_event, modelName) => setModelName(modelName)}
                 onKeyDown={(event) => {
@@ -3202,9 +3198,7 @@ const StorageBrowser: React.FC = () => {
               />
               <FormHelperText>
                 <HelperText>
-                  <HelperTextItem>
-                    Enter the HuggingFace model repository ID. Model will be imported to the current location.
-                  </HelperTextItem>
+                  <HelperTextItem>{t('import.huggingface.helperText')}</HelperTextItem>
                 </HelperText>
               </FormHelperText>
             </FormGroup>
@@ -3230,15 +3224,15 @@ const StorageBrowser: React.FC = () => {
             onClick={handleImportModelConfirm}
             isDisabled={!isHfFormValid() || currentImportJobId !== null}
           >
-            Import
+            {t('import.huggingface.importButton')}
           </Button>
           {currentImportJobId !== null && (
             <Button key="cancel-import" variant="danger" onClick={handleCancelImport}>
-              Cancel Import
+              {t('import.huggingface.cancelImport')}
             </Button>
           )}
           <Button key="close" variant="link" onClick={handleImportModelClose}>
-            Close
+            {tCommon('common.actions.close')}
           </Button>
         </ModalFooter>
       </Modal>
@@ -3248,22 +3242,22 @@ const StorageBrowser: React.FC = () => {
         onClose={handleUploadSingleFileModalToggle}
         aria-labelledby="upload-single-modal-title"
       >
-        <ModalHeader labelId="upload-single-modal-title" title="Upload file" />
+        <ModalHeader labelId="upload-single-modal-title" title={t('upload.single.title')} />
         <ModalBody>
           <FileUpload
             id="simple-file"
             value={singleFileUploadValue}
             filename={singleFilename}
-            filenamePlaceholder="Drag and drop a file or upload one"
+            filenamePlaceholder={t('upload.single.dragDropText')}
             onFileInputChange={handleFileInputChange}
             onClearClick={handleClear}
-            browseButtonText="Browse"
+            browseButtonText={t('upload.single.browseFiles')}
           />
           <Flex direction={{ default: 'column' }} className="upload-bars">
             <FlexItem hidden={!(uploadPercentages[singleFilename] && uploadPercentages[singleFilename].loaded !== 0)}>
               <Progress
                 value={uploadPercentages[singleFilename]?.loaded ?? 0}
-                title="Upload to backend progress"
+                title={t('upload.single.progress.toBackend')}
                 size={ProgressSize.sm}
               />
             </FlexItem>
@@ -3272,7 +3266,7 @@ const StorageBrowser: React.FC = () => {
             >
               <Progress
                 value={uploadToS3Percentages[singleFilename]?.loaded ?? 0}
-                title="Upload to storage progress"
+                title={t('upload.single.progress.toS3')}
                 size={ProgressSize.sm}
               />
             </FlexItem>
@@ -3280,10 +3274,10 @@ const StorageBrowser: React.FC = () => {
         </ModalBody>
         <ModalFooter>
           <Button key="confirm" variant="primary" onClick={handleUploadFileConfirm} isDisabled={singleFilename === ''}>
-            Upload
+            {tCommon('common.actions.upload')}
           </Button>
           <Button key="cancel" variant="link" onClick={handleUploadFileCancel}>
-            Cancel
+            {tCommon('common.actions.cancel')}
           </Button>
         </ModalFooter>
       </Modal>
@@ -3293,16 +3287,16 @@ const StorageBrowser: React.FC = () => {
         onClose={handleUploadFilesClose}
         aria-labelledby="upload-files-modal-title"
       >
-        <ModalHeader labelId="upload-files-modal-title" title="Upload multiple files" />
+        <ModalHeader labelId="upload-files-modal-title" title={t('upload.multiple.title')} />
         <ModalBody>
           <MultipleFileUpload onFileDrop={handleFileDrop} isHorizontal={false}>
-            <MultipleFileUploadMain
-              titleIcon={<UploadIcon />}
-              titleText="Drag and drop files here or click on the button to select files and folders."
-            />
+            <MultipleFileUploadMain titleIcon={<UploadIcon />} titleText={t('upload.multiple.dragDropText')} />
             {showStatus && (
               <MultipleFileUploadStatus
-                statusToggleText={`${successfullyUploadedFileCount} of ${currentFiles.length} files uploaded`}
+                statusToggleText={t('upload.multiple.statusText', {
+                  uploaded: successfullyUploadedFileCount,
+                  total: currentFiles.length,
+                })}
                 statusToggleIcon={statusIcon}
                 aria-label="Current uploads"
               >
@@ -3358,7 +3352,7 @@ const StorageBrowser: React.FC = () => {
         </ModalBody>
         <ModalFooter>
           <Button key="close" variant="primary" onClick={handleUploadFilesClose}>
-            Close
+            {tCommon('common.actions.close')}
           </Button>
         </ModalFooter>
       </Modal>
@@ -3369,16 +3363,10 @@ const StorageBrowser: React.FC = () => {
         ouiaId="CleanupFilesModal"
         aria-labelledby="cleanup-files-modal-title"
       >
-        <ModalHeader
-          labelId="cleanup-files-modal-title"
-          title="Import Cancelled - Cleanup Files?"
-          titleIconVariant="warning"
-        />
+        <ModalHeader labelId="cleanup-files-modal-title" title={t('import.cleanup.title')} titleIconVariant="warning" />
         <ModalBody>
           <Content>
-            <Content component={ContentVariants.p}>
-              The import has been cancelled. The following files were downloaded:
-            </Content>
+            <Content component={ContentVariants.p}>{t('import.cleanup.message')}</Content>
             <ul>
               {cancelledJobInfo?.files?.map((file: CancelledJobFile, index: number) => (
                 <li key={index}>
@@ -3386,7 +3374,7 @@ const StorageBrowser: React.FC = () => {
                 </li>
               ))}
             </ul>
-            <Content component={ContentVariants.p}>Do you want to keep these files or delete them?</Content>
+            <Content component={ContentVariants.p}>{t('import.cleanup.keepOrDelete')}</Content>
           </Content>
         </ModalBody>
         <ModalFooter>
@@ -3397,7 +3385,7 @@ const StorageBrowser: React.FC = () => {
             isLoading={isDeletingFiles}
             isDisabled={isDeletingFiles}
           >
-            Delete All Downloaded Files
+            {t('import.cleanup.deleteAll')}
           </Button>
           <Button
             key="keep"
@@ -3405,7 +3393,7 @@ const StorageBrowser: React.FC = () => {
             onClick={() => handleCleanupDecision(false)}
             isDisabled={isDeletingFiles}
           >
-            Keep Files
+            {t('import.cleanup.keepFiles')}
           </Button>
         </ModalFooter>
       </Modal>
@@ -3428,11 +3416,11 @@ const StorageBrowser: React.FC = () => {
       />
       {/* Screen reader status announcements */}
       <div role="status" aria-live="polite" aria-atomic="true" className="pf-v6-screen-reader">
-        {viewingFile && `Loading file preview`}
-        {downloadingFile && `Downloading file`}
-        {isDeletingSelected && `Deleting ${selectedItems.size} items`}
-        {deepSearchActive && `Deep search in progress`}
-        {isLoadingMore && `Loading more files`}
+        {viewingFile && t('accessibility.loadingFilePreview')}
+        {downloadingFile && t('accessibility.downloadingFile')}
+        {isDeletingSelected && t('accessibility.deletingItems', { count: selectedItems.size })}
+        {deepSearchActive && t('accessibility.deepSearchInProgress')}
+        {isLoadingMore && t('accessibility.loadingMoreFiles')}
       </div>
       {/* File Details Modal (S3 only) */}
       <FileDetailsModal

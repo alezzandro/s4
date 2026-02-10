@@ -1,0 +1,78 @@
+{
+  "title": "Impostazioni",
+  "tabs": {
+    "s3": "Impostazioni S3",
+    "huggingface": "Impostazioni HuggingFace",
+    "concurrency": "Trasferimenti simultanei massimi",
+    "pagination": "File massimi per pagina",
+    "proxy": "Impostazioni proxy"
+  },
+  "s3": {
+    "accessKey": {
+      "label": "Chiave di accesso",
+      "helper": "L'ID della chiave di accesso S3 per l'autenticazione"
+    },
+    "secretKey": {
+      "label": "Chiave segreta",
+      "helper": "La chiave di accesso segreta S3 per l'autenticazione",
+      "show": "Mostra chiave segreta",
+      "hide": "Nascondi chiave segreta"
+    },
+    "region": {
+      "label": "Regione",
+      "helper": "Regione AWS in cui si trovano i bucket S3 (es., us-east-1)"
+    },
+    "endpoint": {
+      "label": "Endpoint",
+      "helper": "URL dell'endpoint S3 (lascia vuoto per usare il valore predefinito AWS)"
+    },
+    "defaultBucket": {
+      "label": "Bucket predefinito",
+      "helper": "Bucket predefinito da utilizzare per le operazioni di archiviazione"
+    },
+    "save": "Salva impostazioni S3",
+    "test": "Testa connessione",
+    "testSuccess": "Test di connessione S3 superato!"
+  },
+  "huggingface": {
+    "token": {
+      "label": "Token",
+      "show": "Mostra token",
+      "hide": "Nascondi token"
+    },
+    "save": "Salva impostazioni HuggingFace",
+    "test": "Testa connessione",
+    "testSuccess": "Stai utilizzando il token denominato: {{tokenName}}"
+  },
+  "concurrency": {
+    "label": "Trasferimenti simultanei massimi: {{value}}",
+    "helper": "Numero massimo di trasferimenti file simultanei (1-10)",
+    "save": "Salva trasferimenti simultanei massimi"
+  },
+  "pagination": {
+    "label": "File massimi per pagina: {{value}}",
+    "helper": "Numero massimo di file visualizzati per pagina",
+    "save": "Salva file massimi per pagina"
+  },
+  "proxy": {
+    "httpProxy": {
+      "label": "Proxy HTTP",
+      "placeholder": "http://proxy-server:port",
+      "helper": "URL del server proxy HTTP (es., http://proxy-server:8080)"
+    },
+    "httpsProxy": {
+      "label": "Proxy HTTPS",
+      "placeholder": "https://proxy-server:port",
+      "helper": "URL del server proxy HTTPS (es., https://proxy-server:8443)"
+    },
+    "testUrl": {
+      "label": "URL di test",
+      "placeholder": "https://www.google.com",
+      "helper": "URL per testare la connettività del proxy"
+    },
+    "save": "Salva impostazioni proxy",
+    "test": "Testa connessione",
+    "testSuccess": "Test di connessione proxy superato!",
+    "saved": "Impostazioni proxy salvate con successo!"
+  }
+}

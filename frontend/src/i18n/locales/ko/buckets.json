@@ -1,0 +1,65 @@
+{
+  "title": "저장소 관리",
+  "table": {
+    "columns": {
+      "name": "이름",
+      "type": "유형",
+      "status": "상태",
+      "creationDate": "생성일",
+      "owner": "소유자"
+    },
+    "emptyState": {
+      "title": "Bucket을 찾을 수 없습니다",
+      "description": "시작하려면 첫 번째 bucket을 생성하세요.",
+      "createButton": "Bucket 생성"
+    }
+  },
+  "types": {
+    "s3": "S3",
+    "pvc": "PVC"
+  },
+  "actions": {
+    "createBucket": "S3 Bucket 생성",
+    "deleteBucket": "Bucket 삭제",
+    "refresh": "새로고침"
+  },
+  "createModal": {
+    "title": "새 bucket 생성",
+    "nameLabel": "Bucket 이름",
+    "namePlaceholder": "3자 이상 입력하세요",
+    "create": "생성",
+    "rules": {
+      "title": "Bucket 이름 규칙:",
+      "length": "Bucket 이름은 3자에서 63자 사이여야 합니다",
+      "characters": "Bucket 이름은 소문자, 숫자, 마침표(.), 하이픈(-)만 사용할 수 있습니다",
+      "startEnd": "Bucket 이름은 문자 또는 숫자로 시작하고 끝나야 합니다",
+      "noPeriods": "Bucket 이름에 연속된 마침표를 포함할 수 없습니다",
+      "noIp": "Bucket 이름은 IP 주소 형식이어서는 안 됩니다 (예: 192.168.5.4)",
+      "unique": "Bucket 이름은 현재 구성 내에서 고유해야 합니다"
+    },
+    "success": "Bucket 생성됨",
+    "successMessage": "Bucket {{bucketName}}이(가) 성공적으로 생성되었습니다"
+  },
+  "deleteModal": {
+    "title": "Bucket을 삭제하시겠습니까?",
+    "message": "이 작업은 되돌릴 수 없습니다.",
+    "confirmMessage": "삭제를 확인하려면 {{bucketName}}을(를) 입력하세요.",
+    "confirm": "Bucket 삭제",
+    "success": "Bucket 삭제됨",
+    "successMessage": "Bucket {{bucketName}}이(가) 성공적으로 삭제되었습니다"
+  },
+  "search": {
+    "placeholder": "저장소 위치 검색"
+  },
+  "pagination": {
+    "perPage": "페이지당 {{count}}개"
+  },
+  "refresh": {
+    "success": "저장소 새로고침 완료",
+    "successMessage": "저장소 위치가 성공적으로 업데이트되었습니다."
+  },
+  "validation": {
+    "invalidName": "잘못된 bucket 이름",
+    "invalidNameMessage": "Bucket 이름 {{bucketName}}이(가) 유효하지 않습니다. 규칙을 확인하고 다시 시도하세요."
+  }
+}

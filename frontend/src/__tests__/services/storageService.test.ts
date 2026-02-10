@@ -1,12 +1,4 @@
-import {
-  storageService,
-  StorageLocation,
-  FileEntry,
-  TransferItem,
-  TransferRequest,
-  ConflictCheckResponse,
-} from '@app/services/storageService';
-import config from '@app/config';
+import { TransferItem, TransferRequest, storageService } from '@app/services/storageService';
 
 // Mock apiClient instead of raw axios - storageService uses apiClient, not axios directly
 jest.mock('@app/utils/apiClient', () => ({
@@ -27,6 +19,7 @@ describe('StorageService', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     // Clear the locations cache to ensure tests are isolated
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (storageService as any).locationsCache = null;
   });
 

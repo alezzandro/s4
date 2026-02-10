@@ -1,0 +1,132 @@
+{
+  "app_title": "S4",
+  "app_header": {
+    "powered_by": "Propulsé par",
+    "help": {
+      "header": "À propos de S4",
+      "body": "Super Simple Storage Service"
+    },
+    "version": "Version : {{version}}",
+    "sourceCode": "Code source et documentation disponibles sur",
+    "sourceOnGithub": "Source sur GitHub"
+  },
+  "ui": {
+    "footer": {
+      "stars": "Étoiles GitHub",
+      "forks": "Forks GitHub",
+      "appBy": "Application par",
+      "version": "version {{version}}"
+    }
+  },
+  "nav": {
+    "browse": "Parcourir",
+    "buckets": "Stockage",
+    "settings": "Paramètres",
+    "storageBrowser": "Explorateur de stockage",
+    "storageManagement": "Gestion du stockage",
+    "storageTools": "Outils de stockage"
+  },
+  "common": {
+    "actions": {
+      "save": "Enregistrer",
+      "cancel": "Annuler",
+      "close": "Fermer",
+      "delete": "Supprimer",
+      "confirm": "Confirmer",
+      "create": "Créer",
+      "edit": "Modifier",
+      "view": "Afficher",
+      "download": "Télécharger",
+      "upload": "Upload",
+      "refresh": "Actualiser",
+      "search": "Rechercher",
+      "copy": "Copier",
+      "add": "Ajouter",
+      "remove": "Retirer",
+      "back": "Retour",
+      "next": "Suivant",
+      "loading": "Chargement...",
+      "submit": "Soumettre",
+      "test": "Tester",
+      "clear": "Effacer"
+    },
+    "status": {
+      "available": "Disponible",
+      "unavailable": "Indisponible",
+      "loading": "Chargement",
+      "error": "Erreur",
+      "success": "Succès",
+      "warning": "Avertissement",
+      "info": "Info",
+      "pending": "En attente",
+      "complete": "Terminé",
+      "failed": "Échoué",
+      "inProgress": "En cours"
+    },
+    "labels": {
+      "name": "Nom",
+      "type": "Type",
+      "size": "Taille",
+      "date": "Date",
+      "status": "Statut",
+      "actions": "Actions",
+      "description": "Description",
+      "path": "Chemin",
+      "key": "Clé",
+      "value": "Valeur"
+    },
+    "pagination": {
+      "previous": "Précédent",
+      "next": "Suivant",
+      "showing": "Affichage de {{start}}-{{end}} sur {{total}}",
+      "perPage": "{{count}} par page",
+      "perPageLabel": "par page",
+      "noItems": "Aucun élément"
+    },
+    "validation": {
+      "required": "Ce champ est obligatoire",
+      "minLength": "Doit contenir au moins {{min}} caractères",
+      "maxLength": "Ne doit pas dépasser {{max}} caractères"
+    }
+  },
+  "notifications": {
+    "settingsSaved": "Paramètres enregistrés",
+    "settingsSavedMessage": "Les paramètres ont été enregistrés avec succès !",
+    "connectionSuccess": "Connexion réussie",
+    "copySuccess": "Copié dans le presse-papiers",
+    "copyFailed": "Échec de la copie dans le presse-papiers"
+  },
+  "notifications_drawer": {
+    "markAllRead": "Tout marquer comme lu",
+    "clearAll": "Tout effacer",
+    "markAsRead": "Marquer comme lu",
+    "clear": "Effacer",
+    "actions": "Actions du panneau de notifications",
+    "noNotifications": "Aucune notification",
+    "noNotificationsBody": "Il n'y a actuellement aucune notification.",
+    "overflowMessage": "Voir {{count}} notification(s) supplémentaire(s) dans le panneau de notifications"
+  },
+  "accessibility": {
+    "skipToContent": "Aller au contenu",
+    "dashboardNavigation": "Navigation du tableau de bord",
+    "loadingAuthentication": "Chargement de l'authentification",
+    "itemsPerPage": "Éléments par page",
+    "previousPage": "Page précédente",
+    "nextPage": "Page suivante"
+  },
+  "disclaimer": {
+    "title": "Avertissement",
+    "message": "Cette application est fournie « en l'état » sous licence MIT, sans aucune garantie d'aucune sorte.",
+    "licenseLink": "fichier de licence",
+    "moreDetails": "Veuillez consulter le {link} pour plus de détails",
+    "accept": "Accepter"
+  },
+  "theme": {
+    "light": "Thème clair",
+    "dark": "Thème sombre"
+  },
+  "auth": {
+    "logOut": "Se déconnecter",
+    "logIn": "Se connecter"
+  }
+}

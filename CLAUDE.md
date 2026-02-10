@@ -97,6 +97,20 @@ s4/
 - `docker/Dockerfile` - Container build (RGW base + Node.js)
 - `docker/entrypoint.sh` - Creates RGW user on first run
 
+## Version Management
+
+The application version is defined in `package.json` (source of truth). To bump:
+
+1. Update `version` in `package.json`
+2. Run `npm run version:sync` — this syncs `appVersion` in `charts/s4/Chart.yaml`
+
+Other consumers read from `package.json` automatically at build time:
+
+- `Makefile` — uses it for the container image tag
+- `frontend/webpack.common.js` — injects it as `process.env.APP_VERSION`
+
+The `backend/package.json` and `frontend/package.json` versions are set to `0.0.0-see-root` and should not be changed.
+
 ## Default Configuration
 
 ### S3 Storage

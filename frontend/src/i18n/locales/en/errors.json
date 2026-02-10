@@ -1,0 +1,56 @@
+{
+  "generic": {
+    "title": "Error",
+    "message": "An unexpected error occurred",
+    "tryAgain": "Please try again"
+  },
+  "network": {
+    "title": "Network Error",
+    "message": "Unable to connect to the server",
+    "checkConnection": "Please check your internet connection and try again"
+  },
+  "notFound": {
+    "title": "404 Page not found",
+    "message": "We didn't find a page that matches the address you navigated to.",
+    "goHome": "Take me home"
+  },
+  "unauthorized": {
+    "title": "Unauthorized",
+    "message": "You are not authorized to perform this action",
+    "loginRequired": "Please log in to continue"
+  },
+  "forbidden": {
+    "title": "Forbidden",
+    "message": "You don't have permission to access this resource"
+  },
+  "validation": {
+    "title": "Validation Error",
+    "invalidInput": "Please check your input and try again"
+  },
+  "s3": {
+    "connectionFailed": "Failed to connect to S3",
+    "accessDenied": "Access denied to S3 bucket",
+    "bucketNotFound": "Bucket not found",
+    "objectNotFound": "Object not found",
+    "quotaExceeded": "Storage quota exceeded"
+  },
+  "upload": {
+    "failed": "Upload failed",
+    "tooLarge": "File is too large",
+    "invalidType": "Invalid file type",
+    "aborted": "Upload was cancelled"
+  },
+  "download": {
+    "failed": "Download failed",
+    "unavailable": "File is not available for download"
+  },
+  "delete": {
+    "failed": "Delete failed",
+    "notEmpty": "Cannot delete non-empty folder"
+  },
+  "rateLimit": {
+    "title": "Rate Limit Exceeded",
+    "message": "Too many requests. Please wait before trying again.",
+    "retryAfter": "Retry after {{seconds}} seconds"
+  }
+}

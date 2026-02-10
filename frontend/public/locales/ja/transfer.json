@@ -1,0 +1,142 @@
+{
+  "title": "ファイル転送",
+  "destination": {
+    "title": "保存先を選択",
+    "location": "ストレージの場所",
+    "selectLocation": "ストレージの場所を選択",
+    "selectLocationPlaceholder": "場所を選択...",
+    "locationFormat": "{{name}} ({{type}}){{unavailable}}",
+    "unavailable": "（利用不可）",
+    "root": "ルート",
+    "directoryList": "ディレクトリ一覧",
+    "createFolder": "フォルダを作成",
+    "create": "作成",
+    "selectDestination": "保存先を選択",
+    "newFolder": {
+      "title": "新しいフォルダを作成",
+      "label": "フォルダ名",
+      "placeholder": "1 文字以上入力してください",
+      "rulesTitle": "フォルダの命名規則:"
+    },
+    "loadError": "ディレクトリの読み込みに失敗しました",
+    "notifications": {
+      "folderCreated": {
+        "title": "フォルダを作成しました",
+        "message": "フォルダ \"{{name}}\" が正常に作成されました"
+      },
+      "folderCreateError": "フォルダの作成に失敗しました"
+    }
+  },
+  "conflicts": {
+    "title": "ファイルの競合を解決",
+    "nonConflicting": {
+      "title": "競合のないファイル",
+      "message": "{{count}} 個のファイルは自動的にコピーされます（競合なし）。"
+    },
+    "conflicting": {
+      "title": "競合するファイル",
+      "message": "{{count}} 個のファイルが保存先に既に存在します。どのように処理しますか？"
+    },
+    "resolution": {
+      "label": "解決方法",
+      "skip": "スキップ",
+      "skipDescription": "競合するファイルをスキップし、保存先の既存ファイルを保持",
+      "overwrite": "上書き",
+      "overwriteDescription": "既存ファイルをソースファイルで置き換え",
+      "rename": "名前変更",
+      "renameDescription": "ソースファイルを新しい名前でコピー（例: file.txt -> file (1).txt）"
+    },
+    "fileList": {
+      "title": "競合するファイル:",
+      "showingFirst": "{{count}} 件の競合のうち最初の 25 件を表示"
+    },
+    "summary": {
+      "title": "概要",
+      "autoCopy": "{{count}} 個のファイルが自動的にコピーされます",
+      "willBe": "{{count}} 件の競合が{{action}}されます",
+      "total": "合計: {{count}} 個のファイルがコピーされます"
+    },
+    "checkError": "競合の確認に失敗しました"
+  },
+  "progress": {
+    "title": "ファイル転送の進捗",
+    "titleWithSummary": "ファイル転送の進捗: {{summary}}",
+    "fileCount": "{{completed}} / {{total}} ファイル",
+    "failedCount": "{{count}} 件失敗",
+    "status": {
+      "error": "エラー",
+      "complete": "完了",
+      "queued": "待機中",
+      "transferring": "転送中"
+    },
+    "errorAlert": "転送エラー",
+    "noTransfers": {
+      "title": "転送なし",
+      "message": "アクティブな転送はありません"
+    },
+    "notifications": {
+      "completed": {
+        "title": "転送が完了しました",
+        "message": "{{count}} 個のファイルを正常に転送しました"
+      },
+      "failed": {
+        "title": "転送に失敗しました",
+        "message": "{{count}} 個のファイルの転送に失敗しました"
+      },
+      "connectionError": {
+        "title": "転送接続エラー",
+        "message": "転送進捗の更新への接続が切断されました"
+      },
+      "cancelled": {
+        "title": "転送がキャンセルされました",
+        "message": "ファイル転送がキャンセルされました"
+      },
+      "cancelError": "転送のキャンセルに失敗しました"
+    }
+  },
+  "actions": {
+    "cancel": "キャンセル",
+    "close": "閉じる",
+    "apply": "適用",
+    "proceed": "続行",
+    "cancelTransfer": "転送をキャンセル",
+    "continueTransfer": "転送を続行"
+  },
+  "confirmCancel": {
+    "title": "転送をキャンセルしますか？",
+    "message": "この転送をキャンセルしてもよろしいですか？転送済みのファイルはそのまま残ります。"
+  },
+  "largeTransfer": {
+    "title": "大量フォルダ転送",
+    "alertTitle": "大量の転送操作",
+    "filesToTransfer": "転送するファイル数",
+    "filesSuffix": "ファイル",
+    "totalSize": "合計サイズ",
+    "instructions": "この操作は完了までに時間がかかる場合があります。進捗は転送キューで確認できます。"
+  },
+  "notifications": {
+    "started": {
+      "title": "転送を開始しました",
+      "message": "{{count}} 個のファイルを転送中"
+    },
+    "startError": "転送の開始に失敗しました"
+  },
+  "summary": {
+    "title": "転送の概要",
+    "filesTransferred": "転送済みファイル数: {{count}}",
+    "filesSkipped": "スキップしたファイル数: {{count}}",
+    "filesFailed": "失敗したファイル数: {{count}}",
+    "totalSize": "合計サイズ: {{size}}"
+  },
+  "errors": {
+    "noDestination": "保存先を選択してください",
+    "sameLocation": "転送元と保存先を同じにすることはできません",
+    "transferFailed": "転送に失敗しました",
+    "networkError": "転送中にネットワークエラーが発生しました"
+  },
+  "huggingface": {
+    "importing": "HuggingFace からインポート中",
+    "modelFiles": "モデルファイル",
+    "downloadProgress": "ダウンロードの進捗"
+  }
+}

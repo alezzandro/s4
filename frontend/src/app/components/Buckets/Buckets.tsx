@@ -79,7 +79,7 @@ class BucketsList {
 }
 
 const Buckets: React.FunctionComponent = () => {
-  const { t } = useTranslation('buckets');
+  const { t } = useTranslation(['buckets', 'translation']);
   const navigate = useNavigate();
 
   // New bucket handling
@@ -107,11 +107,11 @@ const Buckets: React.FunctionComponent = () => {
               createBucketModal.close();
             })
             .catch((error) => {
-              notifyApiError('Refresh storage locations', error);
+              notifyApiError(t('translation:common.actions.refresh'), error);
             });
         })
         .catch((error) => {
-          notifyApiError('Create bucket', error);
+          notifyApiError(t('actions.createBucket'), error);
           createBucketModal.close();
         });
     }
@@ -155,11 +155,11 @@ const Buckets: React.FunctionComponent = () => {
               deleteBucketModal.close();
             })
             .catch((error) => {
-              notifyApiError('Refresh storage locations', error);
+              notifyApiError(t('translation:common.actions.refresh'), error);
             });
         })
         .catch((error) => {
-          notifyApiError('Delete bucket', error);
+          notifyApiError(t('actions.deleteBucket'), error);
         });
     }
   };
@@ -212,7 +212,7 @@ const Buckets: React.FunctionComponent = () => {
 
       notifySuccess(t('refresh.success'), t('refresh.successMessage'));
     } catch (error: unknown) {
-      notifyApiError('Refresh storage locations', error);
+      notifyApiError(t('translation:common.actions.refresh'), error);
     } finally {
       setIsRefreshing(false);
     }
@@ -235,11 +235,11 @@ const Buckets: React.FunctionComponent = () => {
   };
 
   const columnNames = {
-    name: 'Name',
-    type: 'Type',
-    status: 'Status',
-    creation_date: 'Creation Date',
-    owner: 'Owner',
+    name: t('table.columns.name'),
+    type: t('table.columns.type'),
+    status: t('table.columns.status'),
+    creation_date: t('table.columns.creationDate'),
+    owner: t('table.columns.owner'),
   };
 
   // Map locations to rows for display
@@ -315,21 +315,25 @@ const Buckets: React.FunctionComponent = () => {
     title: row.name,
     icon: row.type === 's3' ? <DatabaseIcon /> : <FolderIcon />,
     label: {
-      text: row.type === 's3' ? 'S3' : 'PVC',
+      text: row.type === 's3' ? t('types.s3') : t('types.pvc'),
       color: row.type === 's3' ? 'blue' : 'green',
       icon: row.type === 's3' ? <CloudIcon /> : <FolderIcon />,
     },
     fields: [
       {
-        label: 'Status',
-        value: row.available ? 'Available' : <Label color="red">Unavailable</Label>,
+        label: t('table.columns.status'),
+        value: row.available ? (
+          t('translation:common.status.available')
+        ) : (
+          <Label color="red">{t('translation:common.status.unavailable')}</Label>
+        ),
       },
       {
-        label: 'Created',
+        label: t('table.columns.creationDate'),
         value: row.creation_date || '-',
       },
       {
-        label: 'Owner',
+        label: t('table.columns.owner'),
         value: row.owner || '-',
       },
     ],
@@ -339,7 +343,7 @@ const Buckets: React.FunctionComponent = () => {
         size="sm"
         onClick={handleDeleteBucketClick(row.name)}
         isDisabled={!row.available}
-        aria-label={`Delete bucket ${row.name}`}
+        aria-label={t('deleteModal.confirm') + ': ' + row.name}
       >
         <TrashIcon />
       </Button>
@@ -390,7 +394,7 @@ const Buckets: React.FunctionComponent = () => {
     <div className="buckets-list">
       <PageSection hasBodyWrapper={false}>
         <Content>
-          <Content component={ContentVariants.h1}>Storage Management</Content>
+          <Content component={ContentVariants.h1}>{t('title')}</Content>
         </Content>
       </PageSection>
       <PageSection hasBodyWrapper={false}>
@@ -400,8 +404,8 @@ const Buckets: React.FunctionComponent = () => {
               value={searchBucketText}
               type="search"
               onChange={(_event, searchText) => setSearchBucketText(searchText)}
-              aria-label="search text input"
-              placeholder="Search storage locations"
+              aria-label={t('search.placeholder')}
+              placeholder={t('search.placeholder')}
               customIcon={<SearchIcon />}
               className="buckets-list-filter-search"
             />
@@ -409,7 +413,7 @@ const Buckets: React.FunctionComponent = () => {
           <FlexItem>
             <FormSelect
               value={bucketsPerPage.toString()}
-              aria-label="Items per page"
+              aria-label={t('translation:accessibility.itemsPerPage')}
               onChange={(_e, value) => {
                 setBucketsPerPage(parseInt(value, 10));
               }}
@@ -417,7 +421,7 @@ const Buckets: React.FunctionComponent = () => {
               className="page-size-select"
             >
               {[10, 25, 50, 100].map((size) => (
-                <FormSelectOption key={size} value={size.toString()} label={`${size} per page`} />
+                <FormSelectOption key={size} value={size.toString()} label={t('pagination.perPage', { count: size })} />
               ))}
             </FormSelect>
           </FlexItem>
@@ -426,7 +430,7 @@ const Buckets: React.FunctionComponent = () => {
               <FlexItem>
                 <Button
                   variant="plain"
-                  aria-label="Previous page"
+                  aria-label={t('translation:accessibility.previousPage')}
                   isDisabled={currentPage <= 1}
                   onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
                 >
@@ -435,13 +439,19 @@ const Buckets: React.FunctionComponent = () => {
               </FlexItem>
               <FlexItem>
                 <Content component={ContentVariants.small}>
-                  {totalItems > 0 ? `Showing ${startIndex + 1}-${endIndex} of ${totalItems}` : 'No items'}
+                  {totalItems > 0
+                    ? t('translation:common.pagination.showing', {
+                        start: startIndex + 1,
+                        end: endIndex,
+                        total: totalItems,
+                      })
+                    : t('translation:common.pagination.noItems')}
                 </Content>
               </FlexItem>
               <FlexItem>
                 <Button
                   variant="plain"
-                  aria-label="Next page"
+                  aria-label={t('translation:accessibility.nextPage')}
                   isDisabled={currentPage >= totalPages}
                   onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
                 >
@@ -458,14 +468,14 @@ const Buckets: React.FunctionComponent = () => {
               isLoading={isRefreshing}
               isDisabled={isLoadingBuckets || isRefreshing}
               icon={<SyncIcon />}
-              aria-label="Refresh storage locations"
+              aria-label={t('actions.refresh')}
             >
-              Refresh
+              {t('actions.refresh')}
             </Button>
           </FlexItem>
           <FlexItem>
             <Button variant="primary" onClick={createBucketModal.open} ouiaId="ShowCreateProjectModal">
-              Create S3 Bucket
+              {t('actions.createBucket')}
             </Button>
           </FlexItem>
         </Flex>
@@ -491,29 +501,29 @@ const Buckets: React.FunctionComponent = () => {
                         <Th width={10} className="s4-hide-below-md">
                           {columnNames.owner}
                         </Th>
-                        <Th width={10} screenReaderText="Actions" />
+                        <Th width={10} screenReaderText={t('translation:common.labels.actions')} />
                       </Tr>
                     </Thead>
                     <Tbody>
                       {[1, 2, 3].map((i) => (
                         <Tr key={i} className="bucket-row">
                           <Td className="bucket-column">
-                            <Skeleton width="60%" screenreaderText="Loading name" />
+                            <Skeleton width="60%" screenreaderText={t('translation:common.actions.loading')} />
                           </Td>
                           <Td className="bucket-column">
-                            <Skeleton width="50px" screenreaderText="Loading type" />
+                            <Skeleton width="50px" screenreaderText={t('translation:common.actions.loading')} />
                           </Td>
                           <Td className="bucket-column s4-hide-below-sm">
-                            <Skeleton width="80px" screenreaderText="Loading status" />
+                            <Skeleton width="80px" screenreaderText={t('translation:common.actions.loading')} />
                           </Td>
                           <Td className="bucket-column s4-hide-below-md">
-                            <Skeleton width="100px" screenreaderText="Loading date" />
+                            <Skeleton width="100px" screenreaderText={t('translation:common.actions.loading')} />
                           </Td>
                           <Td className="bucket-column s4-hide-below-md">
-                            <Skeleton width="80px" screenreaderText="Loading owner" />
+                            <Skeleton width="80px" screenreaderText={t('translation:common.actions.loading')} />
                           </Td>
                           <Td className="bucket-column align-right">
-                            <Skeleton width="40px" screenreaderText="Loading actions" />
+                            <Skeleton width="40px" screenreaderText={t('translation:common.actions.loading')} />
                           </Td>
                         </Tr>
                       ))}
@@ -527,11 +537,11 @@ const Buckets: React.FunctionComponent = () => {
               </div>
             </>
           ) : sortedRows.length === 0 ? (
-            <EmptyState headingLevel="h4" icon={CubesIcon} titleText="No buckets found">
-              <EmptyStateBody>Create your first bucket to get started.</EmptyStateBody>
+            <EmptyState headingLevel="h4" icon={CubesIcon} titleText={t('table.emptyState.title')}>
+              <EmptyStateBody>{t('table.emptyState.description')}</EmptyStateBody>
               <EmptyStateFooter>
                 <Button variant="primary" onClick={createBucketModal.open}>
-                  Create bucket
+                  {t('table.emptyState.createButton')}
                 </Button>
               </EmptyStateFooter>
             </EmptyState>
@@ -556,7 +566,7 @@ const Buckets: React.FunctionComponent = () => {
                         <Th width={10} className="s4-hide-below-md">
                           {columnNames.owner}
                         </Th>
-                        <Th width={10} screenReaderText="Actions" />
+                        <Th width={10} screenReaderText={t('translation:common.labels.actions')} />
                       </Tr>
                     </Thead>
                     <Tbody>
@@ -577,18 +587,18 @@ const Buckets: React.FunctionComponent = () => {
                           <Td className="bucket-column">
                             {row.type === 's3' ? (
                               <Label color="blue" icon={<CloudIcon />}>
-                                S3
+                                {t('types.s3')}
                               </Label>
                             ) : (
                               <Label color="green" icon={<FolderIcon />}>
-                                PVC
+                                {t('types.pvc')}
                               </Label>
                             )}
                           </Td>
                           <Td className="bucket-column s4-hide-below-sm">
                             {!row.available && (
-                              <Tooltip content="Storage location is not accessible">
-                                <Label color="red">Unavailable</Label>
+                              <Tooltip content={t('translation:common.status.unavailable')}>
+                                <Label color="red">{t('translation:common.status.unavailable')}</Label>
                               </Tooltip>
                             )}
                           </Td>
@@ -600,7 +610,7 @@ const Buckets: React.FunctionComponent = () => {
                                 variant="danger"
                                 onClick={handleDeleteBucketClick(row.name)}
                                 isDisabled={!row.available}
-                                aria-label={`Delete bucket ${row.name}`}
+                                aria-label={t('deleteModal.confirm') + ': ' + row.name}
                               >
                                 <TrashIcon />
                               </Button>
@@ -627,7 +637,7 @@ const Buckets: React.FunctionComponent = () => {
         ouiaId="CreateBucketModal"
         aria-labelledby="create-bucket-modal-title"
       >
-        <ModalHeader labelId="create-bucket-modal-title" title="Create a new bucket" />
+        <ModalHeader labelId="create-bucket-modal-title" title={t('createModal.title')} />
         <ModalBody>
           <Form
             onSubmit={(event) => {
@@ -637,14 +647,14 @@ const Buckets: React.FunctionComponent = () => {
               }
             }}
           >
-            <FormGroup label="Bucket name" isRequired fieldId="bucket-name">
+            <FormGroup label={t('createModal.nameLabel')} isRequired fieldId="bucket-name">
               <TextInput
                 isRequired
                 type="text"
                 id="bucket-name"
                 name="bucket-name"
                 aria-describedby="bucket-name-helper"
-                placeholder="Enter at least 3 characters"
+                placeholder={t('createModal.namePlaceholder')}
                 value={newBucketName}
                 onChange={(_event, newBucketName) => setNewBucketName(newBucketName)}
                 onKeyDown={(event) => {
@@ -661,13 +671,13 @@ const Buckets: React.FunctionComponent = () => {
                 <HelperText id="bucket-name-helper">
                   {newBucketNameRulesVisibility ? (
                     <HelperTextItem variant="error">
-                      Invalid bucket name{' '}
+                      {t('validation.invalidName')}{' '}
                       <Popover
-                        headerContent="Bucket naming rules"
+                        headerContent={t('createModal.rules.title')}
                         bodyContent={
                           <ul>
                             {getBucketNameRules().map((rule, index) => (
-                              <li key={index}>{rule}</li>
+                              <li key={index}>{t(rule)}</li>
                             ))}
                           </ul>
                         }
@@ -690,10 +700,10 @@ const Buckets: React.FunctionComponent = () => {
             onClick={handleNewBucketCreate}
             isDisabled={newBucketName.length < 3 || newBucketNameRulesVisibility}
           >
-            Create
+            {t('createModal.create')}
           </Button>
           <Button key="cancel" variant="link" onClick={handleNewBucketCancel}>
-            Cancel
+            {t('translation:common.actions.cancel')}
           </Button>
         </ModalFooter>
       </Modal>
@@ -703,17 +713,17 @@ const Buckets: React.FunctionComponent = () => {
         onClose={deleteBucketModal.close}
         aria-labelledby="delete-bucket-modal-title"
       >
-        <ModalHeader labelId="delete-bucket-modal-title" title="Delete bucket?" titleIconVariant="warning" />
+        <ModalHeader labelId="delete-bucket-modal-title" title={t('deleteModal.title')} titleIconVariant="warning" />
         <ModalBody>
           <Content>
-            <Content component={ContentVariants.p}>This action cannot be undone.</Content>
+            <Content component={ContentVariants.p}>{t('deleteModal.message')}</Content>
             <Content component={ContentVariants.p} id="delete-confirmation-instructions">
-              Type <strong>{selectedBucket}</strong> to confirm deletion.
+              {t('deleteModal.confirmMessage', { bucketName: selectedBucket })}
             </Content>
           </Content>
           <TextInput
             id="delete-modal-input"
-            aria-label="Confirm bucket deletion"
+            aria-label={t('deleteModal.confirm')}
             aria-describedby="delete-confirmation-instructions"
             value={bucketToDelete}
             onChange={(_event, bucketToDelete) => setBucketToDelete(bucketToDelete)}
@@ -735,10 +745,10 @@ const Buckets: React.FunctionComponent = () => {
             onClick={handleDeleteBucketConfirm}
             isDisabled={!validateBucketToDelete()}
           >
-            Delete bucket
+            {t('deleteModal.confirm')}
           </Button>
           <Button key="cancel" variant="secondary" onClick={handleDeleteBucketCancel}>
-            Cancel
+            {t('translation:common.actions.cancel')}
           </Button>
         </ModalFooter>
       </Modal>

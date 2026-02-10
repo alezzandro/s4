@@ -1,0 +1,336 @@
+{
+  "title": "Speicher-Browser",
+  "locationSelector": {
+    "label": "Speicherort:",
+    "placeholder": "Speicherort auswählen",
+    "loading": "Speicherorte werden geladen...",
+    "noLocations": "Keine Speicherorte verfügbar",
+    "typeS3": "(S3)",
+    "typePVC": "(PVC)",
+    "unavailableSuffix": " - Nicht verfügbar",
+    "overrideLabel": "Speicherort überschreiben:",
+    "overridePlaceholder": "S3-Bucket-Namen eingeben...",
+    "setLocation": "Speicherort festlegen"
+  },
+  "breadcrumb": {
+    "root": "Stammverzeichnis"
+  },
+  "table": {
+    "columns": {
+      "key": "Schlüssel",
+      "lastModified": "Zuletzt geändert",
+      "size": "Größe"
+    },
+    "emptyState": {
+      "title": "Keine Dateien gefunden",
+      "description": "Dieser Speicherort ist leer oder keine Dateien entsprechen Ihrer Suche."
+    }
+  },
+  "search": {
+    "placeholder": "Dateien und Ordner durchsuchen",
+    "filterPlaceholder": "Dateien filtern (mind. 3 Zeichen für Serversuche)…",
+    "mode": {
+      "contains": "Enthält",
+      "startsWith": "Beginnt mit"
+    },
+    "results": {
+      "truncated": "Suchergebnisse sind möglicherweise unvollständig"
+    },
+    "clear": "Suche löschen",
+    "deepSearchActive": "Tiefensuche aktiv... {{count}} zusätzliche Seite(n) durchsucht...",
+    "cancel": "Abbrechen",
+    "partialResults": "Teilergebnisse werden angezeigt.",
+    "moreResultsAvailable": "Weitere Ergebnisse sind möglicherweise verfügbar.",
+    "clientFiltering": "Clientseitige Filterung aktiv. Ergebnisse können unvollständig sein. Tiefensuche wird automatisch ausgelöst, wenn keine Treffer gefunden werden."
+  },
+  "actions": {
+    "upload": "Hochladen",
+    "uploadSingle": "Einzelne Datei hochladen",
+    "uploadMultiple": "Mehrere Dateien hochladen",
+    "createFolder": "Ordner erstellen",
+    "importModel": "HF-Modell importieren",
+    "copyPath": "Pfad kopieren",
+    "viewFile": "Anzeigen",
+    "downloadFile": "Herunterladen",
+    "deleteFile": "Löschen",
+    "selectAll": "Alle auswählen",
+    "deselectAll": "Auswahl aufheben",
+    "copySelected": "Ausgewählte kopieren",
+    "deleteSelected": "Ausgewählte löschen",
+    "viewDetails": "Details anzeigen",
+    "loadMore": "Mehr laden",
+    "copyTo": "Kopieren nach...",
+    "clearSelection": "Auswahl aufheben",
+    "uploadFiles": "Dateien hochladen"
+  },
+  "fileDetails": {
+    "title": "Dateidetails: {{fileName}}",
+    "tabs": {
+      "metadata": "Metadata",
+      "tags": "Tags"
+    },
+    "metadata": {
+      "key": "Schlüssel",
+      "size": "Größe",
+      "lastModified": "Zuletzt geändert",
+      "contentType": "Inhaltstyp",
+      "etag": "ETag",
+      "storageClass": "Storage Class",
+      "customMetadata": "Benutzerdefinierte Metadata"
+    },
+    "tags": {
+      "noTags": "Dieses Objekt hat keine Tags. Fügen Sie unten Tags hinzu.",
+      "addTag": "Neuen Tag hinzufügen",
+      "keyPlaceholder": "Schlüssel",
+      "valuePlaceholder": "Wert",
+      "tagCount": "{{count}} von {{max}} Tags verwendet",
+      "saveTags": "Tags speichern",
+      "saving": "Wird gespeichert...",
+      "saved": "Tags gespeichert",
+      "savedMessage": "Object-Tags wurden erfolgreich aktualisiert."
+    },
+    "notAvailable": "Object-Metadata und Tags sind nur für S3-Speicherorte verfügbar."
+  },
+  "upload": {
+    "single": {
+      "title": "Datei hochladen",
+      "dragDropText": "Datei hierher ziehen und ablegen oder klicken zum Durchsuchen",
+      "browseFiles": "Dateien durchsuchen",
+      "uploading": "Wird hochgeladen...",
+      "progress": {
+        "toBackend": "Wird zum Server hochgeladen",
+        "toS3": "Wird in den Speicher hochgeladen"
+      }
+    },
+    "multiple": {
+      "title": "Mehrere Dateien hochladen",
+      "dragDropText": "Dateien hierher ziehen und ablegen oder klicken zum Durchsuchen",
+      "filesSelected": "{{count}} Dateien ausgewählt",
+      "startUpload": "Hochladen starten",
+      "statusText": "{{uploaded}} von {{total}} Dateien hochgeladen"
+    },
+    "success": "Datei hochgeladen",
+    "successMessage": "Datei \"{{fileName}}\" wurde erfolgreich hochgeladen.",
+    "failed": "Hochladen fehlgeschlagen",
+    "abortError": "Fehler beim Abbrechen des Hochladens",
+    "abortErrorMessage": "Der Hochladevorgang konnte nicht abgebrochen werden."
+  },
+  "createFolder": {
+    "title": "Neuen Ordner erstellen",
+    "nameLabel": "Ordnername",
+    "namePlaceholder": "Ordnernamen eingeben",
+    "create": "Ordner erstellen",
+    "success": "Ordner erstellt",
+    "successMessage": "Ordner \"{{folderName}}\" wurde erfolgreich erstellt.",
+    "failed": "Ordnererstellung fehlgeschlagen",
+    "rules": {
+      "header": "Ordnernamen müssen:",
+      "unique": "einzigartig sein",
+      "s3Chars": "nur Buchstaben (a-z, A-Z), Ziffern (0-9) und diese Sonderzeichen enthalten: ! . - _ * ' ( ). Leerzeichen sind nicht erlaubt",
+      "localChars": "nur Buchstaben (a-z, A-Z), Ziffern (0-9), Punkte (.), Unterstriche (_) und Bindestriche (-) enthalten. Leerzeichen und Sonderzeichen sind nicht erlaubt"
+    }
+  },
+  "delete": {
+    "file": {
+      "title": "Datei löschen?",
+      "message": "Diese Aktion kann nicht rückgängig gemacht werden.",
+      "confirmMessage_prefix": "Geben Sie",
+      "confirmMessage_suffix": "ein, um das Löschen zu bestätigen.",
+      "confirm": "Datei löschen",
+      "success": "Datei gelöscht",
+      "successMessage": "Datei \"{{fileName}}\" wurde erfolgreich gelöscht.",
+      "failed": "Löschen der Datei fehlgeschlagen"
+    },
+    "folder": {
+      "title": "Ordner und gesamten Inhalt löschen?",
+      "message": "Diese Aktion kann nicht rückgängig gemacht werden.",
+      "confirmMessage_prefix": "Geben Sie",
+      "confirmMessage_suffix": "ein, um das Löschen zu bestätigen.",
+      "confirm": "Ordner löschen",
+      "success": "Ordner gelöscht",
+      "successMessage": "Ordner \"{{folderName}}\" und sein gesamter Inhalt wurden erfolgreich gelöscht.",
+      "failed": "Löschen des Ordners fehlgeschlagen"
+    },
+    "selected": {
+      "title": "Ausgewählte Elemente löschen?",
+      "message": "Möchten Sie wirklich {{count}} Element(e) löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
+      "confirmCheckbox": "Ich verstehe, dass diese Aktion nicht rückgängig gemacht werden kann",
+      "confirm": "{{count}} Element(e) löschen",
+      "success": "Erfolgreich gelöscht",
+      "successMessage": "{{count}} Elemente wurden erfolgreich gelöscht."
+    }
+  },
+  "import": {
+    "huggingface": {
+      "title": "Modell von Hugging Face importieren",
+      "modelId": "Modell-ID",
+      "modelIdPlaceholder": "z.\u00a0B. meta-llama/Meta-Llama-3-8B",
+      "token": "HuggingFace Token (optional)",
+      "tokenPlaceholder": "hf_...",
+      "destination": "Ziel",
+      "s3": "S3-Speicher",
+      "local": "Lokaler Speicher",
+      "prefix": "Prefix (optional)",
+      "prefixPlaceholder": "models/",
+      "import": "Modell importieren",
+      "importing": "Wird importiert...",
+      "started": "Modellimport gestartet",
+      "helperText": "HuggingFace-Modell-Repository-ID eingeben. Das Modell wird an den aktuellen Speicherort importiert.",
+      "importButton": "Importieren",
+      "cancelImport": "Import abbrechen"
+    },
+    "cleanup": {
+      "title": "Import abgebrochen – Dateien bereinigen?",
+      "message": "Der Import wurde abgebrochen. Folgende Dateien wurden heruntergeladen:",
+      "keepOrDelete": "Möchten Sie diese Dateien behalten oder löschen?",
+      "deleteAll": "Alle heruntergeladenen Dateien löschen",
+      "keepFiles": "Dateien behalten"
+    }
+  },
+  "selection": {
+    "count": "{{count}} Elemente ausgewählt",
+    "filesAndFolders": "{{files}} Dateien, {{folders}} Ordner ausgewählt",
+    "files_one": "{{count}} Datei",
+    "files_other": "{{count}} Dateien",
+    "folders_one": "{{count}} Ordner",
+    "folders_other": "{{count}} Ordner",
+    "selected": "ausgewählt"
+  },
+  "alerts": {
+    "locationUnavailable": {
+      "title": "Speicherort nicht verfügbar",
+      "message": "Der Speicherort \"{{name}}\" ist derzeit nicht verfügbar.",
+      "localMessage": "Das Verzeichnis ist möglicherweise nicht zugänglich oder der Pfad ist falsch.",
+      "disabledMessage": "Dateioperationen sind deaktiviert, bis der Speicherort wieder verfügbar ist."
+    },
+    "noLocations": {
+      "title": "Keine Speicherorte verfügbar",
+      "message": "Alle Speicherquellen konnten nicht geladen werden. Überprüfen Sie die S3- und lokale Speicherkonfiguration."
+    }
+  },
+  "fileViewer": {
+    "title": "Dateivorschau",
+    "error": "Fehler beim Anzeigen der Datei",
+    "errorMessage": "Der Dateiinhalt konnte nicht abgerufen werden.",
+    "errorObjectMessage": "Der Object-Inhalt konnte nicht abgerufen werden."
+  },
+  "emptyState": {
+    "folderEmpty": "Dieser Ordner ist leer",
+    "folderEmptyDescription": "Laden Sie Dateien hoch oder erstellen Sie Ordner, um zu beginnen.",
+    "noSearchResults": "Keine Dateien entsprechen Ihrer Suche",
+    "noSearchResultsDescription": "Keine Dateien oder Ordner gefunden, die \u201E{{searchText}}\u201C entsprechen."
+  },
+  "tooltips": {
+    "viewFile": "Diese Datei anzeigen.",
+    "downloadFile": "Diese Datei herunterladen.",
+    "viewDetails": "Dateidetails und Tags anzeigen.",
+    "deleteFile": "Diese Datei löschen."
+  },
+  "pagination": {
+    "loadMore": "Mehr laden",
+    "loading": "Wird geladen…",
+    "moreAvailable": "weitere verfügbar",
+    "lastPage": "letzte Seite"
+  },
+  "notes": {
+    "fileViewerLimit": "Die Dateivorschau ist nur für Dateien kleiner als 1 MB und unterstützte Dateitypen aktiviert.",
+    "lastItemDeletesFolder": "Das Löschen des letzten Elements in einem Ordner löscht den Ordner.",
+    "largeDownloadWarning": "Der Download großer Dateien kann fehlschlagen."
+  },
+  "accessibility": {
+    "loadingFilePreview": "Dateivorschau wird geladen",
+    "downloadingFile": "Datei wird heruntergeladen",
+    "deletingItems": "{{count}} Elemente werden gelöscht",
+    "deepSearchInProgress": "Tiefensuche läuft",
+    "loadingMoreFiles": "Weitere Dateien werden geladen"
+  },
+  "notifications": {
+    "defaultSettings": {
+      "title": "Standardeinstellungen werden verwendet",
+      "maxConcurrentTransfers": "Einstellung für maximale gleichzeitige Übertragungen konnte nicht abgerufen werden. Standardwert (2) wird verwendet.",
+      "maxFilesPerPage": "Einstellung für maximale Dateien pro Seite konnte nicht abgerufen werden. Standardwert (100) wird verwendet."
+    },
+    "locationNotFound": {
+      "title": "Speicherort nicht gefunden",
+      "message": "Speicherort \"{{locationId}}\" existiert nicht."
+    },
+    "locationUnavailable": {
+      "title": "Speicherort nicht verfügbar",
+      "message": "Speicherort \"{{name}}\" ist derzeit nicht verfügbar. Er ist möglicherweise getrennt oder nicht erreichbar.",
+      "cannotSelect": "\"{{name}}\" kann nicht ausgewählt werden, da er derzeit nicht verfügbar ist."
+    },
+    "invalidLocation": {
+      "title": "Ungültiger Speicherort",
+      "message": "Speicherort \"{{locationId}}\" existiert nicht."
+    },
+    "pathCopied": {
+      "title": "Pfad kopiert",
+      "message": "Der Pfad wurde erfolgreich in die Zwischenablage kopiert."
+    },
+    "errorLoadingFiles": {
+      "title": "Fehler beim Laden der Dateien",
+      "message": "Dateien konnten nicht aus dem Speicher geladen werden."
+    },
+    "noLocations": {
+      "title": "Keine Speicherorte verfügbar",
+      "message": "Alle Speicherquellen konnten nicht geladen werden. Überprüfen Sie die S3- und lokale Speicherkonfiguration. Details finden Sie in der Browserkonsole."
+    },
+    "errorLoadingLocations": {
+      "title": "Fehler beim Laden der Speicherorte",
+      "message": "Speicherorte konnten nicht geladen werden. Bitte überprüfen Sie Ihre Verbindungseinstellungen."
+    },
+    "deleteFailed": {
+      "title": "Löschen fehlgeschlagen",
+      "message": "Einige Elemente konnten nicht gelöscht werden. Bitte versuchen Sie es erneut."
+    },
+    "noItemsSelected": {
+      "title": "Keine Elemente ausgewählt",
+      "message": "Bitte wählen Sie Elemente zum Kopieren aus."
+    },
+    "downloadFailed": {
+      "title": "Herunterladen fehlgeschlagen",
+      "message": "Die Datei konnte nicht heruntergeladen werden. Bitte versuchen Sie es erneut."
+    },
+    "uploadComplete": {
+      "title": "Hochladen abgeschlossen",
+      "message": "{{count}} Datei(en) erfolgreich hochgeladen."
+    },
+    "uploadPartialFailed": {
+      "title": "Hochladen mit Fehlern abgeschlossen",
+      "message": "{{failed}} von {{total}} Dateien konnten nicht hochgeladen werden."
+    },
+    "modelImport": {
+      "error": "Fehler beim Modellimport",
+      "fileError": "Fehler beim Importieren von \"{{fileName}}\": {{error}}",
+      "success": "Modell importiert",
+      "successMessage": "Modell \"{{modelName}}\" wurde erfolgreich importiert.",
+      "failed": "Modellimport fehlgeschlagen",
+      "failedMessage": "Import von Modell \"{{modelName}}\" ist fehlgeschlagen.",
+      "cancelled": "Modellimport abgebrochen",
+      "cancelledMessage": "Import von Modell \"{{modelName}}\" wurde abgebrochen.",
+      "started": "Modellimport gestartet",
+      "startedMessage": "Import von Modell \"{{modelName}}\" wurde erfolgreich gestartet.",
+      "startFailed": "Modellimport konnte nicht gestartet werden.",
+      "cancelFailed": "Abbrechen fehlgeschlagen",
+      "cancelFailedMessage": "Import konnte nicht abgebrochen werden.",
+      "noLocations": "Modell kann nicht importiert werden – keine Speicherziele verfügbar."
+    },
+    "connectionError": {
+      "title": "Verbindungsfehler",
+      "message": "Verbindung zum Import-Fortschritt konnte nicht hergestellt werden",
+      "lost": "Verbindung zum Import-Fortschrittsstrom verloren. Bitte überprüfen Sie die Übertragungswarteschlange für den Status."
+    },
+    "filesDeleted": {
+      "title": "Dateien gelöscht",
+      "message": "Alle heruntergeladenen Dateien wurden gelöscht."
+    },
+    "cleanupFailed": {
+      "title": "Bereinigung fehlgeschlagen",
+      "message": "Heruntergeladene Dateien konnten nicht gelöscht werden."
+    },
+    "validationError": {
+      "title": "Validierungsfehler",
+      "message": "Bitte füllen Sie alle erforderlichen Felder aus."
+    }
+  }
+}

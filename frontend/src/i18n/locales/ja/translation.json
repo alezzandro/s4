@@ -1,0 +1,132 @@
+{
+  "app_title": "S4",
+  "app_header": {
+    "powered_by": "Powered by",
+    "help": {
+      "header": "S4 について",
+      "body": "Super Simple Storage Service"
+    },
+    "version": "バージョン: {{version}}",
+    "sourceCode": "ソースコードとドキュメントはこちらで公開中",
+    "sourceOnGithub": "GitHub のソースコード"
+  },
+  "ui": {
+    "footer": {
+      "stars": "GitHub スター",
+      "forks": "GitHub フォーク",
+      "appBy": "開発元",
+      "version": "バージョン {{version}}"
+    }
+  },
+  "nav": {
+    "browse": "参照",
+    "buckets": "ストレージ",
+    "settings": "設定",
+    "storageBrowser": "ストレージブラウザ",
+    "storageManagement": "ストレージ管理",
+    "storageTools": "ストレージツール"
+  },
+  "common": {
+    "actions": {
+      "save": "保存",
+      "cancel": "キャンセル",
+      "close": "閉じる",
+      "delete": "削除",
+      "confirm": "確認",
+      "create": "作成",
+      "edit": "編集",
+      "view": "表示",
+      "download": "ダウンロード",
+      "upload": "アップロード",
+      "refresh": "更新",
+      "search": "検索",
+      "copy": "コピー",
+      "add": "追加",
+      "remove": "削除",
+      "back": "戻る",
+      "next": "次へ",
+      "loading": "読み込み中...",
+      "submit": "送信",
+      "test": "テスト",
+      "clear": "クリア"
+    },
+    "status": {
+      "available": "利用可能",
+      "unavailable": "利用不可",
+      "loading": "読み込み中",
+      "error": "エラー",
+      "success": "成功",
+      "warning": "警告",
+      "info": "情報",
+      "pending": "保留中",
+      "complete": "完了",
+      "failed": "失敗",
+      "inProgress": "処理中"
+    },
+    "labels": {
+      "name": "名前",
+      "type": "種類",
+      "size": "サイズ",
+      "date": "日付",
+      "status": "状態",
+      "actions": "操作",
+      "description": "説明",
+      "path": "パス",
+      "key": "キー",
+      "value": "値"
+    },
+    "pagination": {
+      "previous": "前へ",
+      "next": "次へ",
+      "showing": "{{total}} 件中 {{start}}-{{end}} 件を表示",
+      "perPage": "{{count}} 件/ページ",
+      "perPageLabel": "件/ページ",
+      "noItems": "項目なし"
+    },
+    "validation": {
+      "required": "この項目は必須です",
+      "minLength": "{{min}} 文字以上で入力してください",
+      "maxLength": "{{max}} 文字以内で入力してください"
+    }
+  },
+  "notifications": {
+    "settingsSaved": "設定を保存しました",
+    "settingsSavedMessage": "設定が正常に保存されました。",
+    "connectionSuccess": "接続に成功しました",
+    "copySuccess": "クリップボードにコピーしました",
+    "copyFailed": "クリップボードへのコピーに失敗しました"
+  },
+  "notifications_drawer": {
+    "markAllRead": "すべて既読にする",
+    "clearAll": "すべてクリア",
+    "markAsRead": "既読にする",
+    "clear": "クリア",
+    "actions": "通知パネルの操作",
+    "noNotifications": "通知はありません",
+    "noNotificationsBody": "現在、通知はありません。",
+    "overflowMessage": "通知パネルにさらに {{count}} 件の通知があります"
+  },
+  "accessibility": {
+    "skipToContent": "コンテンツへスキップ",
+    "dashboardNavigation": "ダッシュボードナビゲーション",
+    "loadingAuthentication": "認証を読み込み中",
+    "itemsPerPage": "ページあたりの表示件数",
+    "previousPage": "前のページ",
+    "nextPage": "次のページ"
+  },
+  "disclaimer": {
+    "title": "免責事項",
+    "message": "このアプリケーションは MIT ライセンスのもと、いかなる保証もなく「現状のまま」提供されます。",
+    "licenseLink": "ライセンスファイル",
+    "moreDetails": "詳細は {link} をご参照ください",
+    "accept": "同意する"
+  },
+  "theme": {
+    "light": "ライトテーマ",
+    "dark": "ダークテーマ"
+  },
+  "auth": {
+    "logOut": "ログアウト",
+    "logIn": "ログイン"
+  }
+}

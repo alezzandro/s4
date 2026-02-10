@@ -1,0 +1,56 @@
+{
+  "generic": {
+    "title": "Errore",
+    "message": "Si è verificato un errore imprevisto",
+    "tryAgain": "Riprova"
+  },
+  "network": {
+    "title": "Errore di rete",
+    "message": "Impossibile connettersi al server",
+    "checkConnection": "Controlla la connessione a Internet e riprova"
+  },
+  "notFound": {
+    "title": "404 Pagina non trovata",
+    "message": "Non abbiamo trovato una pagina corrispondente all'indirizzo che hai inserito.",
+    "goHome": "Portami alla pagina iniziale"
+  },
+  "unauthorized": {
+    "title": "Non autorizzato",
+    "message": "Non sei autorizzato a eseguire questa azione",
+    "loginRequired": "Accedi per continuare"
+  },
+  "forbidden": {
+    "title": "Accesso negato",
+    "message": "Non hai i permessi per accedere a questa risorsa"
+  },
+  "validation": {
+    "title": "Errore di validazione",
+    "invalidInput": "Controlla i dati inseriti e riprova"
+  },
+  "s3": {
+    "connectionFailed": "Connessione a S3 non riuscita",
+    "accessDenied": "Accesso negato al bucket S3",
+    "bucketNotFound": "Bucket non trovato",
+    "objectNotFound": "Object non trovato",
+    "quotaExceeded": "Quota di archiviazione superata"
+  },
+  "upload": {
+    "failed": "Upload non riuscito",
+    "tooLarge": "Il file è troppo grande",
+    "invalidType": "Tipo di file non valido",
+    "aborted": "Upload annullato"
+  },
+  "download": {
+    "failed": "Download non riuscito",
+    "unavailable": "Il file non è disponibile per il download"
+  },
+  "delete": {
+    "failed": "Eliminazione non riuscita",
+    "notEmpty": "Impossibile eliminare una cartella non vuota"
+  },
+  "rateLimit": {
+    "title": "Limite di richieste superato",
+    "message": "Troppe richieste. Attendi prima di riprovare.",
+    "retryAfter": "Riprova tra {{seconds}} secondi"
+  }
+}

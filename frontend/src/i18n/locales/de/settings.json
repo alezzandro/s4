@@ -1,0 +1,78 @@
+{
+  "title": "Einstellungen",
+  "tabs": {
+    "s3": "S3-Einstellungen",
+    "huggingface": "HuggingFace-Einstellungen",
+    "concurrency": "Maximale gleichzeitige Übertragungen",
+    "pagination": "Maximale Dateien pro Seite",
+    "proxy": "Proxy-Einstellungen"
+  },
+  "s3": {
+    "accessKey": {
+      "label": "Zugriffsschlüssel",
+      "helper": "Ihr S3 Access Key zur Authentifizierung"
+    },
+    "secretKey": {
+      "label": "Geheimer Schlüssel",
+      "helper": "Ihr geheimer S3-Zugriffsschlüssel zur Authentifizierung",
+      "show": "Geheimen Schlüssel anzeigen",
+      "hide": "Geheimen Schlüssel verbergen"
+    },
+    "region": {
+      "label": "Region",
+      "helper": "AWS-Region, in der sich Ihre S3 Buckets befinden (z.\u00a0B. us-east-1)"
+    },
+    "endpoint": {
+      "label": "Endpoint",
+      "helper": "S3 Endpoint URL (leer lassen, um den AWS-Standard zu verwenden)"
+    },
+    "defaultBucket": {
+      "label": "Standard-Bucket",
+      "helper": "Standard-Bucket für Speicheroperationen"
+    },
+    "save": "S3-Einstellungen speichern",
+    "test": "Verbindung testen",
+    "testSuccess": "S3-Verbindungstest bestanden!"
+  },
+  "huggingface": {
+    "token": {
+      "label": "Token",
+      "show": "Token anzeigen",
+      "hide": "Token verbergen"
+    },
+    "save": "HuggingFace-Einstellungen speichern",
+    "test": "Verbindung testen",
+    "testSuccess": "Sie verwenden den Token mit dem Namen: {{tokenName}}"
+  },
+  "concurrency": {
+    "label": "Maximale gleichzeitige Übertragungen: {{value}}",
+    "helper": "Maximale Anzahl gleichzeitiger Dateiübertragungen (1-10)",
+    "save": "Maximale gleichzeitige Übertragungen speichern"
+  },
+  "pagination": {
+    "label": "Maximale Dateien pro Seite: {{value}}",
+    "helper": "Maximale Anzahl angezeigter Dateien pro Seite",
+    "save": "Maximale Dateien pro Seite speichern"
+  },
+  "proxy": {
+    "httpProxy": {
+      "label": "HTTP Proxy",
+      "placeholder": "http://proxy-server:port",
+      "helper": "HTTP Proxy-Server URL (z.\u00a0B. http://proxy-server:8080)"
+    },
+    "httpsProxy": {
+      "label": "HTTPS Proxy",
+      "placeholder": "https://proxy-server:port",
+      "helper": "HTTPS Proxy-Server URL (z.\u00a0B. https://proxy-server:8443)"
+    },
+    "testUrl": {
+      "label": "Test-URL",
+      "placeholder": "https://www.google.com",
+      "helper": "URL zum Testen der Proxy-Verbindung"
+    },
+    "save": "Proxy-Einstellungen speichern",
+    "test": "Verbindung testen",
+    "testSuccess": "Proxy-Verbindungstest bestanden!",
+    "saved": "Proxy-Einstellungen erfolgreich gespeichert!"
+  }
+}

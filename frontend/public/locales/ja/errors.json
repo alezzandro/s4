@@ -1,0 +1,56 @@
+{
+  "generic": {
+    "title": "エラー",
+    "message": "予期しないエラーが発生しました",
+    "tryAgain": "もう一度お試しください"
+  },
+  "network": {
+    "title": "ネットワークエラー",
+    "message": "サーバーに接続できません",
+    "checkConnection": "インターネット接続を確認してもう一度お試しください"
+  },
+  "notFound": {
+    "title": "404 ページが見つかりません",
+    "message": "指定されたアドレスに一致するページが見つかりませんでした。",
+    "goHome": "ホームに戻る"
+  },
+  "unauthorized": {
+    "title": "認証エラー",
+    "message": "この操作を実行する権限がありません",
+    "loginRequired": "続行するにはログインしてください"
+  },
+  "forbidden": {
+    "title": "アクセス拒否",
+    "message": "このリソースにアクセスする権限がありません"
+  },
+  "validation": {
+    "title": "入力エラー",
+    "invalidInput": "入力内容を確認してもう一度お試しください"
+  },
+  "s3": {
+    "connectionFailed": "S3 への接続に失敗しました",
+    "accessDenied": "S3 bucket へのアクセスが拒否されました",
+    "bucketNotFound": "Bucket が見つかりません",
+    "objectNotFound": "Object が見つかりません",
+    "quotaExceeded": "ストレージ容量の上限を超えました"
+  },
+  "upload": {
+    "failed": "アップロードに失敗しました",
+    "tooLarge": "ファイルが大きすぎます",
+    "invalidType": "無効なファイル形式です",
+    "aborted": "アップロードがキャンセルされました"
+  },
+  "download": {
+    "failed": "ダウンロードに失敗しました",
+    "unavailable": "ファイルはダウンロードできません"
+  },
+  "delete": {
+    "failed": "削除に失敗しました",
+    "notEmpty": "空でないフォルダは削除できません"
+  },
+  "rateLimit": {
+    "title": "レート制限超過",
+    "message": "リクエストが多すぎます。しばらくしてからもう一度お試しください。",
+    "retryAfter": "{{seconds}} 秒後に再試行してください"
+  }
+}

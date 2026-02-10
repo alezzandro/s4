@@ -1,0 +1,56 @@
+{
+  "generic": {
+    "title": "Fehler",
+    "message": "Ein unerwarteter Fehler ist aufgetreten",
+    "tryAgain": "Bitte versuchen Sie es erneut"
+  },
+  "network": {
+    "title": "Netzwerkfehler",
+    "message": "Verbindung zum Server konnte nicht hergestellt werden",
+    "checkConnection": "Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut"
+  },
+  "notFound": {
+    "title": "404 Seite nicht gefunden",
+    "message": "Wir konnten keine Seite finden, die der eingegebenen Adresse entspricht.",
+    "goHome": "Zur Startseite"
+  },
+  "unauthorized": {
+    "title": "Nicht autorisiert",
+    "message": "Sie sind nicht berechtigt, diese Aktion auszuführen",
+    "loginRequired": "Bitte melden Sie sich an, um fortzufahren"
+  },
+  "forbidden": {
+    "title": "Zugriff verweigert",
+    "message": "Sie haben keine Berechtigung, auf diese Ressource zuzugreifen"
+  },
+  "validation": {
+    "title": "Validierungsfehler",
+    "invalidInput": "Bitte überprüfen Sie Ihre Eingabe und versuchen Sie es erneut"
+  },
+  "s3": {
+    "connectionFailed": "Verbindung zu S3 fehlgeschlagen",
+    "accessDenied": "Zugriff auf S3 Bucket verweigert",
+    "bucketNotFound": "Bucket nicht gefunden",
+    "objectNotFound": "Object nicht gefunden",
+    "quotaExceeded": "Speicherkontingent überschritten"
+  },
+  "upload": {
+    "failed": "Hochladen fehlgeschlagen",
+    "tooLarge": "Datei ist zu groß",
+    "invalidType": "Ungültiger Dateityp",
+    "aborted": "Hochladen wurde abgebrochen"
+  },
+  "download": {
+    "failed": "Herunterladen fehlgeschlagen",
+    "unavailable": "Datei ist nicht zum Herunterladen verfügbar"
+  },
+  "delete": {
+    "failed": "Löschen fehlgeschlagen",
+    "notEmpty": "Nicht-leerer Ordner kann nicht gelöscht werden"
+  },
+  "rateLimit": {
+    "title": "Anfragelimit überschritten",
+    "message": "Zu viele Anfragen. Bitte warten Sie, bevor Sie es erneut versuchen.",
+    "retryAfter": "Erneut versuchen nach {{seconds}} Sekunden"
+  }
+}

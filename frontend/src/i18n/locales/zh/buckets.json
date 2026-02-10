@@ -1,0 +1,65 @@
+{
+  "title": "存储管理",
+  "table": {
+    "columns": {
+      "name": "名称",
+      "type": "类型",
+      "status": "状态",
+      "creationDate": "创建日期",
+      "owner": "所有者"
+    },
+    "emptyState": {
+      "title": "未找到 bucket",
+      "description": "创建您的第一个 bucket 以开始使用。",
+      "createButton": "创建 bucket"
+    }
+  },
+  "types": {
+    "s3": "S3",
+    "pvc": "PVC"
+  },
+  "actions": {
+    "createBucket": "创建 S3 Bucket",
+    "deleteBucket": "删除 bucket",
+    "refresh": "刷新"
+  },
+  "createModal": {
+    "title": "创建新 bucket",
+    "nameLabel": "Bucket 名称",
+    "namePlaceholder": "至少输入 3 个字符",
+    "create": "创建",
+    "rules": {
+      "title": "Bucket 命名规则：",
+      "length": "Bucket 名称长度必须在 3 到 63 个字符之间",
+      "characters": "Bucket 名称只能包含小写字母、数字、点 (.) 和连字符 (-)",
+      "startEnd": "Bucket 名称必须以字母或数字开头和结尾",
+      "noPeriods": "Bucket 名称不能包含两个相邻的句点",
+      "noIp": "Bucket 名称不能采用 IP 地址格式（例如 192.168.5.4）",
+      "unique": "Bucket 名称在当前配置中必须唯一"
+    },
+    "success": "Bucket 已创建",
+    "successMessage": "Bucket {{bucketName}} 已成功创建"
+  },
+  "deleteModal": {
+    "title": "删除 bucket？",
+    "message": "此操作无法撤销。",
+    "confirmMessage": "输入 {{bucketName}} 以确认删除。",
+    "confirm": "删除 bucket",
+    "success": "Bucket 已删除",
+    "successMessage": "Bucket {{bucketName}} 已成功删除"
+  },
+  "search": {
+    "placeholder": "搜索存储位置"
+  },
+  "pagination": {
+    "perPage": "每页 {{count}} 项"
+  },
+  "refresh": {
+    "success": "存储已刷新",
+    "successMessage": "存储位置已成功更新。"
+  },
+  "validation": {
+    "invalidName": "无效的 bucket 名称",
+    "invalidNameMessage": "Bucket 名称 {{bucketName}} 无效。请检查规则后重试。"
+  }
+}

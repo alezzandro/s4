@@ -30,8 +30,8 @@ S4 requires one persistent volume for the S3 engine. Additional volumes for loca
 
 ### Required Volume
 
-| Volume | Mount Path | Purpose |
-|--------|-----------|---------|
+| Volume      | Mount Path              | Purpose                                                                         |
+| ----------- | ----------------------- | ------------------------------------------------------------------------------- |
 | **s4-data** | `/var/lib/ceph/radosgw` | RGW database and S3 object storage. All S3 buckets and objects are stored here. |
 
 This is the only volume required to run S4. Without it, all S3 data is lost when the container restarts.
@@ -149,6 +149,7 @@ kubectl port-forward svc/s4 5000:5000 7480:7480 -n s4
 ```
 
 For detailed Kubernetes/OpenShift configuration, see:
+
 - [Kubernetes Deployment](../deployment/kubernetes.md)
 - [OpenShift Deployment](../deployment/openshift.md)
 
@@ -198,21 +199,21 @@ aws s3 ls
 
 ### Ports
 
-| Port | Service | Description |
-|------|---------|-------------|
-| **5000** | Web UI | Node.js/Fastify server |
-| **7480** | S3 API | Ceph RGW endpoint |
+| Port     | Service | Description            |
+| -------- | ------- | ---------------------- |
+| **5000** | Web UI  | Node.js/Fastify server |
+| **7480** | S3 API  | Ceph RGW endpoint      |
 
 ### Default Credentials
 
-| Type | Username/Key | Password/Secret |
-|------|--------------|-----------------|
-| S3 API | `s4admin` | `s4secret` |
+| Type   | Username/Key        | Password/Secret                         |
+| ------ | ------------------- | --------------------------------------- |
+| S3 API | `s4admin`           | `s4secret`                              |
 | Web UI | (required for Helm) | Set `auth.username` and `auth.password` |
 
 ### Volumes
 
-| Volume | Mount Path | Purpose |
-|--------|-----------|---------|
-| `s4-data` | `/var/lib/ceph/radosgw` | S3 data (required) |
-| Custom volumes | Your choice | Local browsing (set `LOCAL_STORAGE_PATHS`) |
+| Volume         | Mount Path              | Purpose                                    |
+| -------------- | ----------------------- | ------------------------------------------ |
+| `s4-data`      | `/var/lib/ceph/radosgw` | S3 data (required)                         |
+| Custom volumes | Your choice             | Local browsing (set `LOCAL_STORAGE_PATHS`) |

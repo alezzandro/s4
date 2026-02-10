@@ -1,0 +1,21 @@
+{
+  "title": "Iniciar sesión en S4",
+  "subtitle": "Super Simple Storage Service",
+  "form": {
+    "username": "Nombre de usuario",
+    "password": "Contraseña",
+    "showPassword": "Mostrar contraseña",
+    "hidePassword": "Ocultar contraseña",
+    "logIn": "Iniciar sesión",
+    "loggingIn": "Iniciando sesión..."
+  },
+  "validation": {
+    "usernameRequired": "El nombre de usuario es obligatorio",
+    "passwordRequired": "La contraseña es obligatoria"
+  },
+  "errors": {
+    "invalidCredentials": "Nombre de usuario o contraseña inválidos",
+    "sessionExpired": "Su sesión ha expirado. Inicie sesión de nuevo."
+  },
+  "brandAlt": "S4 - Super Simple Storage Service"
+}

@@ -1,0 +1,266 @@
+{
+  "title": "저장소 브라우저",
+  "locationSelector": {
+    "label": "저장소 위치:",
+    "placeholder": "저장소 위치 선택",
+    "loading": "위치 로딩 중...",
+    "noLocations": "사용 가능한 저장소 위치가 없습니다"
+  },
+  "breadcrumb": {
+    "root": "루트"
+  },
+  "table": {
+    "columns": {
+      "key": "키",
+      "lastModified": "최종 수정일",
+      "size": "크기"
+    },
+    "emptyState": {
+      "title": "파일을 찾을 수 없습니다",
+      "description": "이 위치가 비어 있거나 검색과 일치하는 파일이 없습니다."
+    }
+  },
+  "search": {
+    "placeholder": "파일 및 폴더 검색",
+    "mode": {
+      "contains": "포함",
+      "startsWith": "시작 문자"
+    },
+    "results": {
+      "truncated": "검색 결과가 불완전할 수 있습니다"
+    }
+  },
+  "actions": {
+    "upload": "업로드",
+    "uploadSingle": "파일 업로드",
+    "uploadMultiple": "파일 여러 개 업로드",
+    "createFolder": "폴더 생성",
+    "importModel": "HuggingFace에서 가져오기",
+    "copyPath": "경로 복사",
+    "viewFile": "보기",
+    "downloadFile": "다운로드",
+    "deleteFile": "삭제",
+    "selectAll": "모두 선택",
+    "deselectAll": "모두 선택 해제",
+    "copySelected": "선택 항목 복사",
+    "deleteSelected": "선택 항목 삭제",
+    "viewDetails": "상세 정보 보기",
+    "loadMore": "더 보기"
+  },
+  "fileDetails": {
+    "title": "파일 상세 정보: {{fileName}}",
+    "tabs": {
+      "metadata": "Metadata",
+      "tags": "Tag"
+    },
+    "metadata": {
+      "key": "키",
+      "size": "크기",
+      "lastModified": "최종 수정일",
+      "contentType": "콘텐츠 유형",
+      "etag": "ETag",
+      "storageClass": "Storage Class",
+      "customMetadata": "사용자 정의 Metadata"
+    },
+    "tags": {
+      "noTags": "이 object에 tag가 없습니다. 아래에서 tag를 추가하세요.",
+      "addTag": "새 tag 추가",
+      "keyPlaceholder": "키",
+      "valuePlaceholder": "값",
+      "tagCount": "{{max}}개 중 {{count}}개 tag 사용",
+      "saveTags": "Tag 저장",
+      "saving": "저장 중...",
+      "saved": "Tag 저장됨",
+      "savedMessage": "Object tag가 성공적으로 업데이트되었습니다."
+    },
+    "notAvailable": "Object metadata와 tag는 S3 저장소 위치에서만 사용할 수 있습니다."
+  },
+  "upload": {
+    "single": {
+      "title": "파일 업로드",
+      "dragDropText": "여기에 파일을 끌어다 놓거나 클릭하여 찾아보기",
+      "browseFiles": "파일 찾아보기",
+      "uploading": "업로드 중...",
+      "progress": {
+        "toBackend": "서버에 업로드 중",
+        "toS3": "저장소에 업로드 중"
+      }
+    },
+    "multiple": {
+      "title": "여러 파일 업로드",
+      "dragDropText": "여기에 파일을 끌어다 놓거나 클릭하여 찾아보기",
+      "filesSelected": "{{count}}개 파일 선택됨",
+      "startUpload": "업로드 시작"
+    },
+    "success": "파일 업로드 완료",
+    "successMessage": "파일 \"{{fileName}}\"이(가) 성공적으로 업로드되었습니다.",
+    "failed": "파일 업로드 실패",
+    "abortError": "업로드 중단 오류",
+    "abortErrorMessage": "업로드 프로세스를 중단하지 못했습니다."
+  },
+  "createFolder": {
+    "title": "새 폴더 생성",
+    "nameLabel": "폴더 이름",
+    "namePlaceholder": "폴더 이름 입력",
+    "create": "폴더 생성",
+    "success": "폴더 생성됨",
+    "successMessage": "폴더 \"{{folderName}}\"이(가) 성공적으로 생성되었습니다.",
+    "failed": "폴더 생성 실패"
+  },
+  "delete": {
+    "file": {
+      "title": "파일을 삭제하시겠습니까?",
+      "message": "이 작업은 되돌릴 수 없습니다.",
+      "confirmMessage": "삭제를 확인하려면 {{fileName}}을(를) 입력하세요.",
+      "confirm": "파일 삭제",
+      "success": "파일 삭제됨",
+      "successMessage": "파일 \"{{fileName}}\"이(가) 성공적으로 삭제되었습니다.",
+      "failed": "파일 삭제 실패"
+    },
+    "folder": {
+      "title": "폴더를 삭제하시겠습니까?",
+      "message": "폴더와 모든 내용이 삭제됩니다. 이 작업은 되돌릴 수 없습니다.",
+      "confirmMessage": "삭제를 확인하려면 {{folderName}}을(를) 입력하세요.",
+      "confirm": "폴더 삭제",
+      "success": "폴더 삭제됨",
+      "successMessage": "폴더 \"{{folderName}}\"과(와) 모든 내용이 성공적으로 삭제되었습니다.",
+      "failed": "폴더 삭제 실패"
+    },
+    "selected": {
+      "title": "선택한 항목을 삭제하시겠습니까?",
+      "message": "{{count}}개 항목을 삭제하려고 합니다. 이 작업은 되돌릴 수 없습니다.",
+      "confirmCheckbox": "이 작업은 되돌릴 수 없음을 이해합니다",
+      "confirm": "{{count}}개 항목 삭제",
+      "success": "삭제 성공",
+      "successMessage": "{{count}}개 항목이 성공적으로 삭제되었습니다."
+    }
+  },
+  "import": {
+    "huggingface": {
+      "title": "Hugging Face에서 모델 가져오기",
+      "modelId": "모델 ID",
+      "modelIdPlaceholder": "예: meta-llama/Meta-Llama-3-8B",
+      "token": "HuggingFace Token (선택 사항)",
+      "tokenPlaceholder": "hf_...",
+      "destination": "대상",
+      "s3": "S3 저장소",
+      "local": "로컬 저장소",
+      "prefix": "Prefix (선택 사항)",
+      "prefixPlaceholder": "models/",
+      "import": "모델 가져오기",
+      "importing": "가져오는 중...",
+      "started": "모델 가져오기 시작됨"
+    }
+  },
+  "selection": {
+    "count": "{{count}}개 항목 선택됨",
+    "filesAndFolders": "파일 {{files}}개, 폴더 {{folders}}개 선택됨"
+  },
+  "alerts": {
+    "locationUnavailable": {
+      "title": "위치를 사용할 수 없음",
+      "message": "저장소 위치 \"{{name}}\"은(는) 현재 사용할 수 없습니다.",
+      "localMessage": "디렉터리에 접근할 수 없거나 경로가 올바르지 않을 수 있습니다.",
+      "disabledMessage": "위치를 사용할 수 있을 때까지 파일 작업이 비활성화됩니다."
+    },
+    "noLocations": {
+      "title": "사용 가능한 저장소 위치가 없습니다",
+      "message": "모든 저장소 소스를 로드하지 못했습니다. S3 및 로컬 저장소 구성을 확인하세요."
+    }
+  },
+  "fileViewer": {
+    "title": "파일 미리보기",
+    "error": "파일 보기 오류",
+    "errorMessage": "파일 내용을 가져오지 못했습니다.",
+    "errorObjectMessage": "Object 내용을 가져오지 못했습니다."
+  },
+  "notifications": {
+    "defaultSettings": {
+      "title": "기본 설정 사용 중",
+      "maxConcurrentTransfers": "최대 동시 전송 설정을 가져오지 못했습니다. 기본값(2)을 사용합니다.",
+      "maxFilesPerPage": "페이지당 최대 파일 수 설정을 가져오지 못했습니다. 기본값(100)을 사용합니다."
+    },
+    "locationNotFound": {
+      "title": "위치를 찾을 수 없음",
+      "message": "저장소 위치 \"{{locationId}}\"이(가) 존재하지 않습니다."
+    },
+    "locationUnavailable": {
+      "title": "위치를 사용할 수 없음",
+      "message": "저장소 위치 \"{{name}}\"은(는) 현재 사용할 수 없습니다. 연결이 끊겼거나 접근할 수 없을 수 있습니다.",
+      "cannotSelect": "\"{{name}}\"은(는) 현재 사용할 수 없어 선택할 수 없습니다."
+    },
+    "invalidLocation": {
+      "title": "잘못된 위치",
+      "message": "위치 \"{{locationId}}\"이(가) 존재하지 않습니다."
+    },
+    "pathCopied": {
+      "title": "경로 복사됨",
+      "message": "경로가 클립보드에 성공적으로 복사되었습니다."
+    },
+    "errorLoadingFiles": {
+      "title": "파일 로딩 오류",
+      "message": "저장소에서 파일을 로드하지 못했습니다."
+    },
+    "noLocations": {
+      "title": "사용 가능한 저장소 위치가 없습니다",
+      "message": "모든 저장소 소스를 로드하지 못했습니다. S3 및 로컬 저장소 구성을 확인하세요. 자세한 내용은 브라우저 콘솔을 참조하세요."
+    },
+    "errorLoadingLocations": {
+      "title": "위치 로딩 오류",
+      "message": "저장소 위치를 로드하지 못했습니다. 연결 설정을 확인하세요."
+    },
+    "deleteFailed": {
+      "title": "삭제 실패",
+      "message": "일부 항목을 삭제하지 못했습니다. 다시 시도하세요."
+    },
+    "noItemsSelected": {
+      "title": "선택된 항목 없음",
+      "message": "복사할 항목을 선택하세요."
+    },
+    "downloadFailed": {
+      "title": "다운로드 실패",
+      "message": "파일을 다운로드하지 못했습니다. 다시 시도하세요."
+    },
+    "uploadComplete": {
+      "title": "업로드 완료",
+      "message": "{{count}}개 파일이 성공적으로 업로드되었습니다."
+    },
+    "uploadPartialFailed": {
+      "title": "업로드가 오류와 함께 완료됨",
+      "message": "{{total}}개 파일 중 {{failed}}개 파일 업로드에 실패했습니다."
+    },
+    "modelImport": {
+      "error": "모델 가져오기 오류",
+      "fileError": "\"{{fileName}}\" 가져오기 오류: {{error}}",
+      "success": "모델 가져오기 완료",
+      "successMessage": "모델 \"{{modelName}}\"이(가) 성공적으로 가져와졌습니다.",
+      "failed": "모델 가져오기 실패",
+      "failedMessage": "모델 \"{{modelName}}\" 가져오기에 실패했습니다.",
+      "cancelled": "모델 가져오기 취소됨",
+      "cancelledMessage": "모델 \"{{modelName}}\" 가져오기가 취소되었습니다.",
+      "started": "모델 가져오기 시작됨",
+      "startedMessage": "모델 \"{{modelName}}\" 가져오기가 성공적으로 시작되었습니다.",
+      "startFailed": "모델 가져오기를 시작하지 못했습니다.",
+      "cancelFailed": "취소 실패",
+      "cancelFailedMessage": "가져오기를 취소하지 못했습니다.",
+      "noLocations": "모델을 가져올 수 없습니다 - 사용 가능한 저장소 대상이 없습니다."
+    },
+    "connectionError": {
+      "title": "연결 오류",
+      "message": "가져오기 진행 연결을 설정하지 못했습니다",
+      "lost": "가져오기 진행 스트림과의 연결이 끊겼습니다. 전송 대기열에서 상태를 확인하세요."
+    },
+    "filesDeleted": {
+      "title": "파일 삭제됨",
+      "message": "다운로드된 모든 파일이 삭제되었습니다."
+    },
+    "cleanupFailed": {
+      "title": "정리 실패",
+      "message": "다운로드된 파일을 삭제하지 못했습니다."
+    },
+    "validationError": {
+      "title": "유효성 검사 오류",
+      "message": "모든 필수 필드를 입력하세요."
+    }
+  }
+}

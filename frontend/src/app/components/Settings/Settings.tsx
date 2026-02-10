@@ -30,6 +30,7 @@ import * as React from 'react';
 import apiClient from '@app/utils/apiClient';
 import { notifyApiError, notifySuccess } from '@app/utils/notifications';
 import { storageService } from '../../services/storageService';
+import { PAGE_SIZE_PRESETS, snapToNearestPreset } from '@app/utils/paginationPresets';
 
 class S3Settings {
   accessKeyId: string;
@@ -105,11 +106,12 @@ const SettingsManagement: React.FunctionComponent = () => {
       })
       .catch((error) => {
         console.error(error);
-        notifyApiError('Fetch S3 settings', error);
+        notifyApiError(t('s3.save'), error);
       })
       .finally(() => {
         setS3Loading(false);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleS3Change = (value, field) => {
@@ -138,7 +140,7 @@ const SettingsManagement: React.FunctionComponent = () => {
       })
       .catch((error) => {
         console.error(error);
-        notifyApiError('Save S3 settings', error);
+        notifyApiError(t('s3.save'), error);
       });
   };
 
@@ -150,7 +152,7 @@ const SettingsManagement: React.FunctionComponent = () => {
         notifySuccess(t('translation:notifications.connectionSuccess'), t('s3.testSuccess'));
       })
       .catch((error) => {
-        notifyApiError('Test S3 connection', error);
+        notifyApiError(t('s3.test'), error);
       });
   };
 
@@ -174,11 +176,12 @@ const SettingsManagement: React.FunctionComponent = () => {
       })
       .catch((error) => {
         console.error(error);
-        notifyApiError('Fetch HuggingFace settings', error);
+        notifyApiError(t('huggingface.save'), error);
       })
       .finally(() => {
         setHfLoading(false);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleHfChange = (value, field) => {
@@ -202,7 +205,7 @@ const SettingsManagement: React.FunctionComponent = () => {
       })
       .catch((error) => {
         console.error(error);
-        notifyApiError('Save HuggingFace settings', error);
+        notifyApiError(t('huggingface.save'), error);
       });
   };
 
@@ -218,7 +221,7 @@ const SettingsManagement: React.FunctionComponent = () => {
       })
       .catch((error) => {
         console.error(error);
-        notifyApiError('Test HuggingFace connection', error);
+        notifyApiError(t('huggingface.test'), error);
       });
   };
 
@@ -226,6 +229,27 @@ const SettingsManagement: React.FunctionComponent = () => {
 
   const [maxConcurrentTransfers, setMaxConcurrentTransfers] = React.useState<number>(0);
   const [maxFilesPerPage, setMaxFilesPerPage] = React.useState<number>(100);
+
+  // Build customSteps for the pagination slider — evenly-spaced percentage ticks
+  const paginationSteps = React.useMemo(
+    () =>
+      PAGE_SIZE_PRESETS.map((preset, index) => ({
+        value: (index / (PAGE_SIZE_PRESETS.length - 1)) * 100,
+        label: String(preset),
+      })),
+    [],
+  );
+
+  const presetToSliderPercent = React.useCallback((preset: number): number => {
+    const idx = PAGE_SIZE_PRESETS.indexOf(preset as (typeof PAGE_SIZE_PRESETS)[number]);
+    if (idx === -1) return 0;
+    return (idx / (PAGE_SIZE_PRESETS.length - 1)) * 100;
+  }, []);
+
+  const sliderPercentToPreset = React.useCallback((percent: number): number => {
+    const idx = Math.round((percent / 100) * (PAGE_SIZE_PRESETS.length - 1));
+    return PAGE_SIZE_PRESETS[Math.min(Math.max(idx, 0), PAGE_SIZE_PRESETS.length - 1)];
+  }, []);
 
   React.useEffect(() => {
     apiClient
@@ -238,8 +262,9 @@ const SettingsManagement: React.FunctionComponent = () => {
       })
       .catch((error) => {
         console.error(error);
-        notifyApiError('Fetch Max Concurrent Transfers settings', error);
+        notifyApiError(t('concurrency.save'), error);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   React.useEffect(() => {
@@ -248,13 +273,14 @@ const SettingsManagement: React.FunctionComponent = () => {
       .then((response) => {
         const { maxFilesPerPage } = response.data;
         if (maxFilesPerPage !== undefined) {
-          setMaxFilesPerPage(maxFilesPerPage);
+          setMaxFilesPerPage(snapToNearestPreset(maxFilesPerPage));
         }
       })
       .catch((error) => {
         console.error(error);
-        notifyApiError('Fetch Max Files Per Page settings', error);
+        notifyApiError(t('pagination.save'), error);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSaveMaxConcurrentTransfers = (event) => {
@@ -307,11 +333,12 @@ const SettingsManagement: React.FunctionComponent = () => {
       })
       .catch((error) => {
         console.error(error);
-        notifyApiError('Fetch proxy settings', error);
+        notifyApiError(t('proxy.save'), error);
       })
       .finally(() => {
         setProxyLoading(false);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleProxyChange = (value, field) => {
@@ -335,7 +362,7 @@ const SettingsManagement: React.FunctionComponent = () => {
       })
       .catch((error) => {
         console.error(error);
-        notifyApiError('Save proxy settings', error);
+        notifyApiError(t('proxy.save'), error);
       });
   };
 
@@ -352,7 +379,7 @@ const SettingsManagement: React.FunctionComponent = () => {
       })
       .catch((error) => {
         console.error(error);
-        notifyApiError('Test proxy connection', error);
+        notifyApiError(t('proxy.test'), error);
       });
   };
 
@@ -362,11 +389,11 @@ const SettingsManagement: React.FunctionComponent = () => {
     <div>
       <PageSection hasBodyWrapper={false}>
         <Content>
-          <Content component={ContentVariants.h1}>Settings</Content>
+          <Content component={ContentVariants.h1}>{t('title')}</Content>
         </Content>
       </PageSection>
       <PageSection hasBodyWrapper={false}>
-        <Tabs activeKey={activeTabKey} onSelect={handleTabClick} aria-label="Settings Tabs" isBox={false} role="region">
+        <Tabs activeKey={activeTabKey} onSelect={handleTabClick} aria-label={t('title')} isBox={false} role="region">
           <Tab
             eventKey={0}
             title={
@@ -374,40 +401,40 @@ const SettingsManagement: React.FunctionComponent = () => {
                 <TabTitleIcon>
                   <DatabaseIcon />
                 </TabTitleIcon>{' '}
-                <TabTitleText>S3 Settings</TabTitleText>{' '}
+                <TabTitleText>{t('tabs.s3')}</TabTitleText>{' '}
               </>
             }
-            aria-label="S3 settings"
+            aria-label={t('tabs.s3')}
           >
             {s3Loading ? (
               <Form className="settings-form">
-                <FormGroup label="Access key" fieldId="accessKeyId-skeleton">
-                  <Skeleton width="25%" height="36px" screenreaderText="Loading access key" />
+                <FormGroup label={t('s3.accessKey.label')} fieldId="accessKeyId-skeleton">
+                  <Skeleton width="25%" height="36px" screenreaderText={t('translation:common.actions.loading')} />
                 </FormGroup>
-                <FormGroup label="Secret key" fieldId="secretAccessKey-skeleton">
-                  <Skeleton width="25%" height="36px" screenreaderText="Loading secret key" />
+                <FormGroup label={t('s3.secretKey.label')} fieldId="secretAccessKey-skeleton">
+                  <Skeleton width="25%" height="36px" screenreaderText={t('translation:common.actions.loading')} />
                 </FormGroup>
-                <FormGroup label="Region" fieldId="region-skeleton">
-                  <Skeleton width="25%" height="36px" screenreaderText="Loading region" />
+                <FormGroup label={t('s3.region.label')} fieldId="region-skeleton">
+                  <Skeleton width="25%" height="36px" screenreaderText={t('translation:common.actions.loading')} />
                 </FormGroup>
-                <FormGroup label="Endpoint" fieldId="endpoint-skeleton">
-                  <Skeleton width="50%" height="36px" screenreaderText="Loading endpoint" />
+                <FormGroup label={t('s3.endpoint.label')} fieldId="endpoint-skeleton">
+                  <Skeleton width="50%" height="36px" screenreaderText={t('translation:common.actions.loading')} />
                 </FormGroup>
-                <FormGroup label="Default Bucket" fieldId="defaultBucket-skeleton">
-                  <Skeleton width="25%" height="36px" screenreaderText="Loading default bucket" />
+                <FormGroup label={t('s3.defaultBucket.label')} fieldId="defaultBucket-skeleton">
+                  <Skeleton width="25%" height="36px" screenreaderText={t('translation:common.actions.loading')} />
                 </FormGroup>
                 <Flex>
                   <FlexItem>
-                    <Skeleton width="150px" height="36px" screenreaderText="Loading save button" />
+                    <Skeleton width="150px" height="36px" screenreaderText={t('translation:common.actions.loading')} />
                   </FlexItem>
                   <FlexItem>
-                    <Skeleton width="150px" height="36px" screenreaderText="Loading test button" />
+                    <Skeleton width="150px" height="36px" screenreaderText={t('translation:common.actions.loading')} />
                   </FlexItem>
                 </Flex>
               </Form>
             ) : (
               <Form onSubmit={handleSaveS3Settings} className="settings-form">
-                <FormGroup label="Access key" fieldId="accessKeyId">
+                <FormGroup label={t('s3.accessKey.label')} fieldId="accessKeyId">
                   <TextInput
                     value={s3Settings.accessKeyId}
                     onChange={(_event, value) => handleS3Change(value, 'accessKeyId')}
@@ -418,11 +445,11 @@ const SettingsManagement: React.FunctionComponent = () => {
                   />
                   <FormHelperText>
                     <HelperText>
-                      <HelperTextItem id="accessKeyId-helper">Your S3 access key ID for authentication</HelperTextItem>
+                      <HelperTextItem id="accessKeyId-helper">{t('s3.accessKey.helper')}</HelperTextItem>
                     </HelperText>
                   </FormHelperText>
                 </FormGroup>
-                <FormGroup label="Secret key" fieldId="secretAccessKey">
+                <FormGroup label={t('s3.secretKey.label')} fieldId="secretAccessKey">
                   <TextInputGroup className="form-settings">
                     <TextInputGroupMain
                       value={s3Settings.secretAccessKey}
@@ -436,20 +463,18 @@ const SettingsManagement: React.FunctionComponent = () => {
                       <Button
                         icon={<EyeIcon />}
                         variant="plain"
-                        aria-label={showS3SecretKey ? 'Hide secret key' : 'Show secret key'}
+                        aria-label={showS3SecretKey ? t('s3.secretKey.hide') : t('s3.secretKey.show')}
                         onClick={() => setS3ShowSecretKey(!showS3SecretKey)}
                       />
                     </TextInputGroupUtilities>
                   </TextInputGroup>
                   <FormHelperText>
                     <HelperText>
-                      <HelperTextItem id="secretAccessKey-helper">
-                        Your S3 secret access key for authentication
-                      </HelperTextItem>
+                      <HelperTextItem id="secretAccessKey-helper">{t('s3.secretKey.helper')}</HelperTextItem>
                     </HelperText>
                   </FormHelperText>
                 </FormGroup>
-                <FormGroup label="Region" fieldId="region">
+                <FormGroup label={t('s3.region.label')} fieldId="region">
                   <TextInput
                     value={s3Settings.region}
                     onChange={(_event, value) => handleS3Change(value, 'region')}
@@ -460,13 +485,11 @@ const SettingsManagement: React.FunctionComponent = () => {
                   />
                   <FormHelperText>
                     <HelperText>
-                      <HelperTextItem id="region-helper">
-                        AWS region where your S3 buckets are located (e.g., us-east-1)
-                      </HelperTextItem>
+                      <HelperTextItem id="region-helper">{t('s3.region.helper')}</HelperTextItem>
                     </HelperText>
                   </FormHelperText>
                 </FormGroup>
-                <FormGroup label="Endpoint" fieldId="endpoint">
+                <FormGroup label={t('s3.endpoint.label')} fieldId="endpoint">
                   <TextInput
                     value={s3Settings.endpoint}
                     onChange={(_event, value) => handleS3Change(value, 'endpoint')}
@@ -477,13 +500,11 @@ const SettingsManagement: React.FunctionComponent = () => {
                   />
                   <FormHelperText>
                     <HelperText>
-                      <HelperTextItem id="endpoint-helper">
-                        S3 endpoint URL (leave empty to use AWS default)
-                      </HelperTextItem>
+                      <HelperTextItem id="endpoint-helper">{t('s3.endpoint.helper')}</HelperTextItem>
                     </HelperText>
                   </FormHelperText>
                 </FormGroup>
-                <FormGroup label="Default Bucket" fieldId="defaultBucket">
+                <FormGroup label={t('s3.defaultBucket.label')} fieldId="defaultBucket">
                   <TextInput
                     value={s3Settings.defaultBucket}
                     onChange={(_event, value) => handleS3Change(value, 'defaultBucket')}
@@ -494,21 +515,19 @@ const SettingsManagement: React.FunctionComponent = () => {
                   />
                   <FormHelperText>
                     <HelperText>
-                      <HelperTextItem id="defaultBucket-helper">
-                        Default bucket to use for storage operations
-                      </HelperTextItem>
+                      <HelperTextItem id="defaultBucket-helper">{t('s3.defaultBucket.helper')}</HelperTextItem>
                     </HelperText>
                   </FormHelperText>
                 </FormGroup>
                 <Flex>
                   <FlexItem>
                     <Button type="submit" className="form-settings-submit" isDisabled={!s3SettingsChanged}>
-                      Save S3 Settings
+                      {t('s3.save')}
                     </Button>
                   </FlexItem>
                   <FlexItem>
                     <Button className="form-settings-submit" onClick={handleTestS3Connection}>
-                      Test Connection
+                      {t('s3.test')}
                     </Button>
                   </FlexItem>
                 </Flex>
@@ -522,28 +541,28 @@ const SettingsManagement: React.FunctionComponent = () => {
                 <TabTitleIcon>
                   <img className="tab-logo" src={HfLogo} alt="HuggingFace Logo" />
                 </TabTitleIcon>{' '}
-                <TabTitleText>HuggingFace Settings</TabTitleText>{' '}
+                <TabTitleText>{t('tabs.huggingface')}</TabTitleText>{' '}
               </>
             }
-            aria-label="HuggingFace settings"
+            aria-label={t('tabs.huggingface')}
           >
             {hfLoading ? (
               <Form className="settings-form">
-                <FormGroup label="Token" fieldId="token-skeleton">
-                  <Skeleton width="25%" height="36px" screenreaderText="Loading token" />
+                <FormGroup label={t('huggingface.token.label')} fieldId="token-skeleton">
+                  <Skeleton width="25%" height="36px" screenreaderText={t('translation:common.actions.loading')} />
                 </FormGroup>
                 <Flex>
                   <FlexItem>
-                    <Skeleton width="200px" height="36px" screenreaderText="Loading save button" />
+                    <Skeleton width="200px" height="36px" screenreaderText={t('translation:common.actions.loading')} />
                   </FlexItem>
                   <FlexItem>
-                    <Skeleton width="150px" height="36px" screenreaderText="Loading test button" />
+                    <Skeleton width="150px" height="36px" screenreaderText={t('translation:common.actions.loading')} />
                   </FlexItem>
                 </Flex>
               </Form>
             ) : (
               <Form onSubmit={handleSaveHfSettings} className="settings-form">
-                <FormGroup label="Token" fieldId="token">
+                <FormGroup label={t('huggingface.token.label')} fieldId="token">
                   <TextInputGroup className="form-settings">
                     <TextInputGroupMain
                       value={hfSettings.hfToken}
@@ -556,7 +575,7 @@ const SettingsManagement: React.FunctionComponent = () => {
                       <Button
                         icon={<EyeIcon />}
                         variant="plain"
-                        aria-label={showHfToken ? 'Hide token' : 'Show token'}
+                        aria-label={showHfToken ? t('huggingface.token.hide') : t('huggingface.token.show')}
                         onClick={() => setHfShowToken(!showHfToken)}
                       />
                     </TextInputGroupUtilities>
@@ -565,12 +584,12 @@ const SettingsManagement: React.FunctionComponent = () => {
                 <Flex>
                   <FlexItem>
                     <Button type="submit" className="form-settings-submit" isDisabled={!hfSettingsChanged}>
-                      Save HuggingFace Settings
+                      {t('huggingface.save')}
                     </Button>
                   </FlexItem>
                   <FlexItem>
                     <Button className="form-settings-submit" onClick={handleTestHfConnection}>
-                      Test Connection
+                      {t('huggingface.test')}
                     </Button>
                   </FlexItem>
                 </Flex>
@@ -584,13 +603,16 @@ const SettingsManagement: React.FunctionComponent = () => {
                 <TabTitleIcon>
                   <DatabaseIcon />
                 </TabTitleIcon>{' '}
-                <TabTitleText>Max Concurrent Transfers</TabTitleText>{' '}
+                <TabTitleText>{t('tabs.concurrency')}</TabTitleText>{' '}
               </>
             }
-            aria-label="Max concurrent transfers"
+            aria-label={t('tabs.concurrency')}
           >
             <Form onSubmit={handleSaveMaxConcurrentTransfers} className="settings-form">
-              <FormGroup label={'Max Concurrent Transfers: ' + maxConcurrentTransfers} fieldId="maxConcurrentTransfers">
+              <FormGroup
+                label={t('concurrency.label', { value: maxConcurrentTransfers })}
+                fieldId="maxConcurrentTransfers"
+              >
                 <Slider
                   hasTooltipOverThumb={false}
                   value={maxConcurrentTransfers}
@@ -598,19 +620,17 @@ const SettingsManagement: React.FunctionComponent = () => {
                   max={10}
                   className="form-settings-slider"
                   onChange={(_event: SliderOnChangeEvent, value: number) => setMaxConcurrentTransfers(value)}
-                  aria-label="Max concurrent transfers slider"
+                  aria-label={t('tabs.concurrency')}
                   aria-describedby="maxConcurrentTransfers-helper"
                 />
                 <FormHelperText>
                   <HelperText>
-                    <HelperTextItem id="maxConcurrentTransfers-helper">
-                      Maximum number of simultaneous file transfers (1-10)
-                    </HelperTextItem>
+                    <HelperTextItem id="maxConcurrentTransfers-helper">{t('concurrency.helper')}</HelperTextItem>
                   </HelperText>
                 </FormHelperText>
               </FormGroup>
               <Button type="submit" className="form-settings-submit">
-                Save Max Concurrent Transfers
+                {t('concurrency.save')}
               </Button>
             </Form>
           </Tab>
@@ -621,34 +641,32 @@ const SettingsManagement: React.FunctionComponent = () => {
                 <TabTitleIcon>
                   <DatabaseIcon />
                 </TabTitleIcon>{' '}
-                <TabTitleText>Max Files Per Page</TabTitleText>{' '}
+                <TabTitleText>{t('tabs.pagination')}</TabTitleText>{' '}
               </>
             }
-            aria-label="Max files per page"
+            aria-label={t('tabs.pagination')}
           >
             <Form onSubmit={handleSaveMaxFilesPerPage} className="settings-form">
-              <FormGroup label={'Max Files Per Page: ' + maxFilesPerPage} fieldId="maxFilesPerPage">
+              <FormGroup label={t('pagination.label', { value: maxFilesPerPage })} fieldId="maxFilesPerPage">
                 <Slider
                   hasTooltipOverThumb={false}
-                  value={maxFilesPerPage}
-                  min={10}
-                  max={1000}
-                  step={10}
+                  value={presetToSliderPercent(maxFilesPerPage)}
+                  customSteps={paginationSteps}
                   className="form-settings-slider"
-                  onChange={(_event: SliderOnChangeEvent, value: number) => setMaxFilesPerPage(value)}
-                  aria-label="Max files per page slider"
+                  onChange={(_event: SliderOnChangeEvent, value: number) =>
+                    setMaxFilesPerPage(sliderPercentToPreset(value))
+                  }
+                  aria-label={t('tabs.pagination')}
                   aria-describedby="maxFilesPerPage-helper"
                 />
                 <FormHelperText>
                   <HelperText>
-                    <HelperTextItem id="maxFilesPerPage-helper">
-                      Maximum number of files displayed per page (10-1000)
-                    </HelperTextItem>
+                    <HelperTextItem id="maxFilesPerPage-helper">{t('pagination.helper')}</HelperTextItem>
                   </HelperText>
                 </FormHelperText>
               </FormGroup>
               <Button type="submit" className="form-settings-submit">
-                Save Max Files Per Page
+                {t('pagination.save')}
               </Button>
             </Form>
           </Tab>
@@ -659,94 +677,90 @@ const SettingsManagement: React.FunctionComponent = () => {
                 <TabTitleIcon>
                   <GlobeIcon />
                 </TabTitleIcon>{' '}
-                <TabTitleText>Proxy Settings</TabTitleText>{' '}
+                <TabTitleText>{t('tabs.proxy')}</TabTitleText>{' '}
               </>
             }
-            aria-label="Proxy settings"
+            aria-label={t('tabs.proxy')}
           >
             {proxyLoading ? (
               <Form className="settings-form">
-                <FormGroup label="HTTP Proxy" fieldId="httpProxy-skeleton">
-                  <Skeleton width="50%" height="36px" screenreaderText="Loading HTTP proxy" />
+                <FormGroup label={t('proxy.httpProxy.label')} fieldId="httpProxy-skeleton">
+                  <Skeleton width="50%" height="36px" screenreaderText={t('translation:common.actions.loading')} />
                 </FormGroup>
-                <FormGroup label="HTTPS Proxy" fieldId="httpsProxy-skeleton">
-                  <Skeleton width="50%" height="36px" screenreaderText="Loading HTTPS proxy" />
+                <FormGroup label={t('proxy.httpsProxy.label')} fieldId="httpsProxy-skeleton">
+                  <Skeleton width="50%" height="36px" screenreaderText={t('translation:common.actions.loading')} />
                 </FormGroup>
-                <FormGroup label="Test URL" fieldId="testUrl-skeleton">
-                  <Skeleton width="50%" height="36px" screenreaderText="Loading test URL" />
+                <FormGroup label={t('proxy.testUrl.label')} fieldId="testUrl-skeleton">
+                  <Skeleton width="50%" height="36px" screenreaderText={t('translation:common.actions.loading')} />
                 </FormGroup>
                 <Flex>
                   <FlexItem>
-                    <Skeleton width="180px" height="36px" screenreaderText="Loading save button" />
+                    <Skeleton width="180px" height="36px" screenreaderText={t('translation:common.actions.loading')} />
                   </FlexItem>
                   <FlexItem>
-                    <Skeleton width="150px" height="36px" screenreaderText="Loading test button" />
+                    <Skeleton width="150px" height="36px" screenreaderText={t('translation:common.actions.loading')} />
                   </FlexItem>
                 </Flex>
               </Form>
             ) : (
               <Form onSubmit={handleSaveProxySettings} className="settings-form">
-                <FormGroup label="HTTP Proxy" fieldId="httpProxy">
+                <FormGroup label={t('proxy.httpProxy.label')} fieldId="httpProxy">
                   <TextInput
                     value={proxySettings.httpProxy}
                     onChange={(_event, value) => handleProxyChange(value, 'httpProxy')}
                     id="httpProxy"
                     name="httpProxy"
-                    placeholder="http://proxy-server:port"
+                    placeholder={t('proxy.httpProxy.placeholder')}
                     className="form-settings-long"
                     aria-describedby="httpProxy-helper"
                   />
                   <FormHelperText>
                     <HelperText>
-                      <HelperTextItem id="httpProxy-helper">
-                        HTTP proxy server URL (e.g., http://proxy-server:8080)
-                      </HelperTextItem>
+                      <HelperTextItem id="httpProxy-helper">{t('proxy.httpProxy.helper')}</HelperTextItem>
                     </HelperText>
                   </FormHelperText>
                 </FormGroup>
-                <FormGroup label="HTTPS Proxy" fieldId="httpsProxy">
+                <FormGroup label={t('proxy.httpsProxy.label')} fieldId="httpsProxy">
                   <TextInput
                     value={proxySettings.httpsProxy}
                     onChange={(_event, value) => handleProxyChange(value, 'httpsProxy')}
                     id="httpsProxy"
                     name="httpsProxy"
-                    placeholder="https://proxy-server:port"
+                    placeholder={t('proxy.httpsProxy.placeholder')}
                     className="form-settings-long"
                     aria-describedby="httpsProxy-helper"
                   />
                   <FormHelperText>
                     <HelperText>
-                      <HelperTextItem id="httpsProxy-helper">
-                        HTTPS proxy server URL (e.g., https://proxy-server:8443)
-                      </HelperTextItem>
+                      <HelperTextItem id="httpsProxy-helper">{t('proxy.httpsProxy.helper')}</HelperTextItem>
                     </HelperText>
                   </FormHelperText>
                 </FormGroup>
-                <FormGroup label="Test URL" fieldId="testUrl">
+                <FormGroup label={t('proxy.testUrl.label')} fieldId="testUrl">
                   <TextInput
                     value={proxySettings.testUrl}
                     onChange={(_event, value) => handleProxyChange(value, 'testUrl')}
                     id="testUrl"
                     name="testUrl"
-                    placeholder="https://www.google.com"
+                    placeholder={t('proxy.testUrl.placeholder')}
                     className="form-settings-long"
                     aria-describedby="testUrl-helper"
                   />
                   <FormHelperText>
                     <HelperText>
-                      <HelperTextItem id="testUrl-helper">URL to test proxy connectivity</HelperTextItem>
+                      <HelperTextItem id="testUrl-helper">{t('proxy.testUrl.helper')}</HelperTextItem>
                     </HelperText>
                   </FormHelperText>
                 </FormGroup>
                 <Flex>
                   <FlexItem>
                     <Button type="submit" className="form-settings-submit" isDisabled={!proxySettingsChanged}>
-                      Save Proxy Settings
+                      {t('proxy.save')}
                     </Button>
                   </FlexItem>
                   <FlexItem>
                     <Button className="form-settings-submit" onClick={handleTestProxyConnection}>
-                      Test Connection
+                      {t('proxy.test')}
                     </Button>
                   </FlexItem>
                 </Flex>

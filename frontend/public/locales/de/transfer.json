@@ -1,0 +1,142 @@
+{
+  "title": "Dateien übertragen",
+  "destination": {
+    "title": "Ziel auswählen",
+    "location": "Speicherort",
+    "selectLocation": "Speicherort auswählen",
+    "selectLocationPlaceholder": "Speicherort auswählen...",
+    "locationFormat": "{{name}} ({{type}}){{unavailable}}",
+    "unavailable": " (nicht verfügbar)",
+    "root": "Stammverzeichnis",
+    "directoryList": "Verzeichnisliste",
+    "createFolder": "Ordner erstellen",
+    "create": "Erstellen",
+    "selectDestination": "Ziel auswählen",
+    "newFolder": {
+      "title": "Neuen Ordner erstellen",
+      "label": "Ordnername",
+      "placeholder": "Mindestens 1 Zeichen eingeben",
+      "rulesTitle": "Regeln für Ordnernamen:"
+    },
+    "loadError": "Verzeichnisse konnten nicht geladen werden",
+    "notifications": {
+      "folderCreated": {
+        "title": "Ordner erstellt",
+        "message": "Ordner \"{{name}}\" wurde erfolgreich erstellt"
+      },
+      "folderCreateError": "Ordner konnte nicht erstellt werden"
+    }
+  },
+  "conflicts": {
+    "title": "Dateikonflikte lösen",
+    "nonConflicting": {
+      "title": "Konfliktfreie Dateien",
+      "message": "{{count}} Datei(en) werden automatisch kopiert (keine Konflikte)."
+    },
+    "conflicting": {
+      "title": "Konfligierende Dateien",
+      "message": "{{count}} Datei(en) existieren bereits am Zielort. Wie sollen diese behandelt werden?"
+    },
+    "resolution": {
+      "label": "Auflösungsstrategie",
+      "skip": "Überspringen",
+      "skipDescription": "Konfligierende Dateien überspringen, bestehende Zieldateien beibehalten",
+      "overwrite": "Überschreiben",
+      "overwriteDescription": "Bestehende Dateien durch Quelldateien ersetzen",
+      "rename": "Umbenennen",
+      "renameDescription": "Quelldateien mit neuen Namen kopieren (z.\u00a0B. datei.txt -> datei (1).txt)"
+    },
+    "fileList": {
+      "title": "Konfligierende Dateien:",
+      "showingFirst": "Erste 25 von {{count}} Konflikten werden angezeigt"
+    },
+    "summary": {
+      "title": "Zusammenfassung",
+      "autoCopy": "{{count}} Datei(en) werden automatisch kopiert",
+      "willBe": "{{count}} Konflikt(e) werden {{action}}",
+      "total": "Gesamt: {{count}} Dateien werden kopiert"
+    },
+    "checkError": "Konflikte konnten nicht überprüft werden"
+  },
+  "progress": {
+    "title": "Dateiübertragungsfortschritt",
+    "titleWithSummary": "Dateiübertragungsfortschritt: {{summary}}",
+    "fileCount": "{{completed}} / {{total}} Dateien",
+    "failedCount": "{{count}} fehlgeschlagen",
+    "status": {
+      "error": "Fehler",
+      "complete": "Abgeschlossen",
+      "queued": "In Warteschlange",
+      "transferring": "Wird übertragen"
+    },
+    "errorAlert": "Übertragungsfehler",
+    "noTransfers": {
+      "title": "Keine Übertragungen",
+      "message": "Keine aktiven Übertragungen"
+    },
+    "notifications": {
+      "completed": {
+        "title": "Übertragung abgeschlossen",
+        "message": "{{count}} Datei(en) erfolgreich übertragen"
+      },
+      "failed": {
+        "title": "Übertragung fehlgeschlagen",
+        "message": "{{count}} Datei(en) konnten nicht übertragen werden"
+      },
+      "connectionError": {
+        "title": "Verbindungsfehler bei Übertragung",
+        "message": "Verbindung zu Übertragungsfortschritt-Updates verloren"
+      },
+      "cancelled": {
+        "title": "Übertragung abgebrochen",
+        "message": "Die Dateiübertragung wurde abgebrochen"
+      },
+      "cancelError": "Übertragung konnte nicht abgebrochen werden"
+    }
+  },
+  "actions": {
+    "cancel": "Abbrechen",
+    "close": "Schließen",
+    "apply": "Anwenden",
+    "proceed": "Fortfahren",
+    "cancelTransfer": "Übertragung abbrechen",
+    "continueTransfer": "Übertragung fortsetzen"
+  },
+  "confirmCancel": {
+    "title": "Übertragung abbrechen?",
+    "message": "Möchten Sie diese Übertragung wirklich abbrechen? Bereits übertragene Dateien bleiben erhalten."
+  },
+  "largeTransfer": {
+    "title": "Große Ordnerübertragung",
+    "alertTitle": "Große Übertragungsoperation",
+    "filesToTransfer": "Zu übertragende Dateien",
+    "filesSuffix": "Dateien",
+    "totalSize": "Gesamtgröße",
+    "instructions": "Dieser Vorgang kann längere Zeit in Anspruch nehmen. Sie können den Fortschritt in der Übertragungswarteschlange verfolgen."
+  },
+  "notifications": {
+    "started": {
+      "title": "Übertragung gestartet",
+      "message": "{{count}} Datei(en) werden übertragen"
+    },
+    "startError": "Übertragung konnte nicht gestartet werden"
+  },
+  "summary": {
+    "title": "Übertragungszusammenfassung",
+    "filesTransferred": "Übertragene Dateien: {{count}}",
+    "filesSkipped": "Übersprungene Dateien: {{count}}",
+    "filesFailed": "Fehlgeschlagene Dateien: {{count}}",
+    "totalSize": "Gesamtgröße: {{size}}"
+  },
+  "errors": {
+    "noDestination": "Bitte wählen Sie ein Ziel aus",
+    "sameLocation": "Quelle und Ziel dürfen nicht identisch sein",
+    "transferFailed": "Übertragung fehlgeschlagen",
+    "networkError": "Netzwerkfehler während der Übertragung"
+  },
+  "huggingface": {
+    "importing": "Import von HuggingFace",
+    "modelFiles": "Modelldateien",
+    "downloadProgress": "Fortschritt des Downloads"
+  }
+}

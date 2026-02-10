@@ -1,0 +1,65 @@
+{
+  "title": "ストレージ管理",
+  "table": {
+    "columns": {
+      "name": "名前",
+      "type": "種類",
+      "status": "状態",
+      "creationDate": "作成日",
+      "owner": "オーナー"
+    },
+    "emptyState": {
+      "title": "Bucket が見つかりません",
+      "description": "最初の bucket を作成して始めましょう。",
+      "createButton": "Bucket を作成"
+    }
+  },
+  "types": {
+    "s3": "S3",
+    "pvc": "PVC"
+  },
+  "actions": {
+    "createBucket": "S3 Bucket を作成",
+    "deleteBucket": "Bucket を削除",
+    "refresh": "更新"
+  },
+  "createModal": {
+    "title": "新しい bucket を作成",
+    "nameLabel": "Bucket 名",
+    "namePlaceholder": "3 文字以上入力してください",
+    "create": "作成",
+    "rules": {
+      "title": "Bucket の命名規則:",
+      "length": "Bucket 名は 3 文字以上 63 文字以内にしてください",
+      "characters": "Bucket 名には小文字、数字、ドット（.）、ハイフン（-）のみ使用できます",
+      "startEnd": "Bucket 名は文字または数字で始まり、文字または数字で終わる必要があります",
+      "noPeriods": "Bucket 名に連続するピリオドを含めることはできません",
+      "noIp": "Bucket 名を IP アドレス形式（例: 192.168.5.4）にすることはできません",
+      "unique": "Bucket 名は現在の設定内で一意である必要があります"
+    },
+    "success": "Bucket を作成しました",
+    "successMessage": "Bucket {{bucketName}} が正常に作成されました"
+  },
+  "deleteModal": {
+    "title": "Bucket を削除しますか？",
+    "message": "この操作は元に戻せません。",
+    "confirmMessage": "削除を確認するには {{bucketName}} と入力してください。",
+    "confirm": "Bucket を削除",
+    "success": "Bucket を削除しました",
+    "successMessage": "Bucket {{bucketName}} が正常に削除されました"
+  },
+  "search": {
+    "placeholder": "ストレージの場所を検索"
+  },
+  "pagination": {
+    "perPage": "{{count}} 件/ページ"
+  },
+  "refresh": {
+    "success": "ストレージを更新しました",
+    "successMessage": "ストレージの場所が正常に更新されました。"
+  },
+  "validation": {
+    "invalidName": "無効な bucket 名",
+    "invalidNameMessage": "Bucket 名 {{bucketName}} は無効です。規則を確認してもう一度お試しください。"
+  }
+}

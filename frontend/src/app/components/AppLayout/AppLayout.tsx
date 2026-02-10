@@ -12,7 +12,6 @@ import {
   Content,
   ContentVariants,
   Dropdown,
-  DropdownGroup,
   DropdownItem,
   DropdownList,
   EmptyState,
@@ -89,6 +88,9 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
   // Theme
   const [isDarkTheme, setIsDarkTheme] = React.useState(false);
 
+  // Language dropdown
+  const [isLanguageDropdownOpen, setLanguageDropdownOpen] = React.useState(false);
+
   React.useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = savedTheme === 'dark';
@@ -97,6 +99,13 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
       document.documentElement.classList.add('pf-v6-theme-dark');
     }
   }, []);
+
+  const handleLanguageChange = (_event: React.MouseEvent | undefined, value: string | number | undefined) => {
+    if (typeof value === 'string') {
+      i18n.changeLanguage(value);
+    }
+    setLanguageDropdownOpen(false);
+  };
 
   const handleThemeToggle = (checked: boolean) => {
     setIsDarkTheme(checked);
@@ -115,22 +124,14 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
     // AuthGate will automatically show login page after logout
   };
 
-  // Language
-  const [selectedLanguage, setSelectedLanguage] = React.useState('en');
-  const onChangeLanguage = (_event: React.FormEvent<HTMLSelectElement>, language: string) => {
-    setSelectedLanguage(language);
-  };
-
   // Git
   const [repoStars, setRepoStars] = React.useState<number | null>(null);
   const [repoForks, setRepoForks] = React.useState<number | null>(null);
 
   //i18n
   const { t, i18n } = useTranslation();
-  React.useEffect(() => {
-    i18n.changeLanguage(selectedLanguage);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedLanguage]); // i18n is stable and doesn't need to be in deps
+  const currentLanguage = i18n.resolvedLanguage || 'en';
+  const currentLngDisplay = supportedLngs[currentLanguage] || supportedLngs['en'];
 
   // Fetch GitHub stars and forks
   React.useEffect(() => {
@@ -310,7 +311,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
   const buildOverflowMessage = () => {
     const overflow = alerts.length - maxDisplayed;
     if (overflow > 0 && maxDisplayed > 0) {
-      return `View ${overflow} more notification(s) in notification drawer`;
+      return t('notifications_drawer.overflowMessage', { count: overflow });
     }
     return '';
   };
@@ -354,19 +355,19 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
   const notificationDrawerActions = (
     <>
       <DropdownItem key="markAllRead" onClick={markAllNotificationsRead}>
-        Mark all read
+        {t('notifications_drawer.markAllRead')}
       </DropdownItem>
       <DropdownItem key="clearAll" onClick={removeAllNotifications}>
-        Clear all
+        {t('notifications_drawer.clearAll')}
       </DropdownItem>
     </>
   );
   const notificationDrawerDropdownItems = (key: React.Key) => [
     <DropdownItem key={`markRead-${key}`} onClick={() => markNotificationRead(key)}>
-      Mark as read
+      {t('notifications_drawer.markAsRead')}
     </DropdownItem>,
     <DropdownItem key={`clear-${key}`} onClick={() => removeNotification(key)}>
-      Clear
+      {t('notifications_drawer.clear')}
     </DropdownItem>,
   ];
 
@@ -385,7 +386,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
               isExpanded={openDropdownKey === 'dropdown-toggle-id-0'}
               variant="plain"
               onClick={() => onDropdownToggle('dropdown-toggle-id-0')}
-              aria-label="Notification drawer actions"
+              aria-label={t('notifications_drawer.actions')}
               icon={<EllipsisVIcon />}
             />
           )}
@@ -433,11 +434,11 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
         {notifications.length === 0 && (
           <EmptyState
             headingLevel="h2"
-            titleText="No notifications found"
+            titleText={t('notifications_drawer.noNotifications')}
             icon={SearchIcon}
             variant={EmptyStateVariant.full}
           >
-            <EmptyStateBody>There are currently no notifications.</EmptyStateBody>
+            <EmptyStateBody>{t('notifications_drawer.noNotificationsBody')}</EmptyStateBody>
           </EmptyState>
         )}
       </NotificationDrawerBody>
@@ -472,7 +473,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
     <NavExpandable
       key={`${group.label}-${groupIndex}`}
       id={`${group.label}-${groupIndex}`}
-      title={group.label}
+      title={t(group.label)}
       isActive={group.routes.some((route) => route.path === location.pathname)}
       isExpanded={group.isExpanded}
     >
@@ -503,12 +504,12 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
         {Navigation}
         <aside role="complementary" className="pf-u-margin-top-auto pf-u-padding-md pf-u-text-center">
           <Content component={ContentVariants.small}>
-            App by&nbsp;
+            {t('ui.footer.appBy')}&nbsp;
             <a href="http://red.ht/cai-team" target="_blank" rel="noreferrer">
               red.ht/cai team
             </a>
             <br />
-            version {process.env.APP_VERSION}
+            {t('ui.footer.version', { version: process.env.APP_VERSION })}
             <br />
             <Flex direction={{ default: 'column' }} alignItems={{ default: 'alignItemsCenter' }}>
               <FlexItem className="pf-u-margin-bottom-none">
@@ -525,7 +526,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
                         alt={'GitHub logo'}
                         className="pf-u-icon-height-md"
                       />
-                      {'Source on GitHub'}
+                      {t('app_header.sourceOnGithub')}
                     </Content>
                   </FlexItem>
                 </Flex>
@@ -570,108 +571,98 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
   );
 
   // Header
-  const HeaderTools = () => {
-    const [isLanguageDropdownOpen, setLanguageDropdownOpen] = React.useState(false);
-
-    return (
-      <Toolbar isFullHeight>
-        <ToolbarContent>
-          <ToolbarGroup align={{ default: 'alignEnd' }} className="s4-header-toolbar-group">
+  const headerTools = (
+    <Toolbar isFullHeight>
+      <ToolbarContent>
+        <ToolbarGroup align={{ default: 'alignEnd' }} className="s4-header-toolbar-group">
+          <ToolbarItem>
+            <ToggleGroup aria-label="Dark theme toggle group">
+              <ToggleGroupItem
+                aria-label={t('theme.light')}
+                icon={<SunIcon />}
+                isSelected={!isDarkTheme}
+                onClick={() => handleThemeToggle(false)}
+              />
+              <ToggleGroupItem
+                aria-label={t('theme.dark')}
+                icon={<MoonIcon />}
+                isSelected={isDarkTheme}
+                onClick={() => handleThemeToggle(true)}
+              />
+            </ToggleGroup>
+          </ToolbarItem>
+          <ToolbarItem>
+            <Dropdown
+              isOpen={isLanguageDropdownOpen}
+              onSelect={handleLanguageChange}
+              onOpenChange={(isOpen) => setLanguageDropdownOpen(isOpen)}
+              popperProps={{ position: 'right' }}
+              shouldFocusToggleOnSelect
+              toggle={(toggleRef) => (
+                <MenuToggle
+                  ref={toggleRef}
+                  onClick={() => setLanguageDropdownOpen(!isLanguageDropdownOpen)}
+                  isExpanded={isLanguageDropdownOpen}
+                >
+                  {currentLngDisplay.flag} {currentLngDisplay.name}
+                </MenuToggle>
+              )}
+            >
+              <DropdownList>
+                {Object.entries(supportedLngs).map(([lngCode, lngName]) => (
+                  <DropdownItem key={lngCode} value={lngCode}>
+                    {lngName.flag} {lngName.name}
+                  </DropdownItem>
+                ))}
+              </DropdownList>
+            </Dropdown>
+          </ToolbarItem>
+          {notificationBadge}
+          <ToolbarItem>
+            <Popover
+              aria-label="Help"
+              position="right"
+              headerContent={t('app_header.help.header')}
+              bodyContent={
+                <Content>
+                  S4 - {t('app_header.help.body')}
+                  <br />
+                  {t('app_header.version', { version: process.env.APP_VERSION })}
+                </Content>
+              }
+              footerContent={
+                <Content component={ContentVariants.small}>
+                  {t('app_header.sourceCode')}{' '}
+                  <a href="https://github.com/rh-aiservices-bu/s4" target="_blank" rel="noreferrer">
+                    github.com/rh-aiservices-bu/s4
+                  </a>
+                </Content>
+              }
+            >
+              <Button aria-label="Help" variant={ButtonVariant.plain} icon={<QuestionCircleIcon />} />
+            </Popover>
+          </ToolbarItem>
+          {authMode !== 'none' && isAuthenticated && (
             <ToolbarItem>
-              <ToggleGroup aria-label="Dark theme toggle group">
-                <ToggleGroupItem
-                  aria-label="light theme toggle"
-                  icon={<SunIcon />}
-                  isSelected={!isDarkTheme}
-                  onClick={() => handleThemeToggle(false)}
-                />
-                <ToggleGroupItem
-                  aria-label="dark theme toggle"
-                  icon={<MoonIcon />}
-                  isSelected={isDarkTheme}
-                  onClick={() => handleThemeToggle(true)}
-                />
-              </ToggleGroup>
+              <Button
+                aria-label={t('auth.logOut')}
+                variant={ButtonVariant.plain}
+                icon={<SignOutAltIcon />}
+                onClick={handleLogout}
+                className="s4-touch-friendly"
+              />
             </ToolbarItem>
-            <ToolbarItem>
-              <Dropdown
-                onSelect={() => setLanguageDropdownOpen(!isLanguageDropdownOpen)}
-                onOpenChange={(isOpen) => setLanguageDropdownOpen(isOpen)}
-                isOpen={isLanguageDropdownOpen}
-                toggle={(toggleRef) => (
-                  <MenuToggle
-                    ref={toggleRef}
-                    onClick={() => setLanguageDropdownOpen(!isLanguageDropdownOpen)}
-                    isExpanded={isLanguageDropdownOpen}
-                  >
-                    {supportedLngs[selectedLanguage] || 'en'}
-                  </MenuToggle>
-                )}
-                popperProps={{ position: 'right' }}
-              >
-                <DropdownGroup key="Language" label="Language">
-                  <DropdownList>
-                    {Object.entries(supportedLngs).map(([lngCode, lngName], index) => (
-                      <DropdownItem
-                        key={index}
-                        value={lngCode}
-                        label={lngName}
-                        onClick={() => onChangeLanguage(null as unknown as React.FormEvent<HTMLSelectElement>, lngCode)}
-                      >
-                        {lngName}
-                      </DropdownItem>
-                    ))}
-                  </DropdownList>
-                </DropdownGroup>
-              </Dropdown>
-            </ToolbarItem>
-            {notificationBadge}
-            <ToolbarItem>
-              <Popover
-                aria-label="Help"
-                position="right"
-                headerContent={t('app_header.help.header')}
-                bodyContent={
-                  <Content>
-                    S4 - {t('app_header.help.body')}
-                    <br />
-                    Version: {process.env.APP_VERSION}
-                  </Content>
-                }
-                footerContent={
-                  <Content component={ContentVariants.small}>
-                    Source code and documentation available at{' '}
-                    <a href="https://github.com/rh-aiservices-bu/s4" target="_blank" rel="noreferrer">
-                      github.com/rh-aiservices-bu/s4
-                    </a>
-                  </Content>
-                }
-              >
-                <Button aria-label="Help" variant={ButtonVariant.plain} icon={<QuestionCircleIcon />} />
-              </Popover>
-            </ToolbarItem>
-            {authMode !== 'none' && isAuthenticated && (
-              <ToolbarItem>
-                <Button
-                  aria-label="Log out"
-                  variant={ButtonVariant.plain}
-                  icon={<SignOutAltIcon />}
-                  onClick={handleLogout}
-                  className="s4-touch-friendly"
-                />
-              </ToolbarItem>
-            )}
-          </ToolbarGroup>
-        </ToolbarContent>
-      </Toolbar>
-    );
-  };
+          )}
+        </ToolbarGroup>
+      </ToolbarContent>
+    </Toolbar>
+  );
 
   const Header = (
     <Masthead role="banner" aria-label="page masthead">
       <MastheadMain>
         <MastheadToggle>
-          <PageToggleButton id="page-nav-toggle" variant="plain" aria-label="Dashboard navigation">
+          <PageToggleButton id="page-nav-toggle" variant="plain" aria-label={t('accessibility.dashboardNavigation')}>
             <BarsIcon />
           </PageToggleButton>
         </MastheadToggle>
@@ -684,7 +675,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
             >
               <Brand src={!isDarkTheme ? logoStd : logoReverse} alt="S4 Logo" heights={{ default: '40px' }} />
               <Content component={ContentVariants.h2} className="title-text pf-u-margin-left-md">
-                Super Simple Storage Service
+                {t('app_header.help.body')}
                 <span className="speed-lines" aria-hidden="true">
                   <span></span>
                   <span></span>
@@ -695,9 +686,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
           </MastheadLogo>
         </MastheadBrand>
       </MastheadMain>
-      <MastheadContent>
-        <HeaderTools />
-      </MastheadContent>
+      <MastheadContent>{headerTools}</MastheadContent>
     </Masthead>
   );
 
@@ -714,7 +703,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
       }}
       href={`#${pageId}`}
     >
-      Skip to Content
+      {t('accessibility.skipToContent')}
     </SkipToContent>
   );
 
@@ -771,21 +760,21 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
         onClose={disclaimerModal.close}
         aria-labelledby="disclaimer-modal-title"
       >
-        <ModalHeader labelId="disclaimer-modal-title" title="Disclaimer" titleIconVariant="info" />
+        <ModalHeader labelId="disclaimer-modal-title" title={t('disclaimer.title')} titleIconVariant="info" />
         <ModalBody>
           <Content component={ContentVariants.p}>
-            This application is provided &quot;as is&quot; under a MIT licence, without any warranty of any kind.
+            {t('disclaimer.message')}
             <br />
-            Please refer to the{' '}
+            {t('disclaimer.moreDetails').split('{link}')[0]}
             <a href="https://github.com/rh-aiservices-bu/s4/blob/main/LICENSE" target="_blank" rel="noreferrer">
-              license file
-            </a>{' '}
-            for more details
+              {t('disclaimer.licenseLink')}
+            </a>
+            {t('disclaimer.moreDetails').split('{link}')[1] || ''}
           </Content>
         </ModalBody>
         <ModalFooter>
           <Button key="accept" variant="primary" onClick={saveDisclaimerStatus}>
-            Accept
+            {t('disclaimer.accept')}
           </Button>
         </ModalFooter>
       </Modal>

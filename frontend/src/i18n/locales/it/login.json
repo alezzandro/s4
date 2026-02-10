@@ -1,0 +1,21 @@
+{
+  "title": "Accedi a S4",
+  "subtitle": "Super Simple Storage Service",
+  "form": {
+    "username": "Nome utente",
+    "password": "Password",
+    "showPassword": "Mostra password",
+    "hidePassword": "Nascondi password",
+    "logIn": "Accedi",
+    "loggingIn": "Accesso in corso..."
+  },
+  "validation": {
+    "usernameRequired": "Il nome utente è obbligatorio",
+    "passwordRequired": "La password è obbligatoria"
+  },
+  "errors": {
+    "invalidCredentials": "Nome utente o password non validi",
+    "sessionExpired": "La sessione è scaduta. Accedi nuovamente."
+  },
+  "brandAlt": "S4 - Super Simple Storage Service"
+}

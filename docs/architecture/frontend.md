@@ -655,7 +655,7 @@ test('should open modal on button click', async () => {
 
 1. **Simple Authentication** - Single admin user, no multi-user or RBAC
 2. **No Service Layer** - API calls embedded in components
-3. **Limited i18n** - English only currently implemented
+3. **i18n Quality** - Translations for non-English languages may need refinement
 4. **Ephemeral Settings** - Not persisted unless from env vars
 5. **No Global Error Boundary** - Component-level only
 6. **Minimal Test Coverage** - Needs improvement
@@ -666,10 +666,9 @@ test('should open modal on button click', async () => {
 1. **React Query** - Better API state management and caching
 2. **Service Layer** - Centralize API calls outside components
 3. **Global Error Boundary** - Catch and display unhandled errors
-4. **i18n** - Multi-language support
-5. **Code Splitting** - Route-based lazy loading
-6. **Virtual Scrolling** - For large file lists
-7. **Offline Support** - Service worker for PWA capabilities
+4. **Code Splitting** - Route-based lazy loading
+5. **Virtual Scrolling** - For large file lists
+6. **Offline Support** - Service worker for PWA capabilities
 
 ## Further Reading
 

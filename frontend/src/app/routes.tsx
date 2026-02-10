@@ -39,7 +39,7 @@ export type AppRouteConfig = IAppRoute | IAppRouteGroup;
 
 const routes: AppRouteConfig[] = [
   {
-    label: 'Storage Tools',
+    label: 'nav.storageTools',
     isExpanded: true,
     routes: [
       {
@@ -48,10 +48,10 @@ const routes: AppRouteConfig[] = [
             <StorageRouteGuard />
           </ProtectedRoute>
         ),
-        label: 'Storage Browser',
+        label: 'nav.storageBrowser',
         path: '/browse/:locationId?/:path?',
         navPath: '/browse',
-        title: 'Storage Browser',
+        title: 'nav.storageBrowser',
       },
       {
         element: (
@@ -59,9 +59,9 @@ const routes: AppRouteConfig[] = [
             <Buckets />
           </ProtectedRoute>
         ),
-        label: 'Storage Management',
+        label: 'nav.storageManagement',
         path: '/buckets',
-        title: 'Storage Management',
+        title: 'nav.storageManagement',
       },
     ],
   },
@@ -76,9 +76,9 @@ const routes: AppRouteConfig[] = [
         <SettingsManagement />
       </ProtectedRoute>
     ),
-    label: 'Settings',
+    label: 'nav.settings',
     path: '/settings',
-    title: 'Settings',
+    title: 'nav.settings',
   },
   {
     element: <RedirectWithPrefix to="/browse" />,

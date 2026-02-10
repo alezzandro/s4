@@ -1,0 +1,142 @@
+{
+  "title": "Transférer des fichiers",
+  "destination": {
+    "title": "Sélectionner la destination",
+    "location": "Emplacement de stockage",
+    "selectLocation": "Sélectionner un emplacement de stockage",
+    "selectLocationPlaceholder": "Sélectionner un emplacement...",
+    "locationFormat": "{{name}} ({{type}}){{unavailable}}",
+    "unavailable": " (indisponible)",
+    "root": "Racine",
+    "directoryList": "Liste des répertoires",
+    "createFolder": "Créer un dossier",
+    "create": "Créer",
+    "selectDestination": "Sélectionner la destination",
+    "newFolder": {
+      "title": "Créer un nouveau dossier",
+      "label": "Nom du dossier",
+      "placeholder": "Entrez au moins 1 caractère",
+      "rulesTitle": "Règles de nommage des dossiers :"
+    },
+    "loadError": "Impossible de charger les répertoires",
+    "notifications": {
+      "folderCreated": {
+        "title": "Dossier créé",
+        "message": "Le dossier « {{name}} » a été créé avec succès"
+      },
+      "folderCreateError": "Impossible de créer le dossier"
+    }
+  },
+  "conflicts": {
+    "title": "Résoudre les conflits de fichiers",
+    "nonConflicting": {
+      "title": "Fichiers sans conflit",
+      "message": "{{count}} fichier(s) seront copiés automatiquement (aucun conflit)."
+    },
+    "conflicting": {
+      "title": "Fichiers en conflit",
+      "message": "{{count}} fichier(s) existent déjà dans la destination. Comment souhaitez-vous les traiter ?"
+    },
+    "resolution": {
+      "label": "Stratégie de résolution",
+      "skip": "Ignorer",
+      "skipDescription": "Ignorer les fichiers en conflit, conserver les fichiers existants à la destination",
+      "overwrite": "Écraser",
+      "overwriteDescription": "Remplacer les fichiers existants par les fichiers source",
+      "rename": "Renommer",
+      "renameDescription": "Copier les fichiers source avec de nouveaux noms (ex. : fichier.txt -> fichier (1).txt)"
+    },
+    "fileList": {
+      "title": "Fichiers en conflit :",
+      "showingFirst": "Affichage des 25 premiers conflits sur {{count}}"
+    },
+    "summary": {
+      "title": "Résumé",
+      "autoCopy": "{{count}} fichier(s) seront copiés automatiquement",
+      "willBe": "{{count}} conflit(s) seront traités par {{action}}",
+      "total": "Total : {{count}} fichiers seront copiés"
+    },
+    "checkError": "Impossible de vérifier les conflits"
+  },
+  "progress": {
+    "title": "Progression du transfert de fichiers",
+    "titleWithSummary": "Progression du transfert de fichiers : {{summary}}",
+    "fileCount": "{{completed}} / {{total}} fichiers",
+    "failedCount": "{{count}} échoué(s)",
+    "status": {
+      "error": "Erreur",
+      "complete": "Terminé",
+      "queued": "En file d'attente",
+      "transferring": "En cours de transfert"
+    },
+    "errorAlert": "Erreur de transfert",
+    "noTransfers": {
+      "title": "Aucun transfert",
+      "message": "Aucun transfert actif"
+    },
+    "notifications": {
+      "completed": {
+        "title": "Transfert terminé",
+        "message": "{{count}} fichier(s) transféré(s) avec succès"
+      },
+      "failed": {
+        "title": "Échec du transfert",
+        "message": "Impossible de transférer {{count}} fichier(s)"
+      },
+      "connectionError": {
+        "title": "Erreur de connexion au transfert",
+        "message": "Connexion aux mises à jour de progression du transfert perdue"
+      },
+      "cancelled": {
+        "title": "Transfert annulé",
+        "message": "Le transfert de fichiers a été annulé"
+      },
+      "cancelError": "Impossible d'annuler le transfert"
+    }
+  },
+  "actions": {
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "apply": "Appliquer",
+    "proceed": "Continuer",
+    "cancelTransfer": "Annuler le transfert",
+    "continueTransfer": "Poursuivre le transfert"
+  },
+  "confirmCancel": {
+    "title": "Annuler le transfert ?",
+    "message": "Êtes-vous sûr de vouloir annuler ce transfert ? Les fichiers déjà transférés seront conservés."
+  },
+  "largeTransfer": {
+    "title": "Transfert de dossier volumineux",
+    "alertTitle": "Opération de transfert volumineuse",
+    "filesToTransfer": "Fichiers à transférer",
+    "filesSuffix": "fichiers",
+    "totalSize": "Taille totale",
+    "instructions": "Cette opération peut prendre un temps considérable. Vous pouvez suivre la progression dans la file de transfert."
+  },
+  "notifications": {
+    "started": {
+      "title": "Transfert démarré",
+      "message": "Transfert de {{count}} fichier(s) en cours"
+    },
+    "startError": "Impossible de démarrer le transfert"
+  },
+  "summary": {
+    "title": "Résumé du transfert",
+    "filesTransferred": "Fichiers transférés : {{count}}",
+    "filesSkipped": "Fichiers ignorés : {{count}}",
+    "filesFailed": "Fichiers échoués : {{count}}",
+    "totalSize": "Taille totale : {{size}}"
+  },
+  "errors": {
+    "noDestination": "Veuillez sélectionner une destination",
+    "sameLocation": "La source et la destination ne peuvent pas être identiques",
+    "transferFailed": "Échec du transfert",
+    "networkError": "Erreur réseau lors du transfert"
+  },
+  "huggingface": {
+    "importing": "Importation depuis HuggingFace",
+    "modelFiles": "Fichiers du modèle",
+    "downloadProgress": "Progression du téléchargement"
+  }
+}

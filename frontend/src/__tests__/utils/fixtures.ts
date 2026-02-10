@@ -1,4 +1,4 @@
-import { StorageLocation, FileEntry, TransferConflict } from '../../app/services/storageService';
+import { FileEntry, StorageLocation, TransferConflict } from '../../app/services/storageService';
 
 /**
  * Mock storage locations for testing

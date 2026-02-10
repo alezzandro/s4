@@ -142,19 +142,19 @@ podman run -d \
 
 ## Essential Environment Variables
 
-| Variable                   | Default                  | Description              |
-| -------------------------- | ------------------------ | ------------------------ |
-| `AWS_ACCESS_KEY_ID`        | `s4admin`                | S3 access key            |
-| `AWS_SECRET_ACCESS_KEY`    | `s4secret`               | S3 secret key            |
-| `AWS_S3_ENDPOINT`          | `http://localhost:7480`  | S3 endpoint URL          |
-| `AWS_DEFAULT_REGION`       | `us-east-1`              | AWS region               |
-| `PORT`                     | `5000`                   | Web UI port              |
-| `UI_USERNAME`              | (none)                   | UI login username        |
-| `UI_PASSWORD`              | (none)                   | UI login password        |
-| `LOCAL_STORAGE_PATHS`      | (disabled)               | Local storage paths      |
-| `HF_TOKEN`                 | (none)                   | HuggingFace API token    |
-| `MAX_CONCURRENT_TRANSFERS` | `2`                      | Max concurrent transfers |
-| `MAX_FILE_SIZE_GB`         | `20`                     | Max upload size (GB)     |
+| Variable                   | Default                 | Description              |
+| -------------------------- | ----------------------- | ------------------------ |
+| `AWS_ACCESS_KEY_ID`        | `s4admin`               | S3 access key            |
+| `AWS_SECRET_ACCESS_KEY`    | `s4secret`              | S3 secret key            |
+| `AWS_S3_ENDPOINT`          | `http://localhost:7480` | S3 endpoint URL          |
+| `AWS_DEFAULT_REGION`       | `us-east-1`             | AWS region               |
+| `PORT`                     | `5000`                  | Web UI port              |
+| `UI_USERNAME`              | (none)                  | UI login username        |
+| `UI_PASSWORD`              | (none)                  | UI login password        |
+| `LOCAL_STORAGE_PATHS`      | (disabled)              | Local storage paths      |
+| `HF_TOKEN`                 | (none)                  | HuggingFace API token    |
+| `MAX_CONCURRENT_TRANSFERS` | `2`                     | Max concurrent transfers |
+| `MAX_FILE_SIZE_GB`         | `20`                    | Max upload size (GB)     |
 
 For a complete list, see [Deployment → Configuration Reference](../deployment/configuration.md).
 

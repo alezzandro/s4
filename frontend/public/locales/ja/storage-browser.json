@@ -1,0 +1,266 @@
+{
+  "title": "ストレージブラウザ",
+  "locationSelector": {
+    "label": "ストレージの場所:",
+    "placeholder": "ストレージの場所を選択",
+    "loading": "場所を読み込み中...",
+    "noLocations": "利用可能なストレージの場所がありません"
+  },
+  "breadcrumb": {
+    "root": "ルート"
+  },
+  "table": {
+    "columns": {
+      "key": "キー",
+      "lastModified": "最終更新日",
+      "size": "サイズ"
+    },
+    "emptyState": {
+      "title": "ファイルが見つかりません",
+      "description": "この場所は空か、検索条件に一致するファイルがありません。"
+    }
+  },
+  "search": {
+    "placeholder": "ファイルとフォルダを検索",
+    "mode": {
+      "contains": "を含む",
+      "startsWith": "で始まる"
+    },
+    "results": {
+      "truncated": "検索結果が不完全な可能性があります"
+    }
+  },
+  "actions": {
+    "upload": "アップロード",
+    "uploadSingle": "ファイルをアップロード",
+    "uploadMultiple": "複数ファイルをアップロード",
+    "createFolder": "フォルダを作成",
+    "importModel": "HuggingFace からインポート",
+    "copyPath": "パスをコピー",
+    "viewFile": "表示",
+    "downloadFile": "ダウンロード",
+    "deleteFile": "削除",
+    "selectAll": "すべて選択",
+    "deselectAll": "すべて選択解除",
+    "copySelected": "選択項目をコピー",
+    "deleteSelected": "選択項目を削除",
+    "viewDetails": "詳細を表示",
+    "loadMore": "さらに読み込む"
+  },
+  "fileDetails": {
+    "title": "ファイル詳細: {{fileName}}",
+    "tabs": {
+      "metadata": "メタデータ",
+      "tags": "タグ"
+    },
+    "metadata": {
+      "key": "キー",
+      "size": "サイズ",
+      "lastModified": "最終更新日",
+      "contentType": "コンテンツタイプ",
+      "etag": "ETag",
+      "storageClass": "Storage Class",
+      "customMetadata": "カスタムメタデータ"
+    },
+    "tags": {
+      "noTags": "この object にはタグがありません。以下からタグを追加してください。",
+      "addTag": "新しいタグを追加",
+      "keyPlaceholder": "キー",
+      "valuePlaceholder": "値",
+      "tagCount": "{{max}} 個中 {{count}} 個のタグを使用",
+      "saveTags": "タグを保存",
+      "saving": "保存中...",
+      "saved": "タグを保存しました",
+      "savedMessage": "Object のタグが正常に更新されました。"
+    },
+    "notAvailable": "Object のメタデータとタグは S3 ストレージの場所でのみ利用可能です。"
+  },
+  "upload": {
+    "single": {
+      "title": "ファイルをアップロード",
+      "dragDropText": "ここにファイルをドラッグ＆ドロップするか、クリックして参照",
+      "browseFiles": "ファイルを参照",
+      "uploading": "アップロード中...",
+      "progress": {
+        "toBackend": "サーバーにアップロード中",
+        "toS3": "ストレージにアップロード中"
+      }
+    },
+    "multiple": {
+      "title": "複数ファイルをアップロード",
+      "dragDropText": "ここにファイルをドラッグ＆ドロップするか、クリックして参照",
+      "filesSelected": "{{count}} 個のファイルを選択済み",
+      "startUpload": "アップロード開始"
+    },
+    "success": "ファイルをアップロードしました",
+    "successMessage": "ファイル \"{{fileName}}\" が正常にアップロードされました。",
+    "failed": "ファイルのアップロードに失敗しました",
+    "abortError": "アップロード中止エラー",
+    "abortErrorMessage": "アップロード処理の中止に失敗しました。"
+  },
+  "createFolder": {
+    "title": "新しいフォルダを作成",
+    "nameLabel": "フォルダ名",
+    "namePlaceholder": "フォルダ名を入力",
+    "create": "フォルダを作成",
+    "success": "フォルダを作成しました",
+    "successMessage": "フォルダ \"{{folderName}}\" が正常に作成されました。",
+    "failed": "フォルダの作成に失敗しました"
+  },
+  "delete": {
+    "file": {
+      "title": "ファイルを削除しますか？",
+      "message": "この操作は元に戻せません。",
+      "confirmMessage": "削除を確認するには {{fileName}} と入力してください。",
+      "confirm": "ファイルを削除",
+      "success": "ファイルを削除しました",
+      "successMessage": "ファイル \"{{fileName}}\" が正常に削除されました。",
+      "failed": "ファイルの削除に失敗しました"
+    },
+    "folder": {
+      "title": "フォルダを削除しますか？",
+      "message": "フォルダとそのすべての内容が削除されます。この操作は元に戻せません。",
+      "confirmMessage": "削除を確認するには {{folderName}} と入力してください。",
+      "confirm": "フォルダを削除",
+      "success": "フォルダを削除しました",
+      "successMessage": "フォルダ \"{{folderName}}\" とそのすべての内容が正常に削除されました。",
+      "failed": "フォルダの削除に失敗しました"
+    },
+    "selected": {
+      "title": "選択した項目を削除しますか？",
+      "message": "{{count}} 個の項目を削除しようとしています。この操作は元に戻せません。",
+      "confirmCheckbox": "この操作が元に戻せないことを理解しています",
+      "confirm": "{{count}} 個の項目を削除",
+      "success": "削除に成功しました",
+      "successMessage": "{{count}} 個の項目を正常に削除しました。"
+    }
+  },
+  "import": {
+    "huggingface": {
+      "title": "Hugging Face からモデルをインポート",
+      "modelId": "モデル ID",
+      "modelIdPlaceholder": "例: meta-llama/Meta-Llama-3-8B",
+      "token": "HuggingFace Token（任意）",
+      "tokenPlaceholder": "hf_...",
+      "destination": "保存先",
+      "s3": "S3 ストレージ",
+      "local": "ローカルストレージ",
+      "prefix": "Prefix（任意）",
+      "prefixPlaceholder": "models/",
+      "import": "モデルをインポート",
+      "importing": "インポート中...",
+      "started": "モデルのインポートを開始しました"
+    }
+  },
+  "selection": {
+    "count": "{{count}} 個の項目を選択中",
+    "filesAndFolders": "{{files}} 個のファイル、{{folders}} 個のフォルダを選択中"
+  },
+  "alerts": {
+    "locationUnavailable": {
+      "title": "場所が利用できません",
+      "message": "ストレージの場所 \"{{name}}\" は現在利用できません。",
+      "localMessage": "ディレクトリにアクセスできないか、パスが正しくない可能性があります。",
+      "disabledMessage": "場所が利用可能になるまでファイル操作は無効です。"
+    },
+    "noLocations": {
+      "title": "利用可能なストレージの場所がありません",
+      "message": "すべてのストレージソースの読み込みに失敗しました。S3 およびローカルストレージの設定を確認してください。"
+    }
+  },
+  "fileViewer": {
+    "title": "ファイルプレビュー",
+    "error": "ファイル表示エラー",
+    "errorMessage": "ファイルの内容を取得できませんでした。",
+    "errorObjectMessage": "Object の内容を取得できませんでした。"
+  },
+  "notifications": {
+    "defaultSettings": {
+      "title": "デフォルト設定を使用中",
+      "maxConcurrentTransfers": "最大同時転送数の設定を取得できませんでした。デフォルト値（2）を使用します。",
+      "maxFilesPerPage": "ページあたりの最大ファイル数の設定を取得できませんでした。デフォルト値（100）を使用します。"
+    },
+    "locationNotFound": {
+      "title": "場所が見つかりません",
+      "message": "ストレージの場所 \"{{locationId}}\" は存在しません。"
+    },
+    "locationUnavailable": {
+      "title": "場所が利用できません",
+      "message": "ストレージの場所 \"{{name}}\" は現在利用できません。切断されているか、アクセスできない可能性があります。",
+      "cannotSelect": "\"{{name}}\" は現在利用できないため選択できません。"
+    },
+    "invalidLocation": {
+      "title": "無効な場所",
+      "message": "場所 \"{{locationId}}\" は存在しません。"
+    },
+    "pathCopied": {
+      "title": "パスをコピーしました",
+      "message": "パスがクリップボードに正常にコピーされました。"
+    },
+    "errorLoadingFiles": {
+      "title": "ファイルの読み込みエラー",
+      "message": "ストレージからファイルを読み込めませんでした。"
+    },
+    "noLocations": {
+      "title": "利用可能なストレージの場所がありません",
+      "message": "すべてのストレージソースの読み込みに失敗しました。S3 およびローカルストレージの設定を確認してください。詳細はブラウザコンソールをご覧ください。"
+    },
+    "errorLoadingLocations": {
+      "title": "場所の読み込みエラー",
+      "message": "ストレージの場所を読み込めませんでした。接続設定を確認してください。"
+    },
+    "deleteFailed": {
+      "title": "削除に失敗しました",
+      "message": "一部の項目を削除できませんでした。もう一度お試しください。"
+    },
+    "noItemsSelected": {
+      "title": "項目が選択されていません",
+      "message": "コピーする項目を選択してください。"
+    },
+    "downloadFailed": {
+      "title": "ダウンロードに失敗しました",
+      "message": "ファイルのダウンロードに失敗しました。もう一度お試しください。"
+    },
+    "uploadComplete": {
+      "title": "アップロード完了",
+      "message": "{{count}} 個のファイルを正常にアップロードしました。"
+    },
+    "uploadPartialFailed": {
+      "title": "アップロードがエラーで完了しました",
+      "message": "{{total}} 個中 {{failed}} 個のファイルのアップロードに失敗しました。"
+    },
+    "modelImport": {
+      "error": "モデルインポートエラー",
+      "fileError": "\"{{fileName}}\" のインポートエラー: {{error}}",
+      "success": "モデルをインポートしました",
+      "successMessage": "モデル \"{{modelName}}\" が正常にインポートされました。",
+      "failed": "モデルのインポートに失敗しました",
+      "failedMessage": "モデル \"{{modelName}}\" のインポートに失敗しました。",
+      "cancelled": "モデルのインポートがキャンセルされました",
+      "cancelledMessage": "モデル \"{{modelName}}\" のインポートがキャンセルされました。",
+      "started": "モデルのインポートを開始しました",
+      "startedMessage": "モデル \"{{modelName}}\" のインポートが正常に開始されました。",
+      "startFailed": "モデルのインポートの開始に失敗しました。",
+      "cancelFailed": "キャンセルに失敗しました",
+      "cancelFailedMessage": "インポートのキャンセルに失敗しました。",
+      "noLocations": "モデルをインポートできません - 利用可能なストレージの保存先がありません。"
+    },
+    "connectionError": {
+      "title": "接続エラー",
+      "message": "インポート進捗の接続を確立できませんでした",
+      "lost": "インポート進捗ストリームへの接続が切断されました。状態は転送キューで確認してください。"
+    },
+    "filesDeleted": {
+      "title": "ファイルを削除しました",
+      "message": "ダウンロード済みのファイルがすべて削除されました。"
+    },
+    "cleanupFailed": {
+      "title": "クリーンアップに失敗しました",
+      "message": "ダウンロード済みファイルの削除に失敗しました。"
+    },
+    "validationError": {
+      "title": "入力エラー",
+      "message": "すべての必須項目を入力してください。"
+    }
+  }
+}

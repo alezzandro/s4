@@ -1,0 +1,65 @@
+{
+  "title": "Gestione archiviazione",
+  "table": {
+    "columns": {
+      "name": "Nome",
+      "type": "Tipo",
+      "status": "Stato",
+      "creationDate": "Data di creazione",
+      "owner": "Proprietario"
+    },
+    "emptyState": {
+      "title": "Nessun bucket trovato",
+      "description": "Crea il tuo primo bucket per iniziare.",
+      "createButton": "Crea bucket"
+    }
+  },
+  "types": {
+    "s3": "S3",
+    "pvc": "PVC"
+  },
+  "actions": {
+    "createBucket": "Crea bucket S3",
+    "deleteBucket": "Elimina bucket",
+    "refresh": "Aggiorna"
+  },
+  "createModal": {
+    "title": "Crea un nuovo bucket",
+    "nameLabel": "Nome del bucket",
+    "namePlaceholder": "Inserisci almeno 3 caratteri",
+    "create": "Crea",
+    "rules": {
+      "title": "Regole per i nomi dei bucket:",
+      "length": "I nomi dei bucket devono avere una lunghezza compresa tra 3 e 63 caratteri",
+      "characters": "I nomi dei bucket possono contenere solo lettere minuscole, numeri, punti (.) e trattini (-)",
+      "startEnd": "I nomi dei bucket devono iniziare e terminare con una lettera o un numero",
+      "noPeriods": "I nomi dei bucket non devono contenere due punti adiacenti",
+      "noIp": "I nomi dei bucket non devono essere formattati come un indirizzo IP (ad esempio, 192.168.5.4)",
+      "unique": "I nomi dei bucket devono essere univoci all'interno della configurazione corrente"
+    },
+    "success": "Bucket creato",
+    "successMessage": "Il bucket {{bucketName}} è stato creato con successo"
+  },
+  "deleteModal": {
+    "title": "Eliminare il bucket?",
+    "message": "Questa azione non può essere annullata.",
+    "confirmMessage": "Digita {{bucketName}} per confermare l'eliminazione.",
+    "confirm": "Elimina bucket",
+    "success": "Bucket eliminato",
+    "successMessage": "Il bucket {{bucketName}} è stato eliminato con successo"
+  },
+  "search": {
+    "placeholder": "Cerca posizioni di archiviazione"
+  },
+  "pagination": {
+    "perPage": "{{count}} per pagina"
+  },
+  "refresh": {
+    "success": "Archiviazione aggiornata",
+    "successMessage": "Le posizioni di archiviazione sono state aggiornate con successo."
+  },
+  "validation": {
+    "invalidName": "Nome del bucket non valido",
+    "invalidNameMessage": "Il nome del bucket {{bucketName}} non è valido. Controlla le regole e riprova."
+  }
+}

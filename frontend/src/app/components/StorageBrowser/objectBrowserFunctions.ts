@@ -1,15 +1,14 @@
-import * as React from 'react';
 import axios from 'axios';
 import apiClient from '@app/utils/apiClient';
 import {
+  Bucket,
+  BucketsList,
+  ExtendedFile,
+  Owner,
   S3Object,
   S3Objects,
   S3Prefix,
   S3Prefixes,
-  ExtendedFile,
-  BucketsList,
-  Bucket,
-  Owner,
 } from './storageBrowserTypes';
 import { notifySuccess, notifyWarning } from '@app/utils/notifications';
 import { NavigateFunction } from 'react-router';
@@ -35,6 +34,7 @@ export const loadBuckets = (bucketName: string, navigate: NavigateFunction, setB
       if (response.status === 200) {
         const { owner, defaultBucket, buckets } = response.data;
         const newBucketsState = new BucketsList(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           buckets.map((bucket: any) => new Bucket(bucket.Name, bucket.CreationDate)),
           new Owner(owner.DisplayName, owner.ID),
         );
@@ -70,6 +70,7 @@ export const refreshObjects = (
   continuationToken?: string | null,
   append: boolean = false,
   searchOptions?: { q?: string; mode?: 'startsWith' | 'contains' },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setFilterMeta?: (meta: any) => void,
   abortController?: AbortController, // Accept external abort controller
 ): Promise<void> => {
@@ -133,10 +134,12 @@ export const refreshObjects = (
       const newS3Objects =
         objects !== undefined
           ? new S3Objects(
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               objects.map((s3Object: any) => new S3Object(s3Object.Key, s3Object.LastModified, s3Object.Size)),
             )
           : null;
       const newS3Prefixes =
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         prefixes !== undefined ? new S3Prefixes(prefixes.map((s3Prefix: any) => new S3Prefix(s3Prefix.Prefix))) : null;
 
       if (append) {
@@ -210,11 +213,11 @@ export const uploadSingleFile = async (
       headers: {
         'Content-Type': 'multipart/form-data',
       },
-      onUploadProgress: (progressEvent) => {
+      onUploadProgress: (_progressEvent) => {
         // progress hook intentionally left blank (handled elsewhere)
       },
     })
-    .then((response) => {
+    .then((_response) => {
       // Refresh using decoded prefix (refreshObjects will encode if needed)
       refreshObjects(bucketName, decodedPrefix, setDecodedPrefix, setS3Objects, setS3Prefixes);
     })
@@ -239,7 +242,7 @@ export const deleteFile = (
 ) => {
   apiClient
     .delete(`/objects/${bucketName}/${btoa(selectedFile)}`)
-    .then((response) => {
+    .then((_response) => {
       notifySuccess('File deleted', 'File "' + selectedFile.split('/').pop() + '" has been successfully deleted.');
       navigate(`/browse/${bucketName}/${btoa(decodedPrefix)}`);
       setFileToDelete('');
@@ -265,7 +268,7 @@ export const deleteFolder = (
 ) => {
   apiClient
     .delete(`/objects/${bucketName}/${btoa(selectedFolder)}`)
-    .then((response) => {
+    .then((_response) => {
       notifySuccess(
         'Folder deleted',
         'Folder "' + selectedFolder.slice(0, -1).split('/').pop() + '" has been successfully deleted.',
@@ -302,7 +305,7 @@ export const createFolder = (
         'Content-Type': 'multipart/form-data',
       },
     })
-    .then((response) => {
+    .then((_response) => {
       notifySuccess('Folder created', 'Folder "' + newFolderName + '" has been successfully created.');
       setNewFolderName('');
       setIsCreateFolderModalOpen(false);

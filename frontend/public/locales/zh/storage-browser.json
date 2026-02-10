@@ -1,0 +1,266 @@
+{
+  "title": "存储浏览器",
+  "locationSelector": {
+    "label": "存储位置：",
+    "placeholder": "选择存储位置",
+    "loading": "正在加载位置...",
+    "noLocations": "没有可用的存储位置"
+  },
+  "breadcrumb": {
+    "root": "根目录"
+  },
+  "table": {
+    "columns": {
+      "key": "Key",
+      "lastModified": "最后修改时间",
+      "size": "大小"
+    },
+    "emptyState": {
+      "title": "未找到文件",
+      "description": "此位置为空或没有与搜索匹配的文件。"
+    }
+  },
+  "search": {
+    "placeholder": "搜索文件和文件夹",
+    "mode": {
+      "contains": "包含",
+      "startsWith": "开头为"
+    },
+    "results": {
+      "truncated": "搜索结果可能不完整"
+    }
+  },
+  "actions": {
+    "upload": "上传",
+    "uploadSingle": "上传文件",
+    "uploadMultiple": "上传多个文件",
+    "createFolder": "创建文件夹",
+    "importModel": "从 HuggingFace 导入",
+    "copyPath": "复制路径",
+    "viewFile": "查看",
+    "downloadFile": "下载",
+    "deleteFile": "删除",
+    "selectAll": "全选",
+    "deselectAll": "取消全选",
+    "copySelected": "复制所选",
+    "deleteSelected": "删除所选",
+    "viewDetails": "查看详情",
+    "loadMore": "加载更多"
+  },
+  "fileDetails": {
+    "title": "文件详情：{{fileName}}",
+    "tabs": {
+      "metadata": "Metadata",
+      "tags": "Tags"
+    },
+    "metadata": {
+      "key": "Key",
+      "size": "大小",
+      "lastModified": "最后修改时间",
+      "contentType": "内容类型",
+      "etag": "ETag",
+      "storageClass": "Storage Class",
+      "customMetadata": "自定义 Metadata"
+    },
+    "tags": {
+      "noTags": "此对象没有 tag。请在下方添加 tag。",
+      "addTag": "添加新 tag",
+      "keyPlaceholder": "Key",
+      "valuePlaceholder": "值",
+      "tagCount": "已使用 {{count}} / {{max}} 个 tag",
+      "saveTags": "保存 Tags",
+      "saving": "保存中...",
+      "saved": "Tags 已保存",
+      "savedMessage": "Object tags 已成功更新。"
+    },
+    "notAvailable": "Object metadata 和 tags 仅适用于 S3 存储位置。"
+  },
+  "upload": {
+    "single": {
+      "title": "上传文件",
+      "dragDropText": "将文件拖放到此处或点击浏览",
+      "browseFiles": "浏览文件",
+      "uploading": "上传中...",
+      "progress": {
+        "toBackend": "正在上传到服务器",
+        "toS3": "正在上传到存储"
+      }
+    },
+    "multiple": {
+      "title": "上传多个文件",
+      "dragDropText": "将文件拖放到此处或点击浏览",
+      "filesSelected": "已选择 {{count}} 个文件",
+      "startUpload": "开始上传"
+    },
+    "success": "文件已上传",
+    "successMessage": "文件 \"{{fileName}}\" 已成功上传。",
+    "failed": "文件上传失败",
+    "abortError": "中止上传时出错",
+    "abortErrorMessage": "无法中止上传过程。"
+  },
+  "createFolder": {
+    "title": "创建新文件夹",
+    "nameLabel": "文件夹名称",
+    "namePlaceholder": "输入文件夹名称",
+    "create": "创建文件夹",
+    "success": "文件夹已创建",
+    "successMessage": "文件夹 \"{{folderName}}\" 已成功创建。",
+    "failed": "文件夹创建失败"
+  },
+  "delete": {
+    "file": {
+      "title": "删除文件？",
+      "message": "此操作无法撤销。",
+      "confirmMessage": "输入 {{fileName}} 以确认删除。",
+      "confirm": "删除文件",
+      "success": "文件已删除",
+      "successMessage": "文件 \"{{fileName}}\" 已成功删除。",
+      "failed": "文件删除失败"
+    },
+    "folder": {
+      "title": "删除文件夹？",
+      "message": "这将删除该文件夹及其所有内容。此操作无法撤销。",
+      "confirmMessage": "输入 {{folderName}} 以确认删除。",
+      "confirm": "删除文件夹",
+      "success": "文件夹已删除",
+      "successMessage": "文件夹 \"{{folderName}}\" 及其所有内容已成功删除。",
+      "failed": "文件夹删除失败"
+    },
+    "selected": {
+      "title": "删除所选项目？",
+      "message": "您即将删除 {{count}} 个项目。此操作无法撤销。",
+      "confirmCheckbox": "我了解此操作无法撤销",
+      "confirm": "删除 {{count}} 个项目",
+      "success": "删除成功",
+      "successMessage": "已成功删除 {{count}} 个项目。"
+    }
+  },
+  "import": {
+    "huggingface": {
+      "title": "从 Hugging Face 导入模型",
+      "modelId": "模型 ID",
+      "modelIdPlaceholder": "例如 meta-llama/Meta-Llama-3-8B",
+      "token": "HuggingFace Token（可选）",
+      "tokenPlaceholder": "hf_...",
+      "destination": "目标位置",
+      "s3": "S3 存储",
+      "local": "本地存储",
+      "prefix": "Prefix（可选）",
+      "prefixPlaceholder": "models/",
+      "import": "导入模型",
+      "importing": "导入中...",
+      "started": "模型导入已开始"
+    }
+  },
+  "selection": {
+    "count": "已选择 {{count}} 个项目",
+    "filesAndFolders": "已选择 {{files}} 个文件和 {{folders}} 个文件夹"
+  },
+  "alerts": {
+    "locationUnavailable": {
+      "title": "位置不可用",
+      "message": "存储位置 \"{{name}}\" 当前不可用。",
+      "localMessage": "该目录可能无法访问或路径可能不正确。",
+      "disabledMessage": "在位置恢复可用之前，文件操作已被禁用。"
+    },
+    "noLocations": {
+      "title": "没有可用的存储位置",
+      "message": "所有存储源均加载失败。请检查 S3 和本地存储配置。"
+    }
+  },
+  "fileViewer": {
+    "title": "文件预览",
+    "error": "查看文件出错",
+    "errorMessage": "无法获取文件内容。",
+    "errorObjectMessage": "无法获取 object 内容。"
+  },
+  "notifications": {
+    "defaultSettings": {
+      "title": "使用默认设置",
+      "maxConcurrentTransfers": "无法获取最大并发传输数设置，使用默认值 (2)。",
+      "maxFilesPerPage": "无法获取每页最大文件数设置，使用默认值 (100)。"
+    },
+    "locationNotFound": {
+      "title": "未找到位置",
+      "message": "存储位置 \"{{locationId}}\" 不存在。"
+    },
+    "locationUnavailable": {
+      "title": "位置不可用",
+      "message": "存储位置 \"{{name}}\" 当前不可用。可能已断开连接或无法访问。",
+      "cannotSelect": "无法选择 \"{{name}}\"，因为它当前不可用。"
+    },
+    "invalidLocation": {
+      "title": "无效位置",
+      "message": "位置 \"{{locationId}}\" 不存在。"
+    },
+    "pathCopied": {
+      "title": "路径已复制",
+      "message": "路径已成功复制到剪贴板。"
+    },
+    "errorLoadingFiles": {
+      "title": "加载文件出错",
+      "message": "无法从存储加载文件。"
+    },
+    "noLocations": {
+      "title": "没有可用的存储位置",
+      "message": "所有存储源均加载失败。请检查 S3 和本地存储配置。详情请查看浏览器控制台。"
+    },
+    "errorLoadingLocations": {
+      "title": "加载位置出错",
+      "message": "无法加载存储位置。请检查连接设置。"
+    },
+    "deleteFailed": {
+      "title": "删除失败",
+      "message": "部分项目删除失败。请重试。"
+    },
+    "noItemsSelected": {
+      "title": "未选择项目",
+      "message": "请选择要复制的项目。"
+    },
+    "downloadFailed": {
+      "title": "下载失败",
+      "message": "文件下载失败。请重试。"
+    },
+    "uploadComplete": {
+      "title": "上传完成",
+      "message": "已成功上传 {{count}} 个文件。"
+    },
+    "uploadPartialFailed": {
+      "title": "上传完成但有错误",
+      "message": "{{total}} 个文件中有 {{failed}} 个上传失败。"
+    },
+    "modelImport": {
+      "error": "模型导入错误",
+      "fileError": "导入 \"{{fileName}}\" 时出错：{{error}}",
+      "success": "模型已导入",
+      "successMessage": "模型 \"{{modelName}}\" 已成功导入。",
+      "failed": "模型导入失败",
+      "failedMessage": "模型 \"{{modelName}}\" 导入失败。",
+      "cancelled": "模型导入已取消",
+      "cancelledMessage": "模型 \"{{modelName}}\" 的导入已被取消。",
+      "started": "模型导入已开始",
+      "startedMessage": "模型 \"{{modelName}}\" 的导入已成功开始。",
+      "startFailed": "无法启动模型导入。",
+      "cancelFailed": "取消失败",
+      "cancelFailedMessage": "无法取消导入。",
+      "noLocations": "无法导入模型 - 没有可用的存储目标。"
+    },
+    "connectionError": {
+      "title": "连接错误",
+      "message": "无法建立导入进度连接",
+      "lost": "与导入进度流的连接已断开。请检查传输队列了解状态。"
+    },
+    "filesDeleted": {
+      "title": "文件已删除",
+      "message": "所有已下载的文件已被删除。"
+    },
+    "cleanupFailed": {
+      "title": "清理失败",
+      "message": "无法删除已下载的文件。"
+    },
+    "validationError": {
+      "title": "验证错误",
+      "message": "请填写所有必填字段。"
+    }
+  }
+}

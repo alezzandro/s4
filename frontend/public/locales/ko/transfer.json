@@ -1,0 +1,142 @@
+{
+  "title": "파일 전송",
+  "destination": {
+    "title": "대상 선택",
+    "location": "저장소 위치",
+    "selectLocation": "저장소 위치 선택",
+    "selectLocationPlaceholder": "위치 선택...",
+    "locationFormat": "{{name}} ({{type}}){{unavailable}}",
+    "unavailable": " (사용 불가)",
+    "root": "루트",
+    "directoryList": "디렉터리 목록",
+    "createFolder": "폴더 생성",
+    "create": "생성",
+    "selectDestination": "대상 선택",
+    "newFolder": {
+      "title": "새 폴더 생성",
+      "label": "폴더 이름",
+      "placeholder": "1자 이상 입력하세요",
+      "rulesTitle": "폴더 이름 규칙:"
+    },
+    "loadError": "디렉터리를 로드하지 못했습니다",
+    "notifications": {
+      "folderCreated": {
+        "title": "폴더 생성됨",
+        "message": "폴더 \"{{name}}\"이(가) 성공적으로 생성되었습니다"
+      },
+      "folderCreateError": "폴더를 생성하지 못했습니다"
+    }
+  },
+  "conflicts": {
+    "title": "파일 충돌 해결",
+    "nonConflicting": {
+      "title": "충돌 없는 파일",
+      "message": "{{count}}개 파일이 자동으로 복사됩니다 (충돌 없음)."
+    },
+    "conflicting": {
+      "title": "충돌하는 파일",
+      "message": "{{count}}개 파일이 대상에 이미 존재합니다. 어떻게 처리하시겠습니까?"
+    },
+    "resolution": {
+      "label": "해결 방법",
+      "skip": "건너뛰기",
+      "skipDescription": "충돌하는 파일을 건너뛰고 기존 대상 파일을 유지합니다",
+      "overwrite": "덮어쓰기",
+      "overwriteDescription": "기존 파일을 원본 파일로 대체합니다",
+      "rename": "이름 변경",
+      "renameDescription": "원본 파일을 새 이름으로 복사합니다 (예: file.txt -> file (1).txt)"
+    },
+    "fileList": {
+      "title": "충돌하는 파일:",
+      "showingFirst": "{{count}}개 충돌 중 처음 25개 표시"
+    },
+    "summary": {
+      "title": "요약",
+      "autoCopy": "{{count}}개 파일이 자동으로 복사됩니다",
+      "willBe": "{{count}}개 충돌이 {{action}}됩니다",
+      "total": "합계: {{count}}개 파일이 복사됩니다"
+    },
+    "checkError": "충돌을 확인하지 못했습니다"
+  },
+  "progress": {
+    "title": "파일 전송 진행 상황",
+    "titleWithSummary": "파일 전송 진행 상황: {{summary}}",
+    "fileCount": "{{completed}} / {{total}} 파일",
+    "failedCount": "{{count}}개 실패",
+    "status": {
+      "error": "오류",
+      "complete": "완료",
+      "queued": "대기 중",
+      "transferring": "전송 중"
+    },
+    "errorAlert": "전송 오류",
+    "noTransfers": {
+      "title": "전송 없음",
+      "message": "활성 전송이 없습니다"
+    },
+    "notifications": {
+      "completed": {
+        "title": "전송 완료",
+        "message": "{{count}}개 파일이 성공적으로 전송되었습니다"
+      },
+      "failed": {
+        "title": "전송 실패",
+        "message": "{{count}}개 파일 전송에 실패했습니다"
+      },
+      "connectionError": {
+        "title": "전송 연결 오류",
+        "message": "전송 진행 업데이트 연결이 끊겼습니다"
+      },
+      "cancelled": {
+        "title": "전송 취소됨",
+        "message": "파일 전송이 취소되었습니다"
+      },
+      "cancelError": "전송을 취소하지 못했습니다"
+    }
+  },
+  "actions": {
+    "cancel": "취소",
+    "close": "닫기",
+    "apply": "적용",
+    "proceed": "진행",
+    "cancelTransfer": "전송 취소",
+    "continueTransfer": "전송 계속"
+  },
+  "confirmCancel": {
+    "title": "전송을 취소하시겠습니까?",
+    "message": "이 전송을 취소하시겠습니까? 이미 전송된 파일은 유지됩니다."
+  },
+  "largeTransfer": {
+    "title": "대용량 폴더 전송",
+    "alertTitle": "대용량 전송 작업",
+    "filesToTransfer": "전송할 파일",
+    "filesSuffix": "개 파일",
+    "totalSize": "전체 크기",
+    "instructions": "이 작업은 완료하는 데 상당한 시간이 걸릴 수 있습니다. 전송 대기열에서 진행 상황을 모니터링할 수 있습니다."
+  },
+  "notifications": {
+    "started": {
+      "title": "전송 시작됨",
+      "message": "{{count}}개 파일 전송 중"
+    },
+    "startError": "전송을 시작하지 못했습니다"
+  },
+  "summary": {
+    "title": "전송 요약",
+    "filesTransferred": "전송된 파일: {{count}}개",
+    "filesSkipped": "건너뛴 파일: {{count}}개",
+    "filesFailed": "실패한 파일: {{count}}개",
+    "totalSize": "전체 크기: {{size}}"
+  },
+  "errors": {
+    "noDestination": "대상을 선택하세요",
+    "sameLocation": "원본과 대상이 같을 수 없습니다",
+    "transferFailed": "전송 실패",
+    "networkError": "전송 중 네트워크 오류"
+  },
+  "huggingface": {
+    "importing": "HuggingFace에서 가져오는 중",
+    "modelFiles": "모델 파일",
+    "downloadProgress": "다운로드 진행 상황"
+  }
+}

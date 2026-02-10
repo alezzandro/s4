@@ -1,0 +1,78 @@
+{
+  "title": "Settings",
+  "tabs": {
+    "s3": "S3 Settings",
+    "huggingface": "HuggingFace Settings",
+    "concurrency": "Max Concurrent Transfers",
+    "pagination": "Max Files Per Page",
+    "proxy": "Proxy Settings"
+  },
+  "s3": {
+    "accessKey": {
+      "label": "Access key",
+      "helper": "Your S3 access key ID for authentication"
+    },
+    "secretKey": {
+      "label": "Secret key",
+      "helper": "Your S3 secret access key for authentication",
+      "show": "Show secret key",
+      "hide": "Hide secret key"
+    },
+    "region": {
+      "label": "Region",
+      "helper": "AWS region where your S3 buckets are located (e.g., us-east-1)"
+    },
+    "endpoint": {
+      "label": "Endpoint",
+      "helper": "S3 endpoint URL (leave empty to use AWS default)"
+    },
+    "defaultBucket": {
+      "label": "Default Bucket",
+      "helper": "Default bucket to use for storage operations"
+    },
+    "save": "Save S3 Settings",
+    "test": "Test Connection",
+    "testSuccess": "S3 connection test passed!"
+  },
+  "huggingface": {
+    "token": {
+      "label": "Token",
+      "show": "Show token",
+      "hide": "Hide token"
+    },
+    "save": "Save HuggingFace Settings",
+    "test": "Test Connection",
+    "testSuccess": "You are using the token named: {{tokenName}}"
+  },
+  "concurrency": {
+    "label": "Max Concurrent Transfers: {{value}}",
+    "helper": "Maximum number of simultaneous file transfers (1-10)",
+    "save": "Save Max Concurrent Transfers"
+  },
+  "pagination": {
+    "label": "Max Files Per Page: {{value}}",
+    "helper": "Maximum number of files displayed per page",
+    "save": "Save Max Files Per Page"
+  },
+  "proxy": {
+    "httpProxy": {
+      "label": "HTTP Proxy",
+      "placeholder": "http://proxy-server:port",
+      "helper": "HTTP proxy server URL (e.g., http://proxy-server:8080)"
+    },
+    "httpsProxy": {
+      "label": "HTTPS Proxy",
+      "placeholder": "https://proxy-server:port",
+      "helper": "HTTPS proxy server URL (e.g., https://proxy-server:8443)"
+    },
+    "testUrl": {
+      "label": "Test URL",
+      "placeholder": "https://www.google.com",
+      "helper": "URL to test proxy connectivity"
+    },
+    "save": "Save Proxy Settings",
+    "test": "Test Connection",
+    "testSuccess": "Proxy connection test passed!",
+    "saved": "Proxy settings saved successfully!"
+  }
+}

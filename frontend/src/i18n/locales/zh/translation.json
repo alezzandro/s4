@@ -1,0 +1,132 @@
+{
+  "app_title": "S4",
+  "app_header": {
+    "powered_by": "技术支持",
+    "help": {
+      "header": "关于 S4",
+      "body": "超级简易存储服务"
+    },
+    "version": "版本：{{version}}",
+    "sourceCode": "源代码和文档可在此处获取",
+    "sourceOnGithub": "GitHub 源代码"
+  },
+  "ui": {
+    "footer": {
+      "stars": "GitHub 星标",
+      "forks": "GitHub 复刻",
+      "appBy": "应用开发者",
+      "version": "版本 {{version}}"
+    }
+  },
+  "nav": {
+    "browse": "浏览",
+    "buckets": "存储",
+    "settings": "设置",
+    "storageBrowser": "存储浏览器",
+    "storageManagement": "存储管理",
+    "storageTools": "存储工具"
+  },
+  "common": {
+    "actions": {
+      "save": "保存",
+      "cancel": "取消",
+      "close": "关闭",
+      "delete": "删除",
+      "confirm": "确认",
+      "create": "创建",
+      "edit": "编辑",
+      "view": "查看",
+      "download": "下载",
+      "upload": "上传",
+      "refresh": "刷新",
+      "search": "搜索",
+      "copy": "复制",
+      "add": "添加",
+      "remove": "移除",
+      "back": "返回",
+      "next": "下一步",
+      "loading": "加载中...",
+      "submit": "提交",
+      "test": "测试",
+      "clear": "清除"
+    },
+    "status": {
+      "available": "可用",
+      "unavailable": "不可用",
+      "loading": "加载中",
+      "error": "错误",
+      "success": "成功",
+      "warning": "警告",
+      "info": "信息",
+      "pending": "等待中",
+      "complete": "已完成",
+      "failed": "失败",
+      "inProgress": "进行中"
+    },
+    "labels": {
+      "name": "名称",
+      "type": "类型",
+      "size": "大小",
+      "date": "日期",
+      "status": "状态",
+      "actions": "操作",
+      "description": "描述",
+      "path": "路径",
+      "key": "键",
+      "value": "值"
+    },
+    "pagination": {
+      "previous": "上一页",
+      "next": "下一页",
+      "showing": "显示第 {{start}}-{{end}} 项，共 {{total}} 项",
+      "perPage": "每页 {{count}} 项",
+      "perPageLabel": "项/页",
+      "noItems": "无项目"
+    },
+    "validation": {
+      "required": "此字段为必填项",
+      "minLength": "至少需要 {{min}} 个字符",
+      "maxLength": "不能超过 {{max}} 个字符"
+    }
+  },
+  "notifications": {
+    "settingsSaved": "设置已保存",
+    "settingsSavedMessage": "设置保存成功！",
+    "connectionSuccess": "连接成功",
+    "copySuccess": "已复制到剪贴板",
+    "copyFailed": "复制到剪贴板失败"
+  },
+  "notifications_drawer": {
+    "markAllRead": "全部标记为已读",
+    "clearAll": "全部清除",
+    "markAsRead": "标记为已读",
+    "clear": "清除",
+    "actions": "通知面板操作",
+    "noNotifications": "暂无通知",
+    "noNotificationsBody": "目前没有任何通知。",
+    "overflowMessage": "在通知面板中查看另外 {{count}} 条通知"
+  },
+  "accessibility": {
+    "skipToContent": "跳至内容",
+    "dashboardNavigation": "仪表盘导航",
+    "loadingAuthentication": "正在加载身份验证",
+    "itemsPerPage": "每页项目数",
+    "previousPage": "上一页",
+    "nextPage": "下一页"
+  },
+  "disclaimer": {
+    "title": "免责声明",
+    "message": "本应用程序基于 MIT 许可证以「原样」提供，不附带任何形式的担保。",
+    "licenseLink": "许可证文件",
+    "moreDetails": "更多详情请参阅{link}",
+    "accept": "接受"
+  },
+  "theme": {
+    "light": "浅色主题",
+    "dark": "深色主题"
+  },
+  "auth": {
+    "logOut": "退出登录",
+    "logIn": "登录"
+  }
+}

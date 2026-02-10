@@ -1,0 +1,105 @@
+{
+  "app_title": "S4",
+  "app_header": {
+    "powered_by": "Bereitgestellt von",
+    "help": {
+      "header": "Über S4",
+      "body": "Super Simple Storage Service"
+    }
+  },
+  "ui": {
+    "footer": {
+      "stars": "GitHub-Sterne",
+      "forks": "GitHub-Forks"
+    }
+  },
+  "nav": {
+    "browse": "Durchsuchen",
+    "buckets": "Speicher",
+    "settings": "Einstellungen"
+  },
+  "common": {
+    "actions": {
+      "save": "Speichern",
+      "cancel": "Abbrechen",
+      "close": "Schließen",
+      "delete": "Löschen",
+      "confirm": "Bestätigen",
+      "create": "Erstellen",
+      "edit": "Bearbeiten",
+      "view": "Anzeigen",
+      "download": "Herunterladen",
+      "upload": "Hochladen",
+      "refresh": "Aktualisieren",
+      "search": "Suchen",
+      "copy": "Kopieren",
+      "add": "Hinzufügen",
+      "remove": "Entfernen",
+      "back": "Zurück",
+      "next": "Weiter",
+      "loading": "Wird geladen...",
+      "submit": "Absenden",
+      "test": "Testen",
+      "clear": "Leeren"
+    },
+    "status": {
+      "available": "Verfügbar",
+      "unavailable": "Nicht verfügbar",
+      "loading": "Wird geladen",
+      "error": "Fehler",
+      "success": "Erfolgreich",
+      "warning": "Warnung",
+      "info": "Info",
+      "pending": "Ausstehend",
+      "complete": "Abgeschlossen",
+      "failed": "Fehlgeschlagen",
+      "inProgress": "In Bearbeitung"
+    },
+    "labels": {
+      "name": "Name",
+      "type": "Typ",
+      "size": "Größe",
+      "date": "Datum",
+      "status": "Status",
+      "actions": "Aktionen",
+      "description": "Beschreibung",
+      "path": "Pfad",
+      "key": "Schlüssel",
+      "value": "Wert"
+    },
+    "pagination": {
+      "previous": "Zurück",
+      "next": "Weiter",
+      "showing": "{{start}}-{{end}} von {{total}} angezeigt",
+      "perPage": "{{count}} pro Seite",
+      "noItems": "Keine Einträge"
+    },
+    "validation": {
+      "required": "Dieses Feld ist erforderlich",
+      "minLength": "Muss mindestens {{min}} Zeichen lang sein",
+      "maxLength": "Darf höchstens {{max}} Zeichen lang sein"
+    }
+  },
+  "notifications": {
+    "settingsSaved": "Einstellungen gespeichert",
+    "settingsSavedMessage": "Einstellungen wurden erfolgreich gespeichert!",
+    "connectionSuccess": "Verbindung erfolgreich",
+    "copySuccess": "In die Zwischenablage kopiert",
+    "copyFailed": "Kopieren in die Zwischenablage fehlgeschlagen"
+  },
+  "disclaimer": {
+    "title": "Haftungsausschluss",
+    "message": "Diese Anwendung wird unter einer MIT-Lizenz \"wie besehen\" und ohne jegliche Gewährleistung bereitgestellt.",
+    "licenseLink": "Lizenzdatei",
+    "moreDetails": "Weitere Einzelheiten finden Sie in der {link}",
+    "accept": "Akzeptieren"
+  },
+  "theme": {
+    "light": "Helles Design",
+    "dark": "Dunkles Design"
+  },
+  "auth": {
+    "logOut": "Abmelden",
+    "logIn": "Anmelden"
+  }
+}

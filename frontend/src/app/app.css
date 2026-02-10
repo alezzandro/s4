@@ -212,7 +212,7 @@ body,
 }
 
 .form-settings-slider {
-  width: var(--s4-form-input-width);
+  width: min(600px, 100%);
 }
 
 .settings-form {
@@ -416,7 +416,7 @@ body,
 
 /* Page size selector */
 .page-size-select {
-  width: 130px;
+  width: 80px;
 }
 
 /* ===== ACCESSIBILITY ===== */

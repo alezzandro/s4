@@ -1,0 +1,105 @@
+{
+  "app_title": "S4",
+  "app_header": {
+    "powered_by": "제공",
+    "help": {
+      "header": "S4 정보",
+      "body": "Super Simple Storage Service"
+    }
+  },
+  "ui": {
+    "footer": {
+      "stars": "GitHub 스타",
+      "forks": "GitHub 포크"
+    }
+  },
+  "nav": {
+    "browse": "찾아보기",
+    "buckets": "저장소",
+    "settings": "설정"
+  },
+  "common": {
+    "actions": {
+      "save": "저장",
+      "cancel": "취소",
+      "close": "닫기",
+      "delete": "삭제",
+      "confirm": "확인",
+      "create": "생성",
+      "edit": "편집",
+      "view": "보기",
+      "download": "다운로드",
+      "upload": "업로드",
+      "refresh": "새로고침",
+      "search": "검색",
+      "copy": "복사",
+      "add": "추가",
+      "remove": "제거",
+      "back": "뒤로",
+      "next": "다음",
+      "loading": "로딩 중...",
+      "submit": "제출",
+      "test": "테스트",
+      "clear": "지우기"
+    },
+    "status": {
+      "available": "사용 가능",
+      "unavailable": "사용 불가",
+      "loading": "로딩 중",
+      "error": "오류",
+      "success": "성공",
+      "warning": "경고",
+      "info": "정보",
+      "pending": "대기 중",
+      "complete": "완료",
+      "failed": "실패",
+      "inProgress": "진행 중"
+    },
+    "labels": {
+      "name": "이름",
+      "type": "유형",
+      "size": "크기",
+      "date": "날짜",
+      "status": "상태",
+      "actions": "작업",
+      "description": "설명",
+      "path": "경로",
+      "key": "키",
+      "value": "값"
+    },
+    "pagination": {
+      "previous": "이전",
+      "next": "다음",
+      "showing": "{{total}}개 중 {{start}}-{{end}} 표시",
+      "perPage": "페이지당 {{count}}개",
+      "noItems": "항목 없음"
+    },
+    "validation": {
+      "required": "이 필드는 필수입니다",
+      "minLength": "최소 {{min}}자 이상이어야 합니다",
+      "maxLength": "최대 {{max}}자를 초과할 수 없습니다"
+    }
+  },
+  "notifications": {
+    "settingsSaved": "설정 저장됨",
+    "settingsSavedMessage": "설정이 성공적으로 저장되었습니다!",
+    "connectionSuccess": "연결 성공",
+    "copySuccess": "클립보드에 복사됨",
+    "copyFailed": "클립보드에 복사하지 못했습니다"
+  },
+  "disclaimer": {
+    "title": "면책 조항",
+    "message": "이 애플리케이션은 MIT 라이선스에 따라 어떠한 보증 없이 \"있는 그대로\" 제공됩니다.",
+    "licenseLink": "라이선스 파일",
+    "moreDetails": "자세한 내용은 {link}을 참조하세요",
+    "accept": "동의"
+  },
+  "theme": {
+    "light": "라이트 테마",
+    "dark": "다크 테마"
+  },
+  "auth": {
+    "logOut": "로그아웃",
+    "logIn": "로그인"
+  }
+}

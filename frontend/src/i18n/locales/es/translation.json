@@ -1,0 +1,132 @@
+{
+  "app_title": "S4",
+  "app_header": {
+    "powered_by": "Desarrollado por",
+    "help": {
+      "header": "Acerca de S4",
+      "body": "Super Simple Storage Service"
+    },
+    "version": "Versión: {{version}}",
+    "sourceCode": "Código fuente y documentación disponibles en",
+    "sourceOnGithub": "Código en GitHub"
+  },
+  "ui": {
+    "footer": {
+      "stars": "Estrellas en GitHub",
+      "forks": "Forks en GitHub",
+      "appBy": "Aplicación de",
+      "version": "versión {{version}}"
+    }
+  },
+  "nav": {
+    "browse": "Explorar",
+    "buckets": "Almacenamiento",
+    "settings": "Configuraciones",
+    "storageBrowser": "Explorador de almacenamiento",
+    "storageManagement": "Gestión de almacenamiento",
+    "storageTools": "Herramientas de almacenamiento"
+  },
+  "common": {
+    "actions": {
+      "save": "Guardar",
+      "cancel": "Cancelar",
+      "close": "Cerrar",
+      "delete": "Eliminar",
+      "confirm": "Confirmar",
+      "create": "Crear",
+      "edit": "Editar",
+      "view": "Ver",
+      "download": "Descargar",
+      "upload": "Subir",
+      "refresh": "Actualizar",
+      "search": "Buscar",
+      "copy": "Copiar",
+      "add": "Agregar",
+      "remove": "Eliminar",
+      "back": "Atrás",
+      "next": "Siguiente",
+      "loading": "Cargando...",
+      "submit": "Enviar",
+      "test": "Probar",
+      "clear": "Limpiar"
+    },
+    "status": {
+      "available": "Disponible",
+      "unavailable": "No disponible",
+      "loading": "Cargando",
+      "error": "Error",
+      "success": "Éxito",
+      "warning": "Advertencia",
+      "info": "Información",
+      "pending": "Pendiente",
+      "complete": "Completado",
+      "failed": "Fallido",
+      "inProgress": "En progreso"
+    },
+    "labels": {
+      "name": "Nombre",
+      "type": "Tipo",
+      "size": "Tamaño",
+      "date": "Fecha",
+      "status": "Estado",
+      "actions": "Acciones",
+      "description": "Descripción",
+      "path": "Ruta",
+      "key": "Clave",
+      "value": "Valor"
+    },
+    "pagination": {
+      "previous": "Anterior",
+      "next": "Siguiente",
+      "showing": "Mostrando {{start}}-{{end}} de {{total}}",
+      "perPage": "{{count}} por página",
+      "perPageLabel": "por página",
+      "noItems": "Sin elementos"
+    },
+    "validation": {
+      "required": "Este campo es obligatorio",
+      "minLength": "Debe tener al menos {{min}} caracteres",
+      "maxLength": "No debe tener más de {{max}} caracteres"
+    }
+  },
+  "notifications": {
+    "settingsSaved": "Configuraciones guardadas",
+    "settingsSavedMessage": "¡Las configuraciones se guardaron correctamente!",
+    "connectionSuccess": "Conexión exitosa",
+    "copySuccess": "Copiado al portapapeles",
+    "copyFailed": "Error al copiar al portapapeles"
+  },
+  "notifications_drawer": {
+    "markAllRead": "Marcar todo como leído",
+    "clearAll": "Borrar todo",
+    "markAsRead": "Marcar como leído",
+    "clear": "Borrar",
+    "actions": "Acciones del panel de notificaciones",
+    "noNotifications": "No hay notificaciones",
+    "noNotificationsBody": "Actualmente no hay notificaciones.",
+    "overflowMessage": "Ver {{count}} notificación(es) más en el panel de notificaciones"
+  },
+  "accessibility": {
+    "skipToContent": "Ir al contenido",
+    "dashboardNavigation": "Navegación del panel",
+    "loadingAuthentication": "Cargando autenticación",
+    "itemsPerPage": "Elementos por página",
+    "previousPage": "Página anterior",
+    "nextPage": "Página siguiente"
+  },
+  "disclaimer": {
+    "title": "Aviso legal",
+    "message": "Esta aplicación se proporciona \"tal cual\" bajo una licencia MIT, sin garantía de ningún tipo.",
+    "licenseLink": "archivo de licencia",
+    "moreDetails": "Consulte el {link} para más detalles",
+    "accept": "Aceptar"
+  },
+  "theme": {
+    "light": "Tema claro",
+    "dark": "Tema oscuro"
+  },
+  "auth": {
+    "logOut": "Cerrar sesión",
+    "logIn": "Iniciar sesión"
+  }
+}

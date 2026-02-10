@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '@app/components/AuthContext/AuthContext';
 import Login from '@app/components/Login/Login';
 import { Spinner } from '@patternfly/react-core';
@@ -14,13 +15,14 @@ interface AuthGateProps {
  * - Shows the app if authenticated or auth is disabled
  */
 export const AuthGate: React.FC<AuthGateProps> = ({ children }) => {
+  const { t } = useTranslation();
   const { isLoading, isAuthenticated, authMode } = useAuth();
 
   // Show loading spinner while checking auth status
   if (isLoading) {
     return (
       <div className="auth-loading-center">
-        <Spinner size="xl" aria-label="Loading authentication" />
+        <Spinner size="xl" aria-label={t('accessibility.loadingAuthentication')} />
       </div>
     );
   }

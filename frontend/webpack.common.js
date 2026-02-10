@@ -172,10 +172,7 @@ module.exports = (env) => {
         defaults: false,
       }),
       new CopyPlugin({
-        patterns: [
-          { from: './src/favicon.svg', to: 'images' },
-          { from: './public/locales', to: 'locales' },
-        ],
+        patterns: [{ from: './src/favicon.svg', to: 'images' }],
       }),
       new MonacoWebpackPlugin({
         // Include commonly used languages for file preview

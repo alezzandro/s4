@@ -1,0 +1,21 @@
+{
+  "title": "Connexion à S4",
+  "subtitle": "Super Simple Storage Service",
+  "form": {
+    "username": "Nom d'utilisateur",
+    "password": "Mot de passe",
+    "showPassword": "Afficher le mot de passe",
+    "hidePassword": "Masquer le mot de passe",
+    "logIn": "Se connecter",
+    "loggingIn": "Connexion en cours..."
+  },
+  "validation": {
+    "usernameRequired": "Le nom d'utilisateur est obligatoire",
+    "passwordRequired": "Le mot de passe est obligatoire"
+  },
+  "errors": {
+    "invalidCredentials": "Nom d'utilisateur ou mot de passe invalide",
+    "sessionExpired": "Votre session a expiré. Veuillez vous reconnecter."
+  },
+  "brandAlt": "S4 - Super Simple Storage Service"
+}

@@ -1,0 +1,78 @@
+{
+  "title": "设置",
+  "tabs": {
+    "s3": "S3 设置",
+    "huggingface": "HuggingFace 设置",
+    "concurrency": "最大并发传输数",
+    "pagination": "每页最大文件数",
+    "proxy": "Proxy 设置"
+  },
+  "s3": {
+    "accessKey": {
+      "label": "Access key",
+      "helper": "用于身份验证的 S3 access key ID"
+    },
+    "secretKey": {
+      "label": "Secret key",
+      "helper": "用于身份验证的 S3 secret access key",
+      "show": "显示 secret key",
+      "hide": "隐藏 secret key"
+    },
+    "region": {
+      "label": "区域",
+      "helper": "S3 bucket 所在的 AWS 区域（例如 us-east-1）"
+    },
+    "endpoint": {
+      "label": "Endpoint",
+      "helper": "S3 endpoint URL（留空则使用 AWS 默认值）"
+    },
+    "defaultBucket": {
+      "label": "默认 Bucket",
+      "helper": "用于存储操作的默认 bucket"
+    },
+    "save": "保存 S3 设置",
+    "test": "测试连接",
+    "testSuccess": "S3 连接测试通过！"
+  },
+  "huggingface": {
+    "token": {
+      "label": "Token",
+      "show": "显示 token",
+      "hide": "隐藏 token"
+    },
+    "save": "保存 HuggingFace 设置",
+    "test": "测试连接",
+    "testSuccess": "您正在使用名为 {{tokenName}} 的 token"
+  },
+  "concurrency": {
+    "label": "最大并发传输数：{{value}}",
+    "helper": "同时进行的最大文件传输数 (1-10)",
+    "save": "保存最大并发传输数"
+  },
+  "pagination": {
+    "label": "每页最大文件数：{{value}}",
+    "helper": "每页显示的最大文件数",
+    "save": "保存每页最大文件数"
+  },
+  "proxy": {
+    "httpProxy": {
+      "label": "HTTP Proxy",
+      "placeholder": "http://proxy-server:port",
+      "helper": "HTTP proxy 服务器 URL（例如 http://proxy-server:8080）"
+    },
+    "httpsProxy": {
+      "label": "HTTPS Proxy",
+      "placeholder": "https://proxy-server:port",
+      "helper": "HTTPS proxy 服务器 URL（例如 https://proxy-server:8443）"
+    },
+    "testUrl": {
+      "label": "测试 URL",
+      "placeholder": "https://www.google.com",
+      "helper": "用于测试 proxy 连通性的 URL"
+    },
+    "save": "保存 Proxy 设置",
+    "test": "测试连接",
+    "testSuccess": "Proxy 连接测试通过！",
+    "saved": "Proxy 设置保存成功！"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "title": "Storage Management",
+  "table": {
+    "columns": {
+      "name": "Name",
+      "type": "Type",
+      "status": "Status",
+      "creationDate": "Creation Date",
+      "owner": "Owner"
+    },
+    "emptyState": {
+      "title": "No buckets found",
+      "description": "Create your first bucket to get started.",
+      "createButton": "Create bucket"
+    }
+  },
+  "types": {
+    "s3": "S3",
+    "pvc": "PVC"
+  },
+  "actions": {
+    "createBucket": "Create S3 Bucket",
+    "deleteBucket": "Delete bucket",
+    "refresh": "Refresh"
+  },
+  "createModal": {
+    "title": "Create a new bucket",
+    "nameLabel": "Bucket name",
+    "namePlaceholder": "Enter at least 3 characters",
+    "create": "Create",
+    "rules": {
+      "title": "Bucket naming rules:",
+      "length": "Bucket names must be between 3 and 63 characters long",
+      "characters": "Bucket names can consist only of lowercase letters, numbers, dots (.), and hyphens (-)",
+      "startEnd": "Bucket names must begin and end with a letter or number",
+      "noPeriods": "Bucket names must not contain two adjacent periods",
+      "noIp": "Bucket names must not be formatted as an IP address (for example, 192.168.5.4)",
+      "unique": "Bucket names must be unique within the current configuration"
+    },
+    "success": "Bucket created",
+    "successMessage": "Bucket {{bucketName}} has been created successfully"
+  },
+  "deleteModal": {
+    "title": "Delete bucket?",
+    "message": "This action cannot be undone.",
+    "confirmMessage": "Type {{bucketName}} to confirm deletion.",
+    "confirm": "Delete bucket",
+    "success": "Bucket deleted",
+    "successMessage": "Bucket {{bucketName}} has been deleted successfully"
+  },
+  "search": {
+    "placeholder": "Search storage locations"
+  },
+  "pagination": {
+    "perPage": "{{count}} per page"
+  },
+  "refresh": {
+    "success": "Storage refreshed",
+    "successMessage": "Storage locations have been updated successfully."
+  },
+  "validation": {
+    "invalidName": "Invalid bucket name",
+    "invalidNameMessage": "Bucket name {{bucketName}} is invalid. Please check the rules and try again."
+  }
+}

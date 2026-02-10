@@ -1,0 +1,65 @@
+{
+  "title": "Speicherverwaltung",
+  "table": {
+    "columns": {
+      "name": "Name",
+      "type": "Typ",
+      "status": "Status",
+      "creationDate": "Erstellungsdatum",
+      "owner": "Eigentümer"
+    },
+    "emptyState": {
+      "title": "Keine Buckets gefunden",
+      "description": "Erstellen Sie Ihren ersten Bucket, um loszulegen.",
+      "createButton": "Bucket erstellen"
+    }
+  },
+  "types": {
+    "s3": "S3",
+    "pvc": "PVC"
+  },
+  "actions": {
+    "createBucket": "S3 Bucket erstellen",
+    "deleteBucket": "Bucket löschen",
+    "refresh": "Aktualisieren"
+  },
+  "createModal": {
+    "title": "Neuen Bucket erstellen",
+    "nameLabel": "Bucket-Name",
+    "namePlaceholder": "Mindestens 3 Zeichen eingeben",
+    "create": "Erstellen",
+    "rules": {
+      "title": "Regeln für Bucket-Namen:",
+      "length": "Bucket-Namen müssen zwischen 3 und 63 Zeichen lang sein",
+      "characters": "Bucket-Namen dürfen nur Kleinbuchstaben, Ziffern, Punkte (.) und Bindestriche (-) enthalten",
+      "startEnd": "Bucket-Namen müssen mit einem Buchstaben oder einer Ziffer beginnen und enden",
+      "noPeriods": "Bucket-Namen dürfen keine zwei aufeinanderfolgenden Punkte enthalten",
+      "noIp": "Bucket-Namen dürfen nicht als IP-Adresse formatiert sein (z.\u00a0B. 192.168.5.4)",
+      "unique": "Bucket-Namen müssen innerhalb der aktuellen Konfiguration eindeutig sein"
+    },
+    "success": "Bucket erstellt",
+    "successMessage": "Bucket {{bucketName}} wurde erfolgreich erstellt"
+  },
+  "deleteModal": {
+    "title": "Bucket löschen?",
+    "message": "Diese Aktion kann nicht rückgängig gemacht werden.",
+    "confirmMessage": "Geben Sie {{bucketName}} ein, um das Löschen zu bestätigen.",
+    "confirm": "Bucket löschen",
+    "success": "Bucket gelöscht",
+    "successMessage": "Bucket {{bucketName}} wurde erfolgreich gelöscht"
+  },
+  "search": {
+    "placeholder": "Speicherorte durchsuchen"
+  },
+  "pagination": {
+    "perPage": "{{count}} pro Seite"
+  },
+  "refresh": {
+    "success": "Speicher aktualisiert",
+    "successMessage": "Speicherorte wurden erfolgreich aktualisiert."
+  },
+  "validation": {
+    "invalidName": "Ungültiger Bucket-Name",
+    "invalidNameMessage": "Bucket-Name {{bucketName}} ist ungültig. Bitte überprüfen Sie die Regeln und versuchen Sie es erneut."
+  }
+}

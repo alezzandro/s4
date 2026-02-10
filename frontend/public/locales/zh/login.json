@@ -1,0 +1,21 @@
+{
+  "title": "登录 S4",
+  "subtitle": "超级简易存储服务",
+  "form": {
+    "username": "用户名",
+    "password": "密码",
+    "showPassword": "显示密码",
+    "hidePassword": "隐藏密码",
+    "logIn": "登录",
+    "loggingIn": "登录中..."
+  },
+  "validation": {
+    "usernameRequired": "用户名为必填项",
+    "passwordRequired": "密码为必填项"
+  },
+  "errors": {
+    "invalidCredentials": "用户名或密码无效",
+    "sessionExpired": "您的会话已过期。请重新登录。"
+  },
+  "brandAlt": "S4 - 超级简易存储服务"
+}

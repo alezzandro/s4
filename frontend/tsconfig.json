@@ -22,6 +22,7 @@
       "@app/*": ["src/app/*"],
       "@assets/*": ["node_modules/@patternfly/react-core/dist/styles/assets/*"]
     },
+    "resolveJsonModule": true,
     "importHelpers": true,
     "skipLibCheck": true,
     "types": ["react", "react-dom"]

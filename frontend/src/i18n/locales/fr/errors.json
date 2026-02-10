@@ -1,0 +1,56 @@
+{
+  "generic": {
+    "title": "Erreur",
+    "message": "Une erreur inattendue s'est produite",
+    "tryAgain": "Veuillez réessayer"
+  },
+  "network": {
+    "title": "Erreur réseau",
+    "message": "Impossible de se connecter au serveur",
+    "checkConnection": "Veuillez vérifier votre connexion Internet et réessayer"
+  },
+  "notFound": {
+    "title": "404 Page introuvable",
+    "message": "Nous n'avons pas trouvé de page correspondant à l'adresse que vous avez saisie.",
+    "goHome": "Retour à l'accueil"
+  },
+  "unauthorized": {
+    "title": "Non autorisé",
+    "message": "Vous n'êtes pas autorisé à effectuer cette action",
+    "loginRequired": "Veuillez vous connecter pour continuer"
+  },
+  "forbidden": {
+    "title": "Accès interdit",
+    "message": "Vous n'avez pas la permission d'accéder à cette ressource"
+  },
+  "validation": {
+    "title": "Erreur de validation",
+    "invalidInput": "Veuillez vérifier votre saisie et réessayer"
+  },
+  "s3": {
+    "connectionFailed": "Échec de la connexion à S3",
+    "accessDenied": "Accès refusé au bucket S3",
+    "bucketNotFound": "Bucket introuvable",
+    "objectNotFound": "Objet introuvable",
+    "quotaExceeded": "Quota de stockage dépassé"
+  },
+  "upload": {
+    "failed": "Échec de l'upload",
+    "tooLarge": "Le fichier est trop volumineux",
+    "invalidType": "Type de fichier invalide",
+    "aborted": "L'upload a été annulé"
+  },
+  "download": {
+    "failed": "Échec du téléchargement",
+    "unavailable": "Le fichier n'est pas disponible au téléchargement"
+  },
+  "delete": {
+    "failed": "Échec de la suppression",
+    "notEmpty": "Impossible de supprimer un dossier non vide"
+  },
+  "rateLimit": {
+    "title": "Limite de requêtes dépassée",
+    "message": "Trop de requêtes. Veuillez patienter avant de réessayer.",
+    "retryAfter": "Réessayer dans {{seconds}} secondes"
+  }
+}

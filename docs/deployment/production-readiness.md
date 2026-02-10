@@ -353,7 +353,7 @@ Before deploying to production, ensure:
 # production-values.yaml
 image:
   repository: quay.io/rh-aiservices-bu/s4
-  tag: v1.0.0  # Pin to specific version
+  tag: v1.0.0 # Pin to specific version
   pullPolicy: IfNotPresent
 
 auth:

@@ -3,6 +3,8 @@
  * Used by Fastify's built-in validation system
  */
 
+import { PAGE_SIZE_PRESETS } from '../utils/paginationPresets';
+
 // ========== Bucket Schemas ==========
 
 export const createBucketSchema = {
@@ -107,7 +109,7 @@ export const updateMaxFilesConfigSchema = {
     type: 'object',
     required: ['maxFilesPerPage'],
     properties: {
-      maxFilesPerPage: { type: 'number', minimum: 1 },
+      maxFilesPerPage: { type: 'number', enum: [...PAGE_SIZE_PRESETS] },
     },
   },
 };

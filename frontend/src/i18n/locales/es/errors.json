@@ -1,0 +1,56 @@
+{
+  "generic": {
+    "title": "Error",
+    "message": "Ocurrió un error inesperado",
+    "tryAgain": "Inténtelo de nuevo"
+  },
+  "network": {
+    "title": "Error de red",
+    "message": "No se puede conectar al servidor",
+    "checkConnection": "Verifique su conexión a Internet e inténtelo de nuevo"
+  },
+  "notFound": {
+    "title": "404 Página no encontrada",
+    "message": "No encontramos una página que coincida con la dirección a la que navegó.",
+    "goHome": "Llévame al inicio"
+  },
+  "unauthorized": {
+    "title": "No autorizado",
+    "message": "No está autorizado para realizar esta acción",
+    "loginRequired": "Inicie sesión para continuar"
+  },
+  "forbidden": {
+    "title": "Prohibido",
+    "message": "No tiene permiso para acceder a este recurso"
+  },
+  "validation": {
+    "title": "Error de validación",
+    "invalidInput": "Verifique su entrada e inténtelo de nuevo"
+  },
+  "s3": {
+    "connectionFailed": "Error al conectar con S3",
+    "accessDenied": "Acceso denegado al bucket S3",
+    "bucketNotFound": "Bucket no encontrado",
+    "objectNotFound": "Objeto no encontrado",
+    "quotaExceeded": "Cuota de almacenamiento excedida"
+  },
+  "upload": {
+    "failed": "Error en la subida",
+    "tooLarge": "El archivo es demasiado grande",
+    "invalidType": "Tipo de archivo inválido",
+    "aborted": "La subida fue cancelada"
+  },
+  "download": {
+    "failed": "Error en la descarga",
+    "unavailable": "El archivo no está disponible para descargar"
+  },
+  "delete": {
+    "failed": "Error en la eliminación",
+    "notEmpty": "No se puede eliminar una carpeta que no está vacía"
+  },
+  "rateLimit": {
+    "title": "Límite de solicitudes excedido",
+    "message": "Demasiadas solicitudes. Espere antes de intentarlo de nuevo.",
+    "retryAfter": "Reintentar después de {{seconds}} segundos"
+  }
+}

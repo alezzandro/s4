@@ -1,0 +1,336 @@
+{
+  "title": "Explorador de almacenamiento",
+  "locationSelector": {
+    "label": "Ubicación de almacenamiento:",
+    "placeholder": "Seleccionar ubicación de almacenamiento",
+    "loading": "Cargando ubicaciones...",
+    "noLocations": "No hay ubicaciones de almacenamiento disponibles",
+    "typeS3": "(S3)",
+    "typePVC": "(PVC)",
+    "unavailableSuffix": " - No disponible",
+    "overrideLabel": "Ubicación personalizada:",
+    "overridePlaceholder": "Introducir nombre del bucket S3...",
+    "setLocation": "Establecer ubicación"
+  },
+  "breadcrumb": {
+    "root": "Raíz"
+  },
+  "table": {
+    "columns": {
+      "key": "Clave",
+      "lastModified": "Última modificación",
+      "size": "Tamaño"
+    },
+    "emptyState": {
+      "title": "No se encontraron archivos",
+      "description": "Esta ubicación está vacía o ningún archivo coincide con su búsqueda."
+    }
+  },
+  "search": {
+    "placeholder": "Buscar archivos y carpetas",
+    "filterPlaceholder": "Filtrar archivos (mín. 3 caracteres para búsqueda en servidor)…",
+    "mode": {
+      "contains": "Contiene",
+      "startsWith": "Comienza con"
+    },
+    "results": {
+      "truncated": "Los resultados de búsqueda pueden estar incompletos"
+    },
+    "clear": "Borrar búsqueda",
+    "deepSearchActive": "Búsqueda profunda activa... {{count}} página(s) adicional(es) escaneada(s)...",
+    "cancel": "Cancelar",
+    "partialResults": "Mostrando resultados parciales.",
+    "moreResultsAvailable": "Puede haber más resultados disponibles.",
+    "clientFiltering": "Filtrado del lado del cliente activo. Los resultados pueden estar incompletos. La búsqueda profunda se activará automáticamente si no se encuentran coincidencias."
+  },
+  "actions": {
+    "upload": "Subir",
+    "uploadSingle": "Subir archivo individual",
+    "uploadMultiple": "Subir múltiples archivos",
+    "createFolder": "Crear carpeta",
+    "importModel": "Importar modelo HF",
+    "copyPath": "Copiar ruta",
+    "viewFile": "Ver",
+    "downloadFile": "Descargar",
+    "deleteFile": "Eliminar",
+    "selectAll": "Seleccionar todo",
+    "deselectAll": "Deseleccionar todo",
+    "copySelected": "Copiar seleccionados",
+    "deleteSelected": "Eliminar seleccionados",
+    "viewDetails": "Ver detalles",
+    "loadMore": "Cargar más",
+    "copyTo": "Copiar a...",
+    "clearSelection": "Borrar selección",
+    "uploadFiles": "Subir archivos"
+  },
+  "fileDetails": {
+    "title": "Detalles del archivo: {{fileName}}",
+    "tabs": {
+      "metadata": "Metadata",
+      "tags": "Tags"
+    },
+    "metadata": {
+      "key": "Clave",
+      "size": "Tamaño",
+      "lastModified": "Última modificación",
+      "contentType": "Tipo de contenido",
+      "etag": "ETag",
+      "storageClass": "Storage Class",
+      "customMetadata": "Metadata personalizada"
+    },
+    "tags": {
+      "noTags": "Este objeto no tiene tags. Agregue tags a continuación.",
+      "addTag": "Agregar nuevo tag",
+      "keyPlaceholder": "Clave",
+      "valuePlaceholder": "Valor",
+      "tagCount": "{{count}} de {{max}} tags utilizados",
+      "saveTags": "Guardar tags",
+      "saving": "Guardando...",
+      "saved": "Tags guardados",
+      "savedMessage": "Los tags del objeto se han actualizado correctamente."
+    },
+    "notAvailable": "Los metadata y tags del objeto solo están disponibles para ubicaciones de almacenamiento S3."
+  },
+  "upload": {
+    "single": {
+      "title": "Subir archivo",
+      "dragDropText": "Arrastra y suelta un archivo o sube uno",
+      "browseFiles": "Examinar",
+      "uploading": "Subiendo...",
+      "progress": {
+        "toBackend": "Progreso de subida al servidor",
+        "toS3": "Progreso de subida al almacenamiento"
+      }
+    },
+    "multiple": {
+      "title": "Subir múltiples archivos",
+      "dragDropText": "Arrastre y suelte archivos aquí o haga clic para explorar",
+      "filesSelected": "{{count}} archivos seleccionados",
+      "startUpload": "Iniciar subida",
+      "statusText": "{{uploaded}} de {{total}} archivos subidos"
+    },
+    "success": "Archivo subido",
+    "successMessage": "El archivo \"{{fileName}}\" se ha subido correctamente.",
+    "failed": "Error al subir el archivo",
+    "abortError": "Error al cancelar la subida",
+    "abortErrorMessage": "No se pudo cancelar el proceso de subida."
+  },
+  "createFolder": {
+    "title": "Crear una nueva carpeta",
+    "nameLabel": "Nombre de la carpeta",
+    "namePlaceholder": "Ingrese al menos 1 carácter",
+    "create": "Crear carpeta",
+    "success": "Carpeta creada",
+    "successMessage": "La carpeta \"{{folderName}}\" se ha creado correctamente.",
+    "failed": "Error al crear la carpeta",
+    "rules": {
+      "header": "Los nombres de carpeta deben:",
+      "unique": "ser únicos",
+      "s3Chars": "contener solo letras (a-z, A-Z), números (0-9) y estos caracteres especiales: ! . - _ * ' ( ). Los espacios no están permitidos",
+      "localChars": "contener solo letras (a-z, A-Z), números (0-9), puntos (.), guiones bajos (_) y guiones (-). Los espacios y caracteres especiales no están permitidos"
+    }
+  },
+  "delete": {
+    "file": {
+      "title": "¿Eliminar archivo?",
+      "message": "Esta acción no se puede deshacer.",
+      "confirmMessage_prefix": "Escriba",
+      "confirmMessage_suffix": "para confirmar la eliminación.",
+      "confirm": "Eliminar archivo",
+      "success": "Archivo eliminado",
+      "successMessage": "El archivo \"{{fileName}}\" se ha eliminado correctamente.",
+      "failed": "Error al eliminar el archivo"
+    },
+    "folder": {
+      "title": "¿Eliminar carpeta y todo su contenido?",
+      "message": "Esta acción no se puede deshacer.",
+      "confirmMessage_prefix": "Escriba",
+      "confirmMessage_suffix": "para confirmar la eliminación.",
+      "confirm": "Eliminar carpeta",
+      "success": "Carpeta eliminada",
+      "successMessage": "La carpeta \"{{folderName}}\" y todo su contenido se han eliminado correctamente.",
+      "failed": "Error al eliminar la carpeta"
+    },
+    "selected": {
+      "title": "¿Eliminar elementos seleccionados?",
+      "message": "¿Está seguro de que desea eliminar {{count}} elemento(s)? Esta acción no se puede deshacer.",
+      "confirmCheckbox": "Entiendo que esta acción no se puede deshacer",
+      "confirm": "Eliminar {{count}} elemento(s)",
+      "success": "Eliminación exitosa",
+      "successMessage": "Se eliminaron correctamente {{count}} elementos."
+    }
+  },
+  "import": {
+    "huggingface": {
+      "title": "Importar un modelo desde Hugging Face",
+      "modelId": "ID del modelo",
+      "modelIdPlaceholder": "p. ej., meta-llama/Meta-Llama-3-8B",
+      "token": "Token de HuggingFace (opcional)",
+      "tokenPlaceholder": "hf_...",
+      "destination": "Destino",
+      "s3": "Almacenamiento S3",
+      "local": "Almacenamiento local",
+      "prefix": "Prefix (opcional)",
+      "prefixPlaceholder": "models/",
+      "import": "Importar modelo",
+      "importing": "Importando...",
+      "started": "Importación del modelo iniciada",
+      "helperText": "Ingrese el ID del repositorio del modelo de HuggingFace. El modelo se importará a la ubicación actual.",
+      "importButton": "Importar",
+      "cancelImport": "Cancelar importación"
+    },
+    "cleanup": {
+      "title": "Importación cancelada – ¿Limpiar archivos?",
+      "message": "La importación ha sido cancelada. Se descargaron los siguientes archivos:",
+      "keepOrDelete": "¿Desea conservar o eliminar estos archivos?",
+      "deleteAll": "Eliminar todos los archivos descargados",
+      "keepFiles": "Conservar archivos"
+    }
+  },
+  "selection": {
+    "count": "{{count}} elementos seleccionados",
+    "filesAndFolders": "{{files}} archivos, {{folders}} carpetas seleccionados",
+    "files_one": "{{count}} archivo",
+    "files_other": "{{count}} archivos",
+    "folders_one": "{{count}} carpeta",
+    "folders_other": "{{count}} carpetas",
+    "selected": "seleccionado(s)"
+  },
+  "alerts": {
+    "locationUnavailable": {
+      "title": "Ubicación no disponible",
+      "message": "La ubicación de almacenamiento \"{{name}}\" no está disponible actualmente.",
+      "localMessage": "El directorio puede ser inaccesible o la ruta puede ser incorrecta.",
+      "disabledMessage": "Las operaciones con archivos están deshabilitadas hasta que la ubicación esté disponible."
+    },
+    "noLocations": {
+      "title": "No hay ubicaciones de almacenamiento disponibles",
+      "message": "Todas las fuentes de almacenamiento fallaron al cargar. Verifique la configuración de S3 y del almacenamiento local."
+    }
+  },
+  "fileViewer": {
+    "title": "Vista previa del archivo",
+    "error": "Error al visualizar el archivo",
+    "errorMessage": "No se pudo obtener el contenido del archivo.",
+    "errorObjectMessage": "No se pudo obtener el contenido del objeto."
+  },
+  "emptyState": {
+    "folderEmpty": "Esta carpeta está vacía",
+    "folderEmptyDescription": "Suba archivos o cree carpetas para comenzar.",
+    "noSearchResults": "Ningún archivo coincide con su búsqueda",
+    "noSearchResultsDescription": "No se encontraron archivos o carpetas que coincidan con \"{{searchText}}\"."
+  },
+  "tooltips": {
+    "viewFile": "Ver este archivo.",
+    "downloadFile": "Descargar este archivo.",
+    "viewDetails": "Ver detalles y etiquetas del archivo.",
+    "deleteFile": "Eliminar este archivo."
+  },
+  "pagination": {
+    "loadMore": "Cargar más",
+    "loading": "Cargando…",
+    "moreAvailable": "más disponibles",
+    "lastPage": "última página"
+  },
+  "notes": {
+    "fileViewerLimit": "El visor de archivos solo está habilitado para archivos menores de 1 MB y tipos compatibles.",
+    "lastItemDeletesFolder": "Eliminar el último elemento de una carpeta eliminará la carpeta.",
+    "largeDownloadWarning": "La descarga de archivos grandes puede fallar."
+  },
+  "accessibility": {
+    "loadingFilePreview": "Cargando vista previa del archivo",
+    "downloadingFile": "Descargando archivo",
+    "deletingItems": "Eliminando {{count}} elementos",
+    "deepSearchInProgress": "Búsqueda profunda en curso",
+    "loadingMoreFiles": "Cargando más archivos"
+  },
+  "notifications": {
+    "defaultSettings": {
+      "title": "Usando configuración predeterminada",
+      "maxConcurrentTransfers": "No se pudo obtener la configuración de transferencias simultáneas máximas. Usando el valor predeterminado (2).",
+      "maxFilesPerPage": "No se pudo obtener la configuración de archivos máximos por página. Usando el valor predeterminado (100)."
+    },
+    "locationNotFound": {
+      "title": "Ubicación no encontrada",
+      "message": "La ubicación de almacenamiento \"{{locationId}}\" no existe."
+    },
+    "locationUnavailable": {
+      "title": "Ubicación no disponible",
+      "message": "La ubicación de almacenamiento \"{{name}}\" no está disponible actualmente. Puede estar desconectada o inaccesible.",
+      "cannotSelect": "No se puede seleccionar \"{{name}}\" porque no está disponible actualmente."
+    },
+    "invalidLocation": {
+      "title": "Ubicación inválida",
+      "message": "La ubicación \"{{locationId}}\" no existe."
+    },
+    "pathCopied": {
+      "title": "Ruta copiada",
+      "message": "La ruta se ha copiado correctamente al portapapeles."
+    },
+    "errorLoadingFiles": {
+      "title": "Error al cargar archivos",
+      "message": "No se pudieron cargar los archivos del almacenamiento."
+    },
+    "noLocations": {
+      "title": "No hay ubicaciones de almacenamiento disponibles",
+      "message": "Todas las fuentes de almacenamiento fallaron al cargar. Verifique la configuración de S3 y del almacenamiento local. Consulte la consola del navegador para más detalles."
+    },
+    "errorLoadingLocations": {
+      "title": "Error al cargar ubicaciones",
+      "message": "No se pudieron cargar las ubicaciones de almacenamiento. Verifique la configuración de conexión."
+    },
+    "deleteFailed": {
+      "title": "Error al eliminar",
+      "message": "No se pudieron eliminar algunos elementos. Inténtelo de nuevo."
+    },
+    "noItemsSelected": {
+      "title": "No hay elementos seleccionados",
+      "message": "Seleccione elementos para copiar."
+    },
+    "downloadFailed": {
+      "title": "Error en la descarga",
+      "message": "No se pudo descargar el archivo. Inténtelo de nuevo."
+    },
+    "uploadComplete": {
+      "title": "Subida completada",
+      "message": "Se subieron correctamente {{count}} archivo(s)."
+    },
+    "uploadPartialFailed": {
+      "title": "Subida completada con errores",
+      "message": "{{failed}} de {{total}} archivos no se pudieron subir."
+    },
+    "modelImport": {
+      "error": "Error en la importación del modelo",
+      "fileError": "Error al importar \"{{fileName}}\": {{error}}",
+      "success": "Modelo importado",
+      "successMessage": "El modelo \"{{modelName}}\" se ha importado correctamente.",
+      "failed": "Error en la importación del modelo",
+      "failedMessage": "La importación del modelo \"{{modelName}}\" falló.",
+      "cancelled": "Importación del modelo cancelada",
+      "cancelledMessage": "La importación del modelo \"{{modelName}}\" fue cancelada.",
+      "started": "Importación del modelo iniciada",
+      "startedMessage": "La importación del modelo \"{{modelName}}\" se ha iniciado correctamente.",
+      "startFailed": "No se pudo iniciar la importación del modelo.",
+      "cancelFailed": "Error al cancelar",
+      "cancelFailedMessage": "No se pudo cancelar la importación.",
+      "noLocations": "No se puede importar el modelo: no hay destinos de almacenamiento disponibles."
+    },
+    "connectionError": {
+      "title": "Error de conexión",
+      "message": "No se pudo establecer la conexión de progreso de importación",
+      "lost": "Se perdió la conexión con el flujo de progreso de importación. Verifique la cola de transferencias para conocer el estado."
+    },
+    "filesDeleted": {
+      "title": "Archivos eliminados",
+      "message": "Todos los archivos descargados se han eliminado."
+    },
+    "cleanupFailed": {
+      "title": "Error en la limpieza",
+      "message": "No se pudieron eliminar los archivos descargados."
+    },
+    "validationError": {
+      "title": "Error de validación",
+      "message": "Complete todos los campos obligatorios."
+    }
+  }
+}

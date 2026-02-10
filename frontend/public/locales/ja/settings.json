@@ -1,0 +1,78 @@
+{
+  "title": "設定",
+  "tabs": {
+    "s3": "S3 設定",
+    "huggingface": "HuggingFace 設定",
+    "concurrency": "最大同時転送数",
+    "pagination": "ページあたりの最大ファイル数",
+    "proxy": "Proxy 設定"
+  },
+  "s3": {
+    "accessKey": {
+      "label": "Access key",
+      "helper": "認証用の S3 access key ID"
+    },
+    "secretKey": {
+      "label": "Secret key",
+      "helper": "認証用の S3 secret access key",
+      "show": "Secret key を表示",
+      "hide": "Secret key を隠す"
+    },
+    "region": {
+      "label": "リージョン",
+      "helper": "S3 bucket が配置されている AWS リージョン（例: us-east-1）"
+    },
+    "endpoint": {
+      "label": "Endpoint",
+      "helper": "S3 endpoint URL（AWS デフォルトを使用する場合は空欄）"
+    },
+    "defaultBucket": {
+      "label": "デフォルト Bucket",
+      "helper": "ストレージ操作に使用するデフォルトの bucket"
+    },
+    "save": "S3 設定を保存",
+    "test": "接続テスト",
+    "testSuccess": "S3 接続テストに成功しました！"
+  },
+  "huggingface": {
+    "token": {
+      "label": "Token",
+      "show": "Token を表示",
+      "hide": "Token を隠す"
+    },
+    "save": "HuggingFace 設定を保存",
+    "test": "接続テスト",
+    "testSuccess": "使用中の token 名: {{tokenName}}"
+  },
+  "concurrency": {
+    "label": "最大同時転送数: {{value}}",
+    "helper": "同時ファイル転送の最大数（1-10）",
+    "save": "最大同時転送数を保存"
+  },
+  "pagination": {
+    "label": "ページあたりの最大ファイル数: {{value}}",
+    "helper": "ページごとに表示されるファイルの最大数（10-1000）",
+    "save": "ページあたりの最大ファイル数を保存"
+  },
+  "proxy": {
+    "httpProxy": {
+      "label": "HTTP Proxy",
+      "placeholder": "http://proxy-server:port",
+      "helper": "HTTP proxy サーバーの URL（例: http://proxy-server:8080）"
+    },
+    "httpsProxy": {
+      "label": "HTTPS Proxy",
+      "placeholder": "https://proxy-server:port",
+      "helper": "HTTPS proxy サーバーの URL（例: https://proxy-server:8443）"
+    },
+    "testUrl": {
+      "label": "テスト URL",
+      "placeholder": "https://www.google.com",
+      "helper": "Proxy 接続をテストするための URL"
+    },
+    "save": "Proxy 設定を保存",
+    "test": "接続テスト",
+    "testSuccess": "Proxy 接続テストに成功しました！",
+    "saved": "Proxy 設定が正常に保存されました！"
+  }
+}

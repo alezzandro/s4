@@ -1,0 +1,142 @@
+{
+  "title": "Transferir archivos",
+  "destination": {
+    "title": "Seleccionar destino",
+    "location": "Ubicación de almacenamiento",
+    "selectLocation": "Seleccionar ubicación de almacenamiento",
+    "selectLocationPlaceholder": "Seleccionar ubicación...",
+    "locationFormat": "{{name}} ({{type}}){{unavailable}}",
+    "unavailable": " (no disponible)",
+    "root": "Raíz",
+    "directoryList": "Lista de directorios",
+    "createFolder": "Crear carpeta",
+    "create": "Crear",
+    "selectDestination": "Seleccionar destino",
+    "newFolder": {
+      "title": "Crear una nueva carpeta",
+      "label": "Nombre de la carpeta",
+      "placeholder": "Ingrese al menos 1 carácter",
+      "rulesTitle": "Reglas de nomenclatura de carpetas:"
+    },
+    "loadError": "Error al cargar los directorios",
+    "notifications": {
+      "folderCreated": {
+        "title": "Carpeta creada",
+        "message": "La carpeta \"{{name}}\" se creó correctamente"
+      },
+      "folderCreateError": "Error al crear la carpeta"
+    }
+  },
+  "conflicts": {
+    "title": "Resolver conflictos de archivos",
+    "nonConflicting": {
+      "title": "Archivos sin conflictos",
+      "message": "{{count}} archivo(s) se copiarán automáticamente (sin conflictos)."
+    },
+    "conflicting": {
+      "title": "Archivos en conflicto",
+      "message": "{{count}} archivo(s) ya existen en el destino. ¿Cómo desea manejarlos?"
+    },
+    "resolution": {
+      "label": "Estrategia de resolución",
+      "skip": "Omitir",
+      "skipDescription": "Omitir archivos en conflicto, mantener los archivos existentes en el destino",
+      "overwrite": "Sobrescribir",
+      "overwriteDescription": "Reemplazar los archivos existentes con los archivos de origen",
+      "rename": "Renombrar",
+      "renameDescription": "Copiar archivos de origen con nuevos nombres (p. ej., archivo.txt -> archivo (1).txt)"
+    },
+    "fileList": {
+      "title": "Archivos en conflicto:",
+      "showingFirst": "Mostrando los primeros 25 de {{count}} conflictos"
+    },
+    "summary": {
+      "title": "Resumen",
+      "autoCopy": "{{count}} archivo(s) se copiarán automáticamente",
+      "willBe": "{{count}} conflicto(s) serán {{action}}",
+      "total": "Total: {{count}} archivos se copiarán"
+    },
+    "checkError": "Error al verificar conflictos"
+  },
+  "progress": {
+    "title": "Progreso de la transferencia de archivos",
+    "titleWithSummary": "Progreso de la transferencia de archivos: {{summary}}",
+    "fileCount": "{{completed}} / {{total}} archivos",
+    "failedCount": "{{count}} fallidos",
+    "status": {
+      "error": "Error",
+      "complete": "Completado",
+      "queued": "En cola",
+      "transferring": "Transfiriendo"
+    },
+    "errorAlert": "Error en la transferencia",
+    "noTransfers": {
+      "title": "Sin transferencias",
+      "message": "No hay transferencias activas"
+    },
+    "notifications": {
+      "completed": {
+        "title": "Transferencia completada",
+        "message": "Se transfirieron correctamente {{count}} archivo(s)"
+      },
+      "failed": {
+        "title": "Transferencia fallida",
+        "message": "No se pudieron transferir {{count}} archivo(s)"
+      },
+      "connectionError": {
+        "title": "Error de conexión en la transferencia",
+        "message": "Se perdió la conexión con las actualizaciones de progreso de la transferencia"
+      },
+      "cancelled": {
+        "title": "Transferencia cancelada",
+        "message": "La transferencia de archivos ha sido cancelada"
+      },
+      "cancelError": "Error al cancelar la transferencia"
+    }
+  },
+  "actions": {
+    "cancel": "Cancelar",
+    "close": "Cerrar",
+    "apply": "Aplicar",
+    "proceed": "Continuar",
+    "cancelTransfer": "Cancelar transferencia",
+    "continueTransfer": "Continuar transferencia"
+  },
+  "confirmCancel": {
+    "title": "¿Cancelar transferencia?",
+    "message": "¿Está seguro de que desea cancelar esta transferencia? Los archivos ya transferidos permanecerán."
+  },
+  "largeTransfer": {
+    "title": "Transferencia de carpeta grande",
+    "alertTitle": "Operación de transferencia grande",
+    "filesToTransfer": "Archivos a transferir",
+    "filesSuffix": "archivos",
+    "totalSize": "Tamaño total",
+    "instructions": "Esta operación puede tardar un tiempo considerable en completarse. Puede monitorear el progreso en la cola de transferencias."
+  },
+  "notifications": {
+    "started": {
+      "title": "Transferencia iniciada",
+      "message": "Transfiriendo {{count}} archivo(s)"
+    },
+    "startError": "Error al iniciar la transferencia"
+  },
+  "summary": {
+    "title": "Resumen de la transferencia",
+    "filesTransferred": "Archivos transferidos: {{count}}",
+    "filesSkipped": "Archivos omitidos: {{count}}",
+    "filesFailed": "Archivos fallidos: {{count}}",
+    "totalSize": "Tamaño total: {{size}}"
+  },
+  "errors": {
+    "noDestination": "Seleccione un destino",
+    "sameLocation": "El origen y el destino no pueden ser iguales",
+    "transferFailed": "Error en la transferencia",
+    "networkError": "Error de red durante la transferencia"
+  },
+  "huggingface": {
+    "importing": "Importando desde HuggingFace",
+    "modelFiles": "Archivos del modelo",
+    "downloadProgress": "Progreso de la descarga"
+  }
+}

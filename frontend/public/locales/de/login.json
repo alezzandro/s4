@@ -1,0 +1,21 @@
+{
+  "title": "Bei S4 anmelden",
+  "subtitle": "Super Simple Storage Service",
+  "form": {
+    "username": "Benutzername",
+    "password": "Passwort",
+    "showPassword": "Passwort anzeigen",
+    "hidePassword": "Passwort verbergen",
+    "logIn": "Anmelden",
+    "loggingIn": "Anmeldung läuft..."
+  },
+  "validation": {
+    "usernameRequired": "Benutzername ist erforderlich",
+    "passwordRequired": "Passwort ist erforderlich"
+  },
+  "errors": {
+    "invalidCredentials": "Ungültiger Benutzername oder Passwort",
+    "sessionExpired": "Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an."
+  },
+  "brandAlt": "S4 - Super Simple Storage Service"
+}

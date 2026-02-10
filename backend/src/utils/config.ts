@@ -7,6 +7,7 @@ import { getApplyMd5BodyChecksumPlugin } from '@aws-sdk/middleware-apply-body-ch
 import http from 'http';
 import https from 'https';
 import { createLogger } from './logger';
+import { PAGE_SIZE_PRESETS, snapToNearestPreset } from './paginationPresets';
 
 // Module-level logger for config utilities
 const logger = createLogger(undefined, '[Config]');
@@ -20,6 +21,14 @@ let defaultBucket = process.env.AWS_S3_BUCKET || '';
 let hfToken = process.env.HF_TOKEN || '';
 let maxConcurrentTransfers = parseInt(process.env.MAX_CONCURRENT_TRANSFERS || '2', 10);
 let maxFilesPerPage = parseInt(process.env.MAX_FILES_PER_PAGE || '100', 10);
+if (!PAGE_SIZE_PRESETS.includes(maxFilesPerPage as (typeof PAGE_SIZE_PRESETS)[number])) {
+  const snapped = snapToNearestPreset(maxFilesPerPage);
+  logger.warn(
+    { original: maxFilesPerPage, snapped },
+    'MAX_FILES_PER_PAGE is not a valid preset value, snapping to nearest preset',
+  );
+  maxFilesPerPage = snapped;
+}
 let httpProxy = process.env.HTTP_PROXY || '';
 let httpsProxy = process.env.HTTPS_PROXY || '';
 

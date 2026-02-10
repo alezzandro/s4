@@ -1,0 +1,78 @@
+{
+  "title": "설정",
+  "tabs": {
+    "s3": "S3 설정",
+    "huggingface": "HuggingFace 설정",
+    "concurrency": "최대 동시 전송 수",
+    "pagination": "페이지당 최대 파일 수",
+    "proxy": "Proxy 설정"
+  },
+  "s3": {
+    "accessKey": {
+      "label": "Access key",
+      "helper": "인증을 위한 S3 access key ID"
+    },
+    "secretKey": {
+      "label": "Secret key",
+      "helper": "인증을 위한 S3 secret access key",
+      "show": "Secret key 표시",
+      "hide": "Secret key 숨기기"
+    },
+    "region": {
+      "label": "리전",
+      "helper": "S3 bucket이 위치한 AWS 리전 (예: us-east-1)"
+    },
+    "endpoint": {
+      "label": "Endpoint",
+      "helper": "S3 endpoint URL (AWS 기본값을 사용하려면 비워두세요)"
+    },
+    "defaultBucket": {
+      "label": "기본 Bucket",
+      "helper": "저장소 작업에 사용할 기본 bucket"
+    },
+    "save": "S3 설정 저장",
+    "test": "연결 테스트",
+    "testSuccess": "S3 연결 테스트 통과!"
+  },
+  "huggingface": {
+    "token": {
+      "label": "Token",
+      "show": "Token 표시",
+      "hide": "Token 숨기기"
+    },
+    "save": "HuggingFace 설정 저장",
+    "test": "연결 테스트",
+    "testSuccess": "다음 이름의 token을 사용 중입니다: {{tokenName}}"
+  },
+  "concurrency": {
+    "label": "최대 동시 전송 수: {{value}}",
+    "helper": "동시 파일 전송 최대 수 (1-10)",
+    "save": "최대 동시 전송 수 저장"
+  },
+  "pagination": {
+    "label": "페이지당 최대 파일 수: {{value}}",
+    "helper": "페이지당 표시할 최대 파일 수 (10-1000)",
+    "save": "페이지당 최대 파일 수 저장"
+  },
+  "proxy": {
+    "httpProxy": {
+      "label": "HTTP Proxy",
+      "placeholder": "http://proxy-server:port",
+      "helper": "HTTP proxy 서버 URL (예: http://proxy-server:8080)"
+    },
+    "httpsProxy": {
+      "label": "HTTPS Proxy",
+      "placeholder": "https://proxy-server:port",
+      "helper": "HTTPS proxy 서버 URL (예: https://proxy-server:8443)"
+    },
+    "testUrl": {
+      "label": "테스트 URL",
+      "placeholder": "https://www.google.com",
+      "helper": "Proxy 연결을 테스트할 URL"
+    },
+    "save": "Proxy 설정 저장",
+    "test": "연결 테스트",
+    "testSuccess": "Proxy 연결 테스트 통과!",
+    "saved": "Proxy 설정이 성공적으로 저장되었습니다!"
+  }
+}

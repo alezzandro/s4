@@ -74,13 +74,13 @@ JWT_SECRET=your-random-secret-key  # Optional but recommended for production
 
 ### Application Configuration
 
-| Variable                   | Default                  | Required | Description                                       |
-| -------------------------- | ------------------------ | -------- | ------------------------------------------------- |
-| `PORT`                     | `5000`                   | No       | Web UI and API server port                        |
-| `NODE_ENV`                 | `production`             | No       | Node.js environment (`development`, `production`) |
-| `LOCAL_STORAGE_PATHS`      | (disabled)               | No       | Local storage paths (comma-separated)             |
-| `MAX_FILE_SIZE_GB`         | `20`                     | No       | Maximum upload file size in GB                    |
-| `MAX_CONCURRENT_TRANSFERS` | `2`                      | No       | Maximum concurrent file transfers                 |
+| Variable                   | Default      | Required | Description                                       |
+| -------------------------- | ------------ | -------- | ------------------------------------------------- |
+| `PORT`                     | `5000`       | No       | Web UI and API server port                        |
+| `NODE_ENV`                 | `production` | No       | Node.js environment (`development`, `production`) |
+| `LOCAL_STORAGE_PATHS`      | (disabled)   | No       | Local storage paths (comma-separated)             |
+| `MAX_FILE_SIZE_GB`         | `20`         | No       | Maximum upload file size in GB                    |
+| `MAX_CONCURRENT_TRANSFERS` | `2`          | No       | Maximum concurrent file transfers                 |
 
 #### Local Storage Configuration
 
@@ -381,18 +381,18 @@ When using Helm, configuration is managed through `values.yaml`:
 ```yaml
 # values.yaml
 s3:
-  endpoint: "http://localhost:7480"
-  region: "us-east-1"
-  accessKeyId: "your-access-key"
-  secretAccessKey: "your-secret-key"
+  endpoint: 'http://localhost:7480'
+  region: 'us-east-1'
+  accessKeyId: 'your-access-key'
+  secretAccessKey: 'your-secret-key'
   # Or use existing secret:
   # existingSecret: "my-s3-credentials"
 
 auth:
   enabled: true
-  username: "admin"
-  password: "your-secure-password"
-  jwtSecret: "your-jwt-secret-min-32-chars"
+  username: 'admin'
+  password: 'your-secure-password'
+  jwtSecret: 'your-jwt-secret-min-32-chars'
   jwtExpirationHours: 8
   cookieRequireHttps: true
 ```
@@ -401,17 +401,17 @@ auth:
 
 ```yaml
 storage:
-  localPaths: "/opt/app-root/src/data"
+  localPaths: '/opt/app-root/src/data'
   maxFileSizeGB: 20
   maxConcurrentTransfers: 2
   data:
     size: 10Gi
-    storageClass: ""
-    existingClaim: ""
+    storageClass: ''
+    existingClaim: ''
   localStorage:
     size: 50Gi
-    storageClass: ""
-    existingClaim: ""
+    storageClass: ''
+    existingClaim: ''
 ```
 
 ### Server and Resources
@@ -419,7 +419,7 @@ storage:
 ```yaml
 server:
   port: 5000
-  ip: "0.0.0.0"
+  ip: '0.0.0.0'
 
 resources:
   requests:
