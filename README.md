@@ -31,6 +31,30 @@ export AWS_ENDPOINT_URL=http://localhost:7480
 aws s3 mb s3://my-bucket
 ```
 
+## Quick Start (OpenShift/Kubernetes)
+
+```bash
+# Clone the repository
+git clone https://github.com/rh-aiservices-bu/s4.git
+cd s4
+
+# Install with Helm
+helm install s4 ./charts/s4 --namespace s4 --create-namespace
+
+# Access the web UI (OpenShift - route is created automatically)
+oc get route s4 -n s4 -o jsonpath='{.spec.host}'
+
+# Access the web UI (Kubernetes - port forward)
+kubectl port-forward svc/s4 5000:5000 -n s4
+# Then open http://localhost:5000
+```
+
+For advanced configuration options (authentication, storage sizing, ingress, etc.), see the [Deployment Guide](docs/deployment/).
+
+## User Guide
+
+For detailed instructions on using S4 — browsing storage, managing buckets, transferring files, importing HuggingFace models, and more — see the **[User Guide](docs/user-guide/)**.
+
 ## Key Features
 
 - **S3-Compatible API** - Full AWS S3 API compatibility on port 7480
