@@ -1,8 +1,9 @@
 import React, { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ListVariant, LoginForm, LoginPage } from '@patternfly/react-core';
+import { LoginForm, LoginPage } from '@patternfly/react-core';
 import { useAuth } from '@app/components/AuthContext/AuthContext';
+import LanguageSelector from '@app/components/LanguageSelector/LanguageSelector';
 
 // Import the S4 logo
 import logo from '@app/assets/bgimages/s4-icon.svg';
@@ -93,11 +94,10 @@ const Login: React.FC = () => {
       brandImgSrc={logo}
       brandImgAlt={t('brandAlt')}
       backgroundImgSrc=""
+      headerUtilities={<LanguageSelector />}
       loginTitle={t('title')}
       loginSubtitle={t('subtitle')}
       textContent=""
-      footerListItems={undefined}
-      footerListVariants={ListVariant.inline}
     >
       {loginForm}
     </LoginPage>

@@ -490,7 +490,7 @@ exports[`App tests should render default App component 1`] = `
                     >
                       GitHub stars
                     </span>
-                    100
+                    undefined
                   </div>
                   <div
                     class=""
@@ -506,7 +506,7 @@ exports[`App tests should render default App component 1`] = `
                     >
                       GitHub forks
                     </span>
-                    10
+                    undefined
                   </div>
                 </div>
               </div>
