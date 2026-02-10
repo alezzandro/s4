@@ -15,7 +15,9 @@
   },
   "errors": {
     "invalidCredentials": "Nome utente o password non validi",
-    "sessionExpired": "La sessione è scaduta. Accedi nuovamente."
+    "sessionExpired": "La sessione è scaduta. Accedi nuovamente.",
+    "connectionError": "Impossibile connettersi al server",
+    "loginFailed": "Accesso non riuscito. Riprova."
   },
   "brandAlt": "S4 - Super Simple Storage Service"
 }

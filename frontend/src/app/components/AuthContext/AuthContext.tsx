@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import apiClient, { clearAuthToken, getAuthToken, setAuthToken } from '@app/utils/apiClient';
 import Emitter from '@app/utils/emitter';
-import { notifyError, notifySuccess } from '@app/utils/notifications';
+import { notifySuccess } from '@app/utils/notifications';
 
 /**
  * Authentication mode types
@@ -93,7 +93,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     } catch (err) {
       // Server error or network issue
       console.error('Error checking auth status:', err);
-      setError('Unable to connect to server');
+      setError('connectionError');
       // Assume auth is required if we can't reach the server
       setAuthMode('simple');
       setIsAuthenticated(false);
@@ -128,11 +128,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       return true;
     } catch (err) {
       // Handle login errors
-      const axiosError = err as { response?: { data?: { message?: string } } };
-      const errorMessage = axiosError.response?.data?.message || 'Login failed. Please try again.';
-      setError(errorMessage);
-
-      notifyError('Login Failed', errorMessage);
+      const axiosError = err as { response?: { status?: number } };
+      setError(axiosError.response?.status === 401 ? 'invalidCredentials' : 'loginFailed');
 
       return false;
     }
@@ -168,7 +165,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const handleUnauthorized = () => {
       setIsAuthenticated(false);
       setUser(null);
-      setError('Your session has expired. Please log in again.');
+      setError('sessionExpired');
     };
 
     Emitter.on('auth:unauthorized', handleUnauthorized);

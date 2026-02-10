@@ -15,7 +15,9 @@
   },
   "errors": {
     "invalidCredentials": "用户名或密码无效",
-    "sessionExpired": "您的会话已过期。请重新登录。"
+    "sessionExpired": "您的会话已过期。请重新登录。",
+    "connectionError": "无法连接到服务器",
+    "loginFailed": "登录失败。请重试。"
   },
   "brandAlt": "S4 - 超级简易存储服务"
 }

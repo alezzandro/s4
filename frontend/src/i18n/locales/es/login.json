@@ -15,7 +15,9 @@
   },
   "errors": {
     "invalidCredentials": "Nombre de usuario o contraseña inválidos",
-    "sessionExpired": "Su sesión ha expirado. Inicie sesión de nuevo."
+    "sessionExpired": "Su sesión ha expirado. Inicie sesión de nuevo.",
+    "connectionError": "No se puede conectar al servidor",
+    "loginFailed": "Error de inicio de sesión. Inténtelo de nuevo."
   },
   "brandAlt": "S4 - Super Simple Storage Service"
 }

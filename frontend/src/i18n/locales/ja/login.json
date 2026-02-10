@@ -15,7 +15,9 @@
   },
   "errors": {
     "invalidCredentials": "ユーザー名またはパスワードが正しくありません",
-    "sessionExpired": "セッションが期限切れです。もう一度ログインしてください。"
+    "sessionExpired": "セッションが期限切れです。もう一度ログインしてください。",
+    "connectionError": "サーバーに接続できません",
+    "loginFailed": "ログインに失敗しました。もう一度お試しください。"
   },
   "brandAlt": "S4 - Super Simple Storage Service"
 }

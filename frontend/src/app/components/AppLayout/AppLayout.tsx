@@ -64,11 +64,11 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import { supportedLngs } from '../../../i18n/config';
 import apiClient from '@app/utils/apiClient';
 import Emitter, { EventMap } from '../../utils/emitter';
 import { useAuth } from '@app/components/AuthContext/AuthContext';
 import { useModal } from '@app/hooks';
+import LanguageSelector from '@app/components/LanguageSelector/LanguageSelector';
 import forkLogo from '../../assets/bgimages/fork.svg';
 import forkLogoWhite from '../../assets/bgimages/fork-white.svg';
 import githubLogo from '../../assets/bgimages/github-mark.svg';
@@ -88,9 +88,6 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
   // Theme
   const [isDarkTheme, setIsDarkTheme] = React.useState(false);
 
-  // Language dropdown
-  const [isLanguageDropdownOpen, setLanguageDropdownOpen] = React.useState(false);
-
   React.useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = savedTheme === 'dark';
@@ -99,13 +96,6 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
       document.documentElement.classList.add('pf-v6-theme-dark');
     }
   }, []);
-
-  const handleLanguageChange = (_event: React.MouseEvent | undefined, value: string | number | undefined) => {
-    if (typeof value === 'string') {
-      i18n.changeLanguage(value);
-    }
-    setLanguageDropdownOpen(false);
-  };
 
   const handleThemeToggle = (checked: boolean) => {
     setIsDarkTheme(checked);
@@ -129,9 +119,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
   const [repoForks, setRepoForks] = React.useState<number | null>(null);
 
   //i18n
-  const { t, i18n } = useTranslation();
-  const currentLanguage = i18n.resolvedLanguage || 'en';
-  const currentLngDisplay = supportedLngs[currentLanguage] || supportedLngs['en'];
+  const { t } = useTranslation();
 
   // Fetch GitHub stars and forks via backend proxy
   React.useEffect(() => {
@@ -592,30 +580,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
             </ToggleGroup>
           </ToolbarItem>
           <ToolbarItem>
-            <Dropdown
-              isOpen={isLanguageDropdownOpen}
-              onSelect={handleLanguageChange}
-              onOpenChange={(isOpen) => setLanguageDropdownOpen(isOpen)}
-              popperProps={{ position: 'right' }}
-              shouldFocusToggleOnSelect
-              toggle={(toggleRef) => (
-                <MenuToggle
-                  ref={toggleRef}
-                  onClick={() => setLanguageDropdownOpen(!isLanguageDropdownOpen)}
-                  isExpanded={isLanguageDropdownOpen}
-                >
-                  {currentLngDisplay.flag} {currentLngDisplay.name}
-                </MenuToggle>
-              )}
-            >
-              <DropdownList>
-                {Object.entries(supportedLngs).map(([lngCode, lngName]) => (
-                  <DropdownItem key={lngCode} value={lngCode}>
-                    {lngName.flag} {lngName.name}
-                  </DropdownItem>
-                ))}
-              </DropdownList>
-            </Dropdown>
+            <LanguageSelector />
           </ToolbarItem>
           {notificationBadge}
           <ToolbarItem>

@@ -587,3 +587,14 @@ tr:focus-visible {
   justify-content: center;
   padding: 0;
 }
+
+/* ===== LOGIN PAGE OVERRIDES ===== */
+
+.pf-v6-c-login__main-header-desc {
+  font-size: var(--pf-t--global--font--size--lg) !important;
+}
+
+.pf-v6-c-login__main-body .pf-v6-c-helper-text__item-text {
+  font-size: var(--pf-t--global--font--size--lg) !important;
+  color: red;
+}

@@ -105,7 +105,7 @@ export const MobileCardView: React.FC<MobileCardViewProps> = ({
           component="div"
           className={`s4-mobile-card${item.isSelected ? ' s4-mobile-card--selected' : ''}${item.isDisabled ? ' s4-mobile-card--disabled' : ''}`}
           role="listitem"
-          isClickable={!item.isDisabled && (!!item.onClick || (!!item.selectable && !!item.actions))}
+          isClickable={!item.isDisabled && !!item.selectable && (!!item.onClick || !!item.actions)}
           isSelectable={!!item.selectable}
           isSelected={item.isSelected}
         >

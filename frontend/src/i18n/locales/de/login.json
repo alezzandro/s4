@@ -15,7 +15,9 @@
   },
   "errors": {
     "invalidCredentials": "Ungültiger Benutzername oder Passwort",
-    "sessionExpired": "Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an."
+    "sessionExpired": "Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.",
+    "connectionError": "Verbindung zum Server nicht möglich",
+    "loginFailed": "Anmeldung fehlgeschlagen. Bitte versuchen Sie es erneut."
   },
   "brandAlt": "S4 - Super Simple Storage Service"
 }

@@ -5,7 +5,6 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import {
   GetObjectCommand,
-  CopyObjectCommand,
   HeadObjectCommand,
   DeleteObjectCommand,
   PutObjectCommand,
@@ -590,6 +589,7 @@ async function transferS3ToS3(
   destKey: string,
   fileJob: TransferFileJob,
   onProgress: (loaded: number) => void,
+  abortSignal: AbortSignal,
 ): Promise<void> {
   // Memory profiling: Start of S3→S3 transfer
   const fileName = path.basename(sourceKey);
@@ -598,7 +598,6 @@ async function transferS3ToS3(
   const { s3Client } = getS3Config();
 
   // NOTE: S3 doesn't need directory creation - object keys preserve structure
-  // CopyObjectCommand handles the key path automatically
   // .s3keep files are copied as regular objects to preserve empty directories
 
   // Get source object size (limit concurrent HEAD requests)
@@ -613,20 +612,55 @@ async function transferS3ToS3(
   const sizeInMB = (fileJob.size / (1024 * 1024)).toFixed(2);
   logMemory(`[S3→S3] File size: ${fileName} (${sizeInMB} MB)`);
 
-  // Copy object
-  const copyCommand = new CopyObjectCommand({
-    Bucket: destBucket,
-    Key: destKey,
-    CopySource: `${sourceBucket}/${sourceKey}`,
+  // Stream from source bucket via GetObject (with retry + abort support)
+  let response;
+  try {
+    response = await retryNetworkOperation(
+      async () => {
+        const command = new GetObjectCommand({ Bucket: sourceBucket, Key: sourceKey });
+        return await s3Client.send(command, { abortSignal });
+      },
+      `GetObject: ${sourceKey}`,
+      3,
+      abortSignal,
+    );
+  } catch (error: any) {
+    throw sanitizeError(error);
+  }
+
+  if (!response.Body) {
+    throw new Error('S3 response body is empty');
+  }
+
+  // Memory profiling: Before upload
+  logMemory(`[S3→S3] Before upload: ${fileName}`);
+
+  // Upload to destination bucket using stream-through pattern
+  const upload = new Upload({
+    client: s3Client,
+    params: { Bucket: destBucket, Key: destKey, Body: response.Body as Readable },
   });
 
-  await s3Client.send(copyCommand);
+  // Throttled progress tracking to prevent memory leaks
+  const PROGRESS_THRESHOLD = 1024 * 1024; // 1MB
+  let lastReported = 0;
 
-  // Memory profiling: Copy complete
+  const throttledProgress = (loaded: number) => {
+    if (loaded - lastReported >= PROGRESS_THRESHOLD) {
+      onProgress(loaded);
+      lastReported = loaded;
+    }
+  };
+
+  await uploadWithCleanup(upload, throttledProgress);
+
+  // Ensure 100% progress is reported at completion
+  if (fileJob.size > lastReported) {
+    onProgress(fileJob.size);
+  }
+
+  // Memory profiling: Transfer complete
   logMemory(`[S3→S3] Complete: ${fileName}`);
-
-  // S3 copy is atomic, report full progress
-  onProgress(fileJob.size);
 }
 
 /**
@@ -665,7 +699,7 @@ async function executeTransfer(
   } else if (sourceType === 'local' && destType === 'local') {
     await transferLocalToLocal(sourceLoc, sourcePath, destLoc, finalDestPath, fileJob, onProgress, abortSignal);
   } else if (sourceType === 's3' && destType === 's3') {
-    await transferS3ToS3(sourceLoc, sourcePath, destLoc, finalDestPath, fileJob, onProgress);
+    await transferS3ToS3(sourceLoc, sourcePath, destLoc, finalDestPath, fileJob, onProgress, abortSignal);
   } else {
     throw new Error(`Unsupported transfer combination: ${sourceType} → ${destType}`);
   }

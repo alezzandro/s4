@@ -46,7 +46,7 @@ export const DestinationPicker: React.FC<DestinationPickerProps> = ({ isOpen, on
   const [isCreateFolderModalOpen, setIsCreateFolderModalOpen] = React.useState(false);
   const [newFolderName, setNewFolderName] = React.useState('');
   const [newFolderNameRulesVisibility, setNewFolderNameRulesVisibility] = React.useState(false);
-  const [isNewFolderNameFocused, setIsNewFolderNameFocused] = React.useState(false);
+
 
   // Note: Storage locations are loaded by useStorageLocations hook
 
@@ -71,17 +71,15 @@ export const DestinationPicker: React.FC<DestinationPickerProps> = ({ isOpen, on
     return validateS3ObjectName(folderName, storageType);
   };
 
-  // Real-time validation feedback for folder name
+  // Real-time validation feedback for folder name - only show rules on validation failure
   React.useEffect(() => {
-    // Show rules when:
-    // 1. Field is focused (proactive guidance), OR
-    // 2. Field has input AND validation failed (persistent error state)
-    const location = locations.find((loc) => loc.id === selectedLocation);
-    const hasValidationError = newFolderName.length > 0 && !validateFolderName(newFolderName, location?.type);
-    const shouldShowRules = isNewFolderNameFocused || hasValidationError;
-
-    setNewFolderNameRulesVisibility(shouldShowRules);
-  }, [newFolderName, isNewFolderNameFocused, selectedLocation, locations]);
+    if (newFolderName.length > 0) {
+      const location = locations.find((loc) => loc.id === selectedLocation);
+      setNewFolderNameRulesVisibility(!validateFolderName(newFolderName, location?.type));
+    } else {
+      setNewFolderNameRulesVisibility(false);
+    }
+  }, [newFolderName, selectedLocation, locations]);
 
   const handleNavigateInto = (dir: FileEntry) => {
     setCurrentPath(dir.path);
@@ -269,8 +267,6 @@ export const DestinationPicker: React.FC<DestinationPickerProps> = ({ isOpen, on
                 placeholder={t('destination.newFolder.placeholder')}
                 value={newFolderName}
                 onChange={(_event, newFolderName) => setNewFolderName(newFolderName)}
-                onFocus={() => setIsNewFolderNameFocused(true)}
-                onBlur={() => setIsNewFolderNameFocused(false)}
                 onKeyDown={(event) => {
                   if (event.key === 'Enter') {
                     event.preventDefault();
