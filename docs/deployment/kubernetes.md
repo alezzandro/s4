@@ -105,10 +105,10 @@ auth:
 storage:
   data:
     size: 100Gi
-    storageClass: gp3
+    # storageClass: ""  # Leave empty to use cluster default
   localStorage:
     size: 500Gi
-    storageClass: gp3
+    # storageClass: ""  # Leave empty to use cluster default
 
 # Resource limits
 resources:

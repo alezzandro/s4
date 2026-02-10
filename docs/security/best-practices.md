@@ -472,12 +472,12 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: encrypted-storage
-provisioner: kubernetes.io/aws-ebs
+provisioner: your-csi-driver       # Use your cluster's CSI driver
 parameters:
-  type: gp3
-  encrypted: 'true'
-  kmsKeyId: arn:aws:kms:us-east-1:123456789:key/xxx
+  encrypted: 'true'                # Provider-specific encryption parameter
 ```
+
+> **Note**: The `provisioner` and `parameters` depend on your cluster's storage backend (e.g., AWS EBS, Azure Disk, GCP PD, Ceph, etc.). Consult your provider's documentation for the correct values.
 
 ### 20. Encryption in Transit
 
