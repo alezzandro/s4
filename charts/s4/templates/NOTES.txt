@@ -27,6 +27,27 @@ Then open:
 
 {{- end }}
 
+{{- if or .Values.route.s3Api.enabled .Values.ingress.s3Api.enabled }}
+
+S3 API is exposed externally:
+{{- if .Values.route.s3Api.enabled }}
+{{- if .Values.route.s3Api.host }}
+  https://{{ .Values.route.s3Api.host }}
+{{- else }}
+  kubectl get route {{ include "s4.fullname" . }}-s3 -n {{ .Release.Namespace }} -o jsonpath='{.spec.host}'
+{{- end }}
+{{- end }}
+{{- if .Values.ingress.s3Api.enabled }}
+{{- range .Values.ingress.s3Api.hosts }}
+  http{{ if $.Values.ingress.s3Api.tls }}s{{ end }}://{{ .host }}
+{{- end }}
+{{- end }}
+
+  WARNING: The S3 API is accessible from outside the cluster.
+  Ensure proper authentication and network policies are in place.
+
+{{- end }}
+
 {{- if .Values.auth.enabled }}
 
 Authentication is enabled. Use the configured credentials to log in.

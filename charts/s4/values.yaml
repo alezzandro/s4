@@ -143,6 +143,23 @@ ingress:
   #     hosts:
   #       - s4.example.com
 
+  # S3 API Ingress configuration (optional)
+  # WARNING: Enabling this exposes the S3 API outside the cluster.
+  # Ensure proper authentication and network policies are in place.
+  s3Api:
+    enabled: false
+    className: ''
+    annotations: {}
+    hosts: []
+    #   - host: s3.s4.example.com
+    #     paths:
+    #       - path: /
+    #         pathType: Prefix
+    tls: []
+    #   - secretName: s4-s3-tls
+    #     hosts:
+    #       - s3.s4.example.com
+
 # OpenShift Route configuration
 route:
   # -- Enable OpenShift Route
@@ -159,6 +176,18 @@ route:
     termination: edge
     # -- Insecure edge termination policy (Allow, Redirect, None)
     insecureEdgeTerminationPolicy: Redirect
+
+  # S3 API Route configuration (optional)
+  # WARNING: Enabling this exposes the S3 API outside the cluster.
+  # Ensure proper authentication and network policies are in place.
+  s3Api:
+    enabled: false
+    host: ''
+    path: ''
+    annotations: {}
+    tls:
+      termination: edge
+      insecureEdgeTerminationPolicy: Redirect
 
 # Service account configuration
 serviceAccount:

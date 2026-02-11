@@ -107,25 +107,55 @@ The following table lists the configurable parameters and their default values.
 | `service.nodePort.webPort` | NodePort for web UI                | `""`        |
 | `service.nodePort.s3Port`  | NodePort for S3 API                | `""`        |
 
-### Ingress Configuration
+### Ingress Configuration (Web UI)
 
-| Parameter             | Description                 | Default |
-| --------------------- | --------------------------- | ------- |
-| `ingress.enabled`     | Enable ingress              | `false` |
-| `ingress.className`   | Ingress class name          | `""`    |
-| `ingress.annotations` | Ingress annotations         | `{}`    |
-| `ingress.hosts`       | Ingress hosts configuration | `[]`    |
-| `ingress.tls`         | Ingress TLS configuration   | `[]`    |
+| Parameter             | Description                          | Default |
+| --------------------- | ------------------------------------ | ------- |
+| `ingress.enabled`     | Enable ingress for Web UI (port 5000) | `false` |
+| `ingress.className`   | Ingress class name                   | `""`    |
+| `ingress.annotations` | Ingress annotations                  | `{}`    |
+| `ingress.hosts`       | Ingress hosts configuration          | `[]`    |
+| `ingress.tls`         | Ingress TLS configuration            | `[]`    |
 
-### OpenShift Route Configuration
+### Ingress Configuration (S3 API)
 
-| Parameter                                 | Description            | Default    |
-| ----------------------------------------- | ---------------------- | ---------- |
-| `route.enabled`                           | Enable OpenShift Route | `true`     |
-| `route.host`                              | Route hostname         | `""`       |
-| `route.path`                              | Route path             | `""`       |
-| `route.tls.termination`                   | TLS termination type   | `edge`     |
-| `route.tls.insecureEdgeTerminationPolicy` | Insecure edge policy   | `Redirect` |
+Optionally expose the S3 API (port 7480) externally via a separate Ingress.
+
+> **Warning:** Enabling this exposes the S3 API outside the cluster. Ensure proper authentication and network policies are in place.
+
+| Parameter                  | Description                           | Default |
+| -------------------------- | ------------------------------------- | ------- |
+| `ingress.s3Api.enabled`    | Enable ingress for S3 API (port 7480) | `false` |
+| `ingress.s3Api.className`  | Ingress class name                    | `""`    |
+| `ingress.s3Api.annotations`| Ingress annotations                   | `{}`    |
+| `ingress.s3Api.hosts`      | Ingress hosts configuration           | `[]`    |
+| `ingress.s3Api.tls`        | Ingress TLS configuration             | `[]`    |
+
+### OpenShift Route Configuration (Web UI)
+
+| Parameter                                 | Description                             | Default    |
+| ----------------------------------------- | --------------------------------------- | ---------- |
+| `route.enabled`                           | Enable OpenShift Route for Web UI (port 5000) | `true`     |
+| `route.host`                              | Route hostname                          | `""`       |
+| `route.path`                              | Route path                              | `""`       |
+| `route.annotations`                       | Route annotations                       | `{}`       |
+| `route.tls.termination`                   | TLS termination type                    | `edge`     |
+| `route.tls.insecureEdgeTerminationPolicy` | Insecure edge policy                    | `Redirect` |
+
+### OpenShift Route Configuration (S3 API)
+
+Optionally expose the S3 API (port 7480) externally via a separate Route.
+
+> **Warning:** Enabling this exposes the S3 API outside the cluster. Ensure proper authentication and network policies are in place.
+
+| Parameter                                        | Description                              | Default    |
+| ------------------------------------------------ | ---------------------------------------- | ---------- |
+| `route.s3Api.enabled`                            | Enable OpenShift Route for S3 API (port 7480) | `false`    |
+| `route.s3Api.host`                               | Route hostname                           | `""`       |
+| `route.s3Api.path`                               | Route path                               | `""`       |
+| `route.s3Api.annotations`                        | Route annotations                        | `{}`       |
+| `route.s3Api.tls.termination`                    | TLS termination type                     | `edge`     |
+| `route.s3Api.tls.insecureEdgeTerminationPolicy`  | Insecure edge policy                     | `Redirect` |
 
 ### Security Configuration
 
@@ -163,7 +193,7 @@ helm install s4 ./charts/s4 --namespace s4 --create-namespace \
 
 ### With OpenShift Route (Default)
 
-OpenShift Route is enabled by default. To customize the hostname:
+OpenShift Route is enabled by default for the Web UI. To customize the hostname:
 
 ```bash
 helm install s4 ./charts/s4 --namespace s4 --create-namespace \
@@ -178,6 +208,28 @@ helm install s4 ./charts/s4 --namespace s4 --create-namespace \
   --set "ingress.hosts[0].host=s4.example.com" \
   --set "ingress.hosts[0].paths[0].path=/" \
   --set "ingress.hosts[0].paths[0].pathType=Prefix"
+```
+
+### Exposing the S3 API Externally
+
+By default, only the Web UI is exposed externally. The S3 API (port 7480) is only accessible within the cluster. To also expose the S3 API for use with `aws s3`, `mc`, or other S3-compatible clients:
+
+**OpenShift:**
+
+```bash
+helm install s4 ./charts/s4 --namespace s4 --create-namespace \
+  --set route.s3Api.enabled=true \
+  --set route.s3Api.host=s3.s4.apps.example.com
+```
+
+**Kubernetes Ingress:**
+
+```bash
+helm install s4 ./charts/s4 --namespace s4 --create-namespace \
+  --set ingress.s3Api.enabled=true \
+  --set "ingress.s3Api.hosts[0].host=s3.s4.example.com" \
+  --set "ingress.s3Api.hosts[0].paths[0].path=/" \
+  --set "ingress.s3Api.hosts[0].paths[0].pathType=Prefix"
 ```
 
 ### With Custom Storage
@@ -242,6 +294,13 @@ helm upgrade s4 ./charts/s4 --namespace s4 --reuse-values
 
 ## Accessing S4
 
+S4 exposes two endpoints:
+
+| Endpoint | Port | Purpose |
+| -------- | ---- | ------- |
+| **Web UI** | 5000 | Browser-based storage management interface |
+| **S3 API** | 7480 | S3-compatible API for `aws s3`, `mc`, and other S3 clients |
+
 ### Port Forward (Development)
 
 ```bash
@@ -250,16 +309,21 @@ kubectl port-forward svc/s4 5000:5000 7480:7480 -n s4
 
 Then access:
 
-- Web UI: http://localhost:5000
-- S3 API: http://localhost:7480
+- **Web UI**: http://localhost:5000
+- **S3 API**: http://localhost:7480
 
 ### NodePort
 
-If `service.nodePort.enabled=true`, access via node IP and assigned ports.
+If `service.nodePort.enabled=true`, both endpoints are accessible via node IP and assigned ports.
 
-### Ingress/Route
+### Ingress / Route
 
-If configured, access via the specified hostname.
+By default, only the **Web UI** is exposed externally via Ingress or OpenShift Route. The **S3 API** remains cluster-internal.
+
+To also expose the S3 API externally, enable the separate S3 API Ingress or Route (see [Exposing the S3 API Externally](#exposing-the-s3-api-externally) above). Each endpoint gets its own hostname, for example:
+
+- **Web UI**: `https://s4.apps.example.com`
+- **S3 API**: `https://s3.s4.apps.example.com`
 
 ## Troubleshooting
 
