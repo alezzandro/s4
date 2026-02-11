@@ -163,7 +163,7 @@ PORT=5000
 NODE_ENV=development
 ```
 
-See [Configuration Guide](../getting-started/configuration.md) for complete reference.
+See [Configuration Guide](../deployment/configuration.md) for complete reference.
 
 ## Related Guides
 
@@ -172,6 +172,7 @@ See [Configuration Guide](../getting-started/configuration.md) for complete refe
 - [Testing Guide](./testing.md) - Testing strategies and patterns
 - [Code Style Guide](./code-style.md) - Coding standards and conventions
 - [Contributing Guide](./contributing.md) - How to contribute to S4
+- [PatternFly 6 Guide](./pf6-guide/README.md) - PatternFly 6 component patterns and best practices
 
 ## Troubleshooting
 

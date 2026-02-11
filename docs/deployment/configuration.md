@@ -84,6 +84,8 @@ JWT_SECRET=your-random-secret-key  # Optional but recommended for production
 
 #### Local Storage Configuration
 
+S4 can browse and transfer files between local volumes and S3 buckets. To enable this, you must **both** mount volume(s) into the container **and** set `LOCAL_STORAGE_PATHS` to the container-side paths you want exposed in the UI. Without `LOCAL_STORAGE_PATHS`, any mounted volumes are not visible in the web interface.
+
 ```bash
 # Single path
 LOCAL_STORAGE_PATHS=/opt/app-root/src/data
@@ -91,6 +93,31 @@ LOCAL_STORAGE_PATHS=/opt/app-root/src/data
 # Multiple paths (comma-separated)
 LOCAL_STORAGE_PATHS=/data/models,/data/datasets,/data/artifacts
 ```
+
+**Docker/Podman example:**
+
+```bash
+podman run -d \
+  --name s4 \
+  -p 5000:5000 \
+  -p 7480:7480 \
+  -v s4-data:/var/lib/ceph/radosgw \
+  -v /host/models:/models \
+  -v /host/datasets:/datasets \
+  -e LOCAL_STORAGE_PATHS=/models,/datasets \
+  quay.io/rh-aiservices-bu/s4:latest
+```
+
+**Kubernetes (Helm) example:**
+
+```yaml
+storage:
+  localPaths: '/models,/datasets'
+  localStorage:
+    size: 50Gi
+```
+
+See [Docker Deployment → Local Filesystem Browsing](./docker.md#local-filesystem-browsing) for more container examples.
 
 ### HuggingFace Configuration
 
@@ -331,7 +358,6 @@ podman run -d \
   -e JWT_SECRET=your-secret-key \
   -e MAX_FILE_SIZE_GB=20 \
   -v s4-data:/var/lib/ceph/radosgw \
-  -v s4-storage:/opt/app-root/src/data \
   quay.io/rh-aiservices-bu/s4:latest
 
 # Using environment file
@@ -341,7 +367,6 @@ podman run -d \
   -p 7480:7480 \
   --env-file .env.production \
   -v s4-data:/var/lib/ceph/radosgw \
-  -v s4-storage:/opt/app-root/src/data \
   quay.io/rh-aiservices-bu/s4:latest
 ```
 
@@ -364,12 +389,10 @@ services:
       MAX_FILE_SIZE_GB: '20'
     volumes:
       - s4-data:/var/lib/ceph/radosgw
-      - s4-storage:/opt/app-root/src/data
     restart: unless-stopped
 
 volumes:
   s4-data:
-  s4-storage:
 ```
 
 ## Helm Configuration
@@ -401,15 +424,17 @@ auth:
 
 ```yaml
 storage:
+  # Local filesystem browsing (optional)
+  # Set localPaths to enable; omit or leave empty to disable
   localPaths: '/opt/app-root/src/data'
   maxFileSizeGB: 20
   maxConcurrentTransfers: 2
   data:
-    size: 10Gi
+    size: 10Gi          # S3 data PVC (required)
     storageClass: ''
     existingClaim: ''
   localStorage:
-    size: 50Gi
+    size: 50Gi          # Local storage PVC (only created when localPaths is set)
     storageClass: ''
     existingClaim: ''
 ```

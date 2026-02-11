@@ -1,5 +1,7 @@
 # Installation
 
+> For the fastest way to get S4 running, see the [Quick Start Guide](README.md). This page covers detailed installation options, building from source, and verification.
+
 This guide covers installing S4 using containers, Kubernetes, or building from source.
 
 ## Prerequisites
@@ -41,7 +43,6 @@ podman run -d \
   -p 5000:5000 \
   -p 7480:7480 \
   -v s4-data:/var/lib/ceph/radosgw \
-  -v s4-storage:/opt/app-root/src/data \
   quay.io/rh-aiservices-bu/s4:latest
 
 # Verify it's running
@@ -70,7 +71,6 @@ podman run -d \
   -p 7480:7480 \
   --env-file s4.env \
   -v s4-data:/var/lib/ceph/radosgw \
-  -v s4-storage:/opt/app-root/src/data \
   quay.io/rh-aiservices-bu/s4:latest
 ```
 
@@ -100,7 +100,7 @@ podman rm s4
 
 # Remove container and volumes (⚠️ deletes all data)
 podman rm -v s4
-podman volume rm s4-data s4-storage
+podman volume rm s4-data
 ```
 
 ## Kubernetes Installation
@@ -364,7 +364,6 @@ podman run -v s4-data:/var/lib/ceph/radosgw:Z ...
 
 # Or create volumes first
 podman volume create s4-data
-podman volume create s4-storage
 ```
 
 For more troubleshooting, see [Operations → Troubleshooting](../operations/troubleshooting.md).

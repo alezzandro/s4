@@ -685,24 +685,27 @@ oc get storageclass
 - ✅ Configure network policies
 - ✅ Regular security scans
 
-### Multi-Zone Deployment
+### High Availability Considerations
 
-For high availability:
+S4 is designed for **single-replica deployment** due to its SQLite backend and in-memory state (see [Kubernetes Deployment Architecture](./kubernetes.md#deployment-architecture)). Multi-replica scaling is not supported.
+
+To maximize uptime within this constraint:
+
+- **PodDisruptionBudget**: Prevent voluntary evictions during maintenance
+- **Liveness/Readiness probes**: Enable automatic restart on failure
+- **Reliable storage**: Use a production-grade StorageClass (ODF, EBS, etc.)
+- **Resource requests/limits**: Prevent OOM kills and ensure scheduling
 
 ```yaml
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: s4
 spec:
-  replicas: 3
-  template:
-    spec:
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
-                labelSelector:
-                  matchLabels:
-                    app: s4
-                topologyKey: topology.kubernetes.io/zone
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: s4
 ```
 
 ## Related Documentation

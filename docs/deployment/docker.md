@@ -27,7 +27,6 @@ podman run -d \
   -p 5000:5000 \
   -p 7480:7480 \
   -v s4-data:/var/lib/ceph/radosgw \
-  -v s4-storage:/opt/app-root/src/data \
   quay.io/rh-aiservices-bu/s4:latest
 
 # Using Docker
@@ -36,7 +35,6 @@ docker run -d \
   -p 5000:5000 \
   -p 7480:7480 \
   -v s4-data:/var/lib/ceph/radosgw \
-  -v s4-storage:/opt/app-root/src/data \
   quay.io/rh-aiservices-bu/s4:latest
 
 # Access the web UI
@@ -106,7 +104,6 @@ podman run -d \
   -e UI_PASSWORD=pass \
   -e JWT_SECRET=your-secret-key \
   -v s4-data:/var/lib/ceph/radosgw \
-  -v s4-storage:/opt/app-root/src/data \
   quay.io/rh-aiservices-bu/s4:latest
 ```
 
@@ -134,7 +131,6 @@ podman run -d \
   -p 7480:7480 \
   --env-file .env \
   -v s4-data:/var/lib/ceph/radosgw \
-  -v s4-storage:/opt/app-root/src/data \
   quay.io/rh-aiservices-bu/s4:latest
 ```
 
@@ -162,33 +158,31 @@ See [Configuration Guide](./configuration.md) for complete reference.
 
 ### Volumes
 
-S4 requires two persistent volumes:
+S4 requires one persistent volume. Local filesystem browsing volumes are optional.
 
-1. **S3 Data** (`/var/lib/ceph/radosgw`)
+1. **S3 Data** (required) — `/var/lib/ceph/radosgw`
 
    - Stores S3 bucket metadata and objects
    - SQLite database for RGW
    - Critical for data persistence
 
-2. **Local Storage** (`/opt/app-root/src/data`)
-   - Local filesystem storage
-   - File browser and transfer operations
-   - Optional but recommended
+2. **Local Storage** (optional) — mount path of your choice
+   - Enables local filesystem browsing and S3 ↔ local transfers
+   - Requires **both** a volume mount **and** the `LOCAL_STORAGE_PATHS` environment variable
+   - Without `LOCAL_STORAGE_PATHS`, mounted volumes are not visible in the UI
 
 ### Named Volumes (Recommended)
 
 ```bash
-# Create named volumes
+# Create named volume
 podman volume create s4-data
-podman volume create s4-storage
 
-# Run with named volumes
+# Run with named volume
 podman run -d \
   --name s4 \
   -p 5000:5000 \
   -p 7480:7480 \
   -v s4-data:/var/lib/ceph/radosgw \
-  -v s4-storage:/opt/app-root/src/data \
   quay.io/rh-aiservices-bu/s4:latest
 
 # Inspect volumes
@@ -199,22 +193,68 @@ podman volume ls
 ### Bind Mounts (Host Directory)
 
 ```bash
-# Create directories on host
+# Create directory on host
 mkdir -p /data/s4/rgw
-mkdir -p /data/s4/storage
 
 # Set permissions (if running rootless)
-chmod 777 /data/s4/rgw /data/s4/storage
+chmod 777 /data/s4/rgw
 
-# Run with bind mounts
+# Run with bind mount
 podman run -d \
   --name s4 \
   -p 5000:5000 \
   -p 7480:7480 \
   -v /data/s4/rgw:/var/lib/ceph/radosgw \
-  -v /data/s4/storage:/opt/app-root/src/data \
   quay.io/rh-aiservices-bu/s4:latest
 ```
+
+### Local Filesystem Browsing
+
+S4 can browse and transfer files between local volumes and S3 buckets. To enable this, mount one or more volumes and set `LOCAL_STORAGE_PATHS` to tell S4 which container paths to expose in the UI.
+
+**Single local storage path:**
+
+```bash
+podman run -d \
+  --name s4 \
+  -p 5000:5000 \
+  -p 7480:7480 \
+  -v s4-data:/var/lib/ceph/radosgw \
+  -v /host/models:/models \
+  -e LOCAL_STORAGE_PATHS=/models \
+  quay.io/rh-aiservices-bu/s4:latest
+```
+
+**Multiple local storage paths:**
+
+```bash
+podman run -d \
+  --name s4 \
+  -p 5000:5000 \
+  -p 7480:7480 \
+  -v s4-data:/var/lib/ceph/radosgw \
+  -v /host/models:/models \
+  -v /host/datasets:/datasets \
+  -e LOCAL_STORAGE_PATHS=/models,/datasets \
+  quay.io/rh-aiservices-bu/s4:latest
+```
+
+**Using a named volume for local storage:**
+
+```bash
+podman volume create s4-storage
+
+podman run -d \
+  --name s4 \
+  -p 5000:5000 \
+  -p 7480:7480 \
+  -v s4-data:/var/lib/ceph/radosgw \
+  -v s4-storage:/opt/app-root/src/data \
+  -e LOCAL_STORAGE_PATHS=/opt/app-root/src/data \
+  quay.io/rh-aiservices-bu/s4:latest
+```
+
+> **Note**: If `LOCAL_STORAGE_PATHS` is not set, local filesystem browsing is disabled and S4 operates in S3-only mode.
 
 ### Volume Backup
 
@@ -343,7 +383,6 @@ podman run -d \
   -e UI_PASSWORD=your-secure-password \
   -e JWT_SECRET=your-random-secret-key \
   -v s4-data:/var/lib/ceph/radosgw \
-  -v s4-storage:/opt/app-root/src/data \
   quay.io/rh-aiservices-bu/s4:latest
 ```
 
@@ -364,7 +403,6 @@ podman run -d \
   --secret s4_password,type=env,target=UI_PASSWORD \
   --secret s4_jwt_secret,type=env,target=JWT_SECRET \
   -v s4-data:/var/lib/ceph/radosgw \
-  -v s4-storage:/opt/app-root/src/data \
   quay.io/rh-aiservices-bu/s4:latest
 ```
 
@@ -429,7 +467,6 @@ services:
       - 'traefik.http.services.s4.loadbalancer.server.port=5000'
     volumes:
       - s4-data:/var/lib/ceph/radosgw
-      - s4-storage:/opt/app-root/src/data
 
   traefik:
     image: traefik:v2.10
@@ -443,7 +480,6 @@ services:
 
 volumes:
   s4-data:
-  s4-storage:
 ```
 
 ## Docker Compose
@@ -468,12 +504,39 @@ services:
       - UI_PASSWORD=pass
     volumes:
       - s4-data:/var/lib/ceph/radosgw
-      - s4-storage:/opt/app-root/src/data
     restart: unless-stopped
 
 volumes:
   s4-data:
-  s4-storage:
+```
+
+### With Local Filesystem Browsing
+
+```yaml
+# docker-compose.yml
+version: '3.8'
+
+services:
+  s4:
+    image: quay.io/rh-aiservices-bu/s4:latest
+    container_name: s4
+    ports:
+      - '5000:5000'
+      - '7480:7480'
+    environment:
+      - AWS_ACCESS_KEY_ID=s4admin
+      - AWS_SECRET_ACCESS_KEY=s4secret
+      - UI_USERNAME=admin
+      - UI_PASSWORD=pass
+      - LOCAL_STORAGE_PATHS=/models,/datasets
+    volumes:
+      - s4-data:/var/lib/ceph/radosgw
+      - ./models:/models
+      - ./datasets:/datasets
+    restart: unless-stopped
+
+volumes:
+  s4-data:
 ```
 
 ### Start/Stop
@@ -512,7 +575,6 @@ podman run -d \
   -p 5000:5000 \
   -p 7480:7480 \
   -v s4-data:/var/lib/ceph/radosgw \
-  -v s4-storage:/opt/app-root/src/data \
   s4:local
 ```
 
@@ -566,7 +628,6 @@ podman run -d \
   -p 5000:5000 \
   -p 7480:7480 \
   -v s4-data:/var/lib/ceph/radosgw \
-  -v s4-storage:/opt/app-root/src/data \
   quay.io/rh-aiservices-bu/s4:latest
 ```
 

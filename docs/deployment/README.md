@@ -24,7 +24,7 @@ Best for:
 - Easy configuration management
 - Kubernetes and OpenShift deployments
 
-[View Kubernetes Deployment Guide](./kubernetes.md) | [Helm Chart README](../charts/s4/README.md)
+[View Kubernetes Deployment Guide](./kubernetes.md) | [Helm Chart README](../../charts/s4/README.md)
 
 ### 3. OpenShift Deployment
 
@@ -47,7 +47,6 @@ podman run -d \
   -p 5000:5000 \
   -p 7480:7480 \
   -v s4-data:/var/lib/ceph/radosgw \
-  -v s4-storage:/opt/app-root/src/data \
   quay.io/rh-aiservices-bu/s4:latest
 ```
 
@@ -74,132 +73,28 @@ oc apply -f kubernetes/
 oc expose svc/s4
 ```
 
-## Architecture Overview
-
-S4 runs as a single container with two processes:
-
-1. **Ceph RGW** (port 7480) - S3-compatible API with SQLite backend
-2. **Node.js backend** (port 5000) - Fastify server serving React frontend and API
-
-```
-┌─────────────────────────────────────────────┐
-│                S4 Container                  │
-├─────────────────────────────────────────────┤
-│  ┌─────────────────┐  ┌──────────────────┐ │
-│  │   Web UI (5000) │  │  S3 API (7480)   │ │
-│  │   Node.js +     │  │   Ceph RGW +     │ │
-│  │   React         │  │   SQLite         │ │
-│  └────────┬────────┘  └────────┬─────────┘ │
-│           │                    │            │
-│           └────────────────────┘            │
-│                    │                        │
-│  ┌─────────────────┴──────────────────────┐│
-│  │           Persistent Storage            ││
-│  │  /var/lib/ceph/radosgw (S3 data)       ││
-│  │  /opt/app-root/src/data (local files)  ││
-│  └─────────────────────────────────────────┘│
-└─────────────────────────────────────────────┘
-```
-
 ## Configuration
 
-S4 is configured via environment variables. See [Configuration Guide](./configuration.md) for complete reference.
+S4 is configured via environment variables. See [Configuration Guide](./configuration.md) for the complete reference.
 
-### Essential Variables
+Authentication is optional — set both `UI_USERNAME` and `UI_PASSWORD` to enable JWT-based auth. See [Security → Authentication](../security/authentication.md) for details.
 
-| Variable                | Default    | Description                      |
-| ----------------------- | ---------- | -------------------------------- |
-| `AWS_ACCESS_KEY_ID`     | `s4admin`  | S3 access key                    |
-| `AWS_SECRET_ACCESS_KEY` | `s4secret` | S3 secret key                    |
-| `UI_USERNAME`           | (none)     | UI login username (enables auth) |
-| `UI_PASSWORD`           | (none)     | UI login password (enables auth) |
-| `PORT`                  | `5000`     | Web UI port                      |
+## Storage
 
-## Storage Volumes
-
-S4 requires two persistent volumes:
-
-1. **S3 Data** - `/var/lib/ceph/radosgw`
-
-   - Stores S3 bucket metadata and objects
-   - SQLite database for RGW
-   - Must persist across restarts
-
-2. **Local Storage** - `/opt/app-root/src/data`
-   - Local filesystem storage
-   - File browser and transfer source/destination
-   - Optional but recommended
-
-## Networking
-
-### Ports
-
-- **5000** - Web UI (HTTP)
-- **7480** - S3 API (HTTP)
-
-### External Access
-
-**Container**:
-
-- Publish ports with `-p 5000:5000 -p 7480:7480`
-
-**Kubernetes**:
-
-- Service exposes both ports internally
-- Use Ingress for external Web UI access (port 5000)
-- Optionally enable a separate S3 API Ingress for external S3 access (port 7480)
-
-**OpenShift**:
-
-- Service exposes both ports internally
-- Use Route for external Web UI access (port 5000)
-- Optionally enable a separate S3 API Route for external S3 access (port 7480)
-
-## Authentication
-
-S4 supports optional JWT-based authentication:
-
-### Disabled (Default)
-
-No authentication required. Suitable for:
-
-- Development environments
-- Internal networks
-- Trusted environments
-
-### Enabled
-
-Set both `UI_USERNAME` and `UI_PASSWORD` to enable authentication:
-
-```bash
-# Docker/Podman
--e UI_USERNAME=admin \
--e UI_PASSWORD=your-secure-password
-
-# Kubernetes
-# Add to Secret (see kubernetes/s4-secret.yaml)
-```
-
-See [Configuration Guide](./configuration.md) for authentication details.
+S4 requires one persistent volume (`/var/lib/ceph/radosgw`) for S3 data. Local filesystem browsing volumes are optional — see the [Quick Start Guide](../getting-started/README.md#storage-volumes) for details.
 
 ## Production Considerations
 
 Before deploying to production, review:
 
-1. **[Production Readiness Guide](./production-readiness.md)** - Critical deployment considerations
-2. **[Configuration Guide](./configuration.md)** - Complete environment variable reference
-3. **[Security Best Practices](../security/best-practices.md)** - Security recommendations
-
-### Key Production Requirements
-
 - ✅ Enable authentication (`UI_USERNAME` and `UI_PASSWORD`)
 - ✅ Use strong credentials and JWT secrets
-- ✅ Deploy behind HTTPS (reverse proxy or ingress)
+- ✅ Deploy behind HTTPS (reverse proxy or Ingress/Route)
 - ✅ Configure persistent storage
 - ✅ Set up monitoring and logging
 - ✅ Plan backup strategy
 
-See [Production Readiness Guide](./production-readiness.md) for complete checklist.
+See [Production Readiness Guide](./production-readiness.md) for the complete checklist.
 
 ## Choosing Deployment Method
 
@@ -214,10 +109,10 @@ See [Production Readiness Guide](./production-readiness.md) for complete checkli
 ### Use Kubernetes/OpenShift When
 
 - Production environments
-- High availability needed
-- Auto-scaling required
-- Multiple replicas needed
-- Enterprise deployment
+- Managed pod lifecycle and automated restarts
+- Persistent volume management
+- Network policies and TLS termination via Ingress/Route
+- Enterprise infrastructure integration
 
 ## Next Steps
 
@@ -235,6 +130,7 @@ See [Production Readiness Guide](./production-readiness.md) for complete checkli
 
 ## Related Documentation
 
+- [Architecture Overview](../architecture/README.md) - System design and container architecture
 - [Configuration Guide](./configuration.md) - Environment variables
 - [Production Readiness](./production-readiness.md) - Production deployment checklist
 - [Docker Deployment](./docker.md) - Container deployment details

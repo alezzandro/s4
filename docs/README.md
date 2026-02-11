@@ -49,6 +49,7 @@ Development setup, testing, and contribution guidelines.
 - **[Testing Guide](development/testing.md)** - Testing strategies and tools
 - **[Contributing](development/contributing.md)** - How to contribute to S4
 - **[Code Style](development/code-style.md)** - Coding standards and conventions
+- **[PatternFly 6 Guide](development/pf6-guide/README.md)** - PatternFly 6 component patterns and best practices
 
 ### [Deployment](deployment/)
 
